@@ -1,0 +1,17 @@
+# Node.js 本地运行时（免安装版，不需要提交）
+nodejs/
+node-v20.18.1-win-x64.zip
+
+# 依赖
+node_modules/
+
+# 构建产物
+public/
+db.json
+
+# 缓存与临时文件
+.tmp/
+.deploy_git/
+*.log
+.DS_Store
+Thumbs.db

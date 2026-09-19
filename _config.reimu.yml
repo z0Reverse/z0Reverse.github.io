@@ -1,0 +1,83 @@
+# Reimu 主题配置（覆盖 themes/reimu/_config.yml 的同名项）
+# 完整可配置项见 themes/reimu/_config.yml
+
+# 导航栏：首页 / 归档 / 分类 / 标签 / 关于
+menu:
+  - name: home
+    url: /
+    icon:
+  - name: archives
+    url: /archives
+    icon:
+  - name: categories
+    url: /categories
+    icon:
+  - name: tags
+    url: /tags
+    icon:
+  - name: about
+    url: /about
+    icon:
+
+# 首页展示分类卡片（四大分类体系）
+home_categories:
+  enable: true
+  content:
+    - categories: WebSecurity
+      cover:
+    - categories: JavaCodeSecurity
+      cover:
+    - categories: AndroidReverse
+      cover:
+    - categories: Tools
+      cover:
+
+# 侧边栏小部件：分类 + 标签 + 归档 + 最新文章
+widgets:
+  - category
+  - tag
+  - archive
+  - recent_posts
+
+show_count: true
+
+# 副标题打字机效果
+subtitle:
+  typing:
+    enable: true
+    strings:
+      - 记录学习，日积月累
+      - Web Security / Code Security / Android Reverse
+      - 工欲善其事，必先利其器
+    typeSpeed: 100
+    backSpeed: 50
+    backDelay: 2000
+    startDelay: 300
+    loop: true
+    shuffle: true
+    showCursor: true
+    cursorChar: "|"
+    smartBackspace: false
+
+# 页脚
+footer:
+  since: 2026
+  powered: true
+  count: true
+  busuanzi: true
+  icon:
+    url: "../images/taichi.png"
+    rotate: true
+    mask: true
+
+# 文章目录
+toc: true
+
+# 文章版权声明
+article_copyright:
+  enable: true
+  content:
+    author: true
+    link: true
+    license: true
+    license_type: by-nc-sa
