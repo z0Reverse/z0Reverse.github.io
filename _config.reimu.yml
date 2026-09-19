@@ -1,19 +1,17 @@
 # Reimu 主题配置（覆盖 themes/reimu/_config.yml 的同名项）
 # 完整可配置项见 themes/reimu/_config.yml
 
-# 导航栏：首页 / 归档 / 分类 / 标签 / 关于
+# 导航栏：首页 / 分类 / 归档 / 关于
+# （标签页保留，入口在侧边栏和文章页，不在导航露出）
 menu:
   - name: home
     url: /
     icon:
-  - name: archives
-    url: /archives
-    icon:
   - name: categories
     url: /categories
     icon:
-  - name: tags
-    url: /tags
+  - name: archives
+    url: /archives
     icon:
   - name: about
     url: /about
@@ -32,11 +30,10 @@ home_categories:
     - categories: Tools
       cover:
 
-# 侧边栏小部件：分类 + 标签 + 归档 + 最新文章
+# 侧边栏小部件：分类 + 最新文章
+# （标签在文章页/标签页有入口，归档在导航栏有入口，不再重复挂侧边栏）
 widgets:
   - category
-  - tag
-  - archive
   - recent_posts
 
 show_count: true

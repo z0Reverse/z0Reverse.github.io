@@ -1,19 +1,26 @@
 ---
-title: WebSecurity 分类笔记模板
+title: WebSecurity 分类笔记模板（二级分类示例）
 date: 2026-09-20 10:00:00
 categories:
   - WebSecurity
+  - SQL注入
 tags:
   - 模板
   - Web安全
 ---
 
-这是一篇 WebSecurity 分类的示例笔记。
+这是一篇 WebSecurity 分类的示例笔记，front-matter 中演示了**二级分类**写法：
 
-## 使用说明
+```yaml
+categories:
+  - WebSecurity   # 大类
+  - SQL注入       # 二级分类（可自行增加：越权 / 文件上传 / SSRF / 逻辑漏洞...）
+```
 
-- 每篇笔记开头的 `categories` 决定它归属的分类，子分类写法见下例
-- 写完保存后执行 `hexo server` 本地预览，`git push` 后自动发布
+## 分类与标签怎么选
+
+- **分类**：这篇笔记"属于"哪条路径，一篇只写一条（大类 → 子类）
+- **标签**：横跨多类的关键词，如 `提权` `ROOT` `复现` `CTF`，随便贴几个
 
 ## 常用记录结构
 
