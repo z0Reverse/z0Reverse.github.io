@@ -1,0 +1,32 @@
+<%# 分类总览页：按大类分组，展示子分类胶囊（复用主题 archives 样式） %>
+<%_ const allCategories = site.categories.toArray(); _%>
+<%_ const topCategories = allCategories.filter(c => !c.parent); _%>
+<div class="archives-outer-wrap" data-aos="<%= theme.animation.options.archive.whole %>">
+  <%_ if (!topCategories.length) { _%>
+    <section class="archives-wrap">
+      <p>还没有任何分类，去写第一篇笔记吧~</p>
+    </section>
+  <%_ } _%>
+  <%_ topCategories.forEach(function (category) { _%>
+    <%_ const children = allCategories.filter(c => c.parent === category._id); _%>
+    <section class="archives-wrap" data-aos="<%= theme.animation.options.archive.section %>">
+      <div class="archive-year-wrap">
+        <a href="<%- url_for_lang(category.path) %>" class="archive-year"><%= category.name %></a>
+        <span class="archive-category-count"><%= category.length %> 篇</span>
+      </div>
+      <div class="category-wrap">
+        <%_ if (children.length) { _%>
+          <%_ children.forEach(function (child) { _%>
+            <div class="archives-category-list-item" data-aos="<%= theme.animation.options.archive.category %>">
+              <a class="archives-category-list-link" href="<%- url_for_lang(child.path) %>"><%= child.name %> (<%= child.length %>)</a>
+            </div>
+          <%_ }) _%>
+        <%_ } else { _%>
+          <div class="archives-category-list-item" data-aos="<%= theme.animation.options.archive.category %>">
+            <a class="archives-category-list-link" href="<%- url_for_lang(category.path) %>">查看全部笔记</a>
+          </div>
+        <%_ } _%>
+      </div>
+    </section>
+  <%_ }) _%>
+</div>

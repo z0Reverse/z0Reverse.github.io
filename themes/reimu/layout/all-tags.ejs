@@ -1,0 +1,16 @@
+<%# 标签墙页：展示全部标签胶囊 %>
+<div class="archives-outer-wrap" data-aos="<%= theme.animation.options.archive.whole %>">
+  <%_ if (!site.tags.length) { _%>
+    <section class="archives-wrap">
+      <p>还没有任何标签</p>
+    </section>
+  <%_ } else { _%>
+    <div class="tag-wrap">
+      <%_ site.tags.each(function (tag, i) { _%>
+        <div class="archives-tag-list-item" data-aos="<%= theme.animation.options.archive.tag %>">
+          <a class="archives-tag-list-link" href="<%- url_for_lang(tag.path) %>"><%= tag.name %> (<%= tag.length %>)</a>
+        </div>
+      <%_ }) _%>
+    </div>
+  <%_ } _%>
+</div>
