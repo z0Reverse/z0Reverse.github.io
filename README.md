@@ -4,12 +4,16 @@
 
 ## 分类体系
 
-| 大类 | 说明 |
+`source/_posts/` 下的**文件夹结构与网页分类是一一对应的**，文件夹只影响本地整理，不影响文章 URL。
+
+| 大类 | 当前子类 |
 | ---- | ---- |
-| WebSecurity | Web 安全漏洞、渗透测试、靶机通关 |
-| JavaCodeSecurity | Java 代码审计、反序列化、组件漏洞 |
-| AndroidReverse | 安卓逆向、Hook、脱壳与抓包 |
-| Tools | 常用安全工具技巧（可加二级分类，如 Tools/BurpSuite） |
+| WebSecurity | SQL注入、JS逆向、小程序、越权、中间件/FastJson、AI辅助安全 |
+| JavaCodeSecurity | Java基础、JavaWeb安全基础、组件漏洞/FastJson、常见知识、项目实战、实战审计、常见环境 |
+| AndroidReverse | Android基础、NDK开发、Frida逆向、加解密算法、网络协议逆向、恶意代码分析、环境问题、AI辅助逆向、文件存储与沙箱 |
+| Tools | Android抓包 |
+
+新增子类：直接在对应大类下建文件夹，文件 front-matter 里多加一行 `categories` 即可。
 
 ## 日常写笔记流程
 
@@ -29,6 +33,13 @@ tags:
 
 3. 本地预览：`npx hexo server`，访问 http://localhost:4000
 4. 发布：`git add . && git commit -m "新笔记" && git push`，GitHub Actions 自动构建发布
+
+### 几条约定
+
+- **文件夹随便建**：`_posts` 下的子文件夹只用于本地整理，URL 由 `permalink: :year/:month/:name/` 决定，和文件夹无关，移动文件不会导致老链接失效。
+- **图片统一放 `source/images/`**：笔记里用站内绝对路径引用，例如 `![](/images/笔记名/xxx.png)`。Obsidian 中把附件目录设为 `images`、链接格式选 “Vault 绝对路径” 即可自动生成这种写法。
+- **草稿放 `source/_drafts/`**：该目录不会被发布，适合先列大纲后期再补内容。
+- **附件放 `source/attachments/`**：脚本、压缩包等可下载文件放这里，用 `/attachments/xxx.sh` 引用。
 
 ## 本地环境说明
 
@@ -62,7 +73,14 @@ git push -u origin main
 ├── _config.yml            # 站点主配置（站名、URL、主题等）
 ├── _config.reimu.yml      # Reimu 主题配置（导航、分类卡片、侧边栏）
 ├── source/
-│   ├── _posts/            # ★ 所有笔记 Markdown 都放这里
+│   ├── _posts/            # ★ 所有笔记 Markdown（按四大类分文件夹）
+│   │   ├── WebSecurity/
+│   │   ├── JavaCodeSecurity/
+│   │   ├── AndroidReverse/
+│   │   └── Tools/
+│   ├── _drafts/           # 草稿（不会被发布）
+│   ├── images/            # ★ 笔记图片（按笔记名分目录）
+│   ├── attachments/       # 可下载附件（脚本等）
 │   ├── categories/        # 分类汇总页
 │   ├── tags/              # 标签汇总页
 │   └── about/             # 关于页

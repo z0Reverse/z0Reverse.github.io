@@ -15,3 +15,16 @@ db.json
 *.log
 .DS_Store
 Thumbs.db
+
+# Obsidian 工作区配置（每个 vault 复制进来时都会带）
+.obsidian/
+.trash/
+
+# 嵌套 git 仓库（从笔记 vault 复制时可能带入）
+.git/
+!.github/
+__MACOSX/
+
+# 迁移前的临时备份目录与一次性脚本
+.backup_posts/
+_*.ps1
