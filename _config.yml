@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 我的安全笔记
+title: "z0Reverse's Road to Security"
 subtitle: 'Web Security / Code Security / Android Reverse / Tools'
-description: '个人安全技术学习笔记博客'
+description: '我的安全来时路 · 记录安全学习与实战'
 keywords: security,web,notes
 author: z0Reverse
 language: zh-CN

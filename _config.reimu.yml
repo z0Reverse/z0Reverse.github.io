@@ -1,6 +1,9 @@
 # Reimu 主题配置（覆盖 themes/reimu/_config.yml 的同名项）
 # 完整可配置项见 themes/reimu/_config.yml
 
+# 头像：文件放在 source/_data/avatar/ 下，这里写文件名即可（发布后路径为 /avatar/文件名）
+avatar: "avatar.jpg"
+
 # 导航栏：首页 / 分类 / 归档 / 关于
 # （标签页保留，入口在侧边栏和文章页，不在导航露出）
 menu:
