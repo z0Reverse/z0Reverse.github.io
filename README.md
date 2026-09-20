@@ -39,6 +39,7 @@ tags:
 - **文件夹随便建**：`_posts` 下的子文件夹只用于本地整理，URL 由 `permalink: :year/:month/:name/` 决定，和文件夹无关，移动文件不会导致老链接失效。
 - **图片统一放 `source/images/`**：笔记里用站内绝对路径引用，例如 `![](/images/笔记名/xxx.png)`。Obsidian 中把附件目录设为 `images`、链接格式选 “Vault 绝对路径” 即可自动生成这种写法。
 - **草稿放 `source/_drafts/`**：该目录不会被发布，适合先列大纲后期再补内容。
+- **笔记模板在 `source/_templates/`**：四大类各有一个模板（front-matter 写法、二级分类示例、常用记录结构），写新笔记时复制一份到 `_posts` 对应大类下即可。`_templates` 目录不会被发布。
 - **附件放 `source/attachments/`**：脚本、压缩包等可下载文件放这里，用 `/attachments/xxx.sh` 引用。
 
 ## 本地环境说明
@@ -79,6 +80,7 @@ git push -u origin main
 │   │   ├── AndroidReverse/
 │   │   └── Tools/
 │   ├── _drafts/           # 草稿（不会被发布）
+│   ├── _templates/        # 笔记模板（不会被发布，写新笔记时复制）
 │   ├── images/            # ★ 笔记图片（按笔记名分目录）
 │   ├── attachments/       # 可下载附件（脚本等）
 │   ├── categories/        # 分类汇总页
