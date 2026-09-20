@@ -98,6 +98,13 @@ ignore:
 ## Themes: https://hexo.io/themes/
 theme: reimu
 
+# Markdown 渲染
+## prependRoot: 给笔记里的相对图片路径（如 images/xxx.png）自动补上站点根路径，
+## 这样 Obsidian 粘贴图片生成的相对链接在网站上也能正常显示
+marked:
+  prependRoot: true
+  postAsset: false
+
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
