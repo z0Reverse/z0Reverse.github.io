@@ -23,8 +23,7 @@ tar -zxvf jdk-17.0.10_linux-x64_bin.tar.gz -C /usr/local/java/
 /usr/local/java/jdk-17.0.10
 ```
 ![](images/Pasted%20image%2020260922210453.png)
----
-
+***
 ## 使用 update-alternatives
 ### 1. 注册多个 java、javac
 

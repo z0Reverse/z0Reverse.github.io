@@ -36,8 +36,7 @@ select * from users where username = '{输入内容}' union select xxxx;
 
 > 前置：SQL 注入分为：**联合注入、报错注入、布尔盲注、时间盲注、堆叠查询**，不同数据库对这几类支持差异很大。
 
----
-
+***
 ## 1. MySQL / MariaDB（MariaDB 是 MySQL 分支，语法几乎完全一致）
 
 ### 常用函数
@@ -70,8 +69,7 @@ select * from users where username = '{输入内容}' union select xxxx;
 union select 1,version(),database(),user()
 ```
 
----
-
+***
 ## 2. SQL Server (MSSQL)
 
 ### 常用函数
@@ -104,8 +102,7 @@ union select 1,version(),database(),user()
 union select 1,@@version,db_name(),user_name()
 ```
 
----
-
+***
 ## 3. Oracle
 
 ### 常用函数
@@ -135,8 +132,7 @@ union select 1,@@version,db_name(),user_name()
 union select 1,user from dual
 ```
 
----
-
+***
 ## 4. PostgreSQL（PG）
 
 ### 常用函数
@@ -163,8 +159,7 @@ union select 1,user from dual
 union select 1,version(),current_database(),current_user
 ```
 
----
-
+***
 # 四大数据库对比速查表
 
 表格
@@ -179,8 +174,7 @@ union select 1,version(),current_database(),current_user
 |注释符号|`# -- /* */`|`-- /* */`|`-- /* */`|`-- /* */`|||||
 |报错注入|updatexml/extractvalue|floor/rand 报错|utl_inaddr|较少|||||
 
----
-
+***
 # 不同注入类型的数据库支持差异
 
 ## 1️⃣联合注入 UNION SELECT
@@ -217,8 +211,7 @@ union select 1,version(),current_database(),current_user
 
 全部数据库都支持，原理都是构造条件判断页面返回是否变化，只是函数不一样。
 
----
-
+***
 # 实战渗透小总结
 
 1. **如果看到 `#` 注释有效，大概率是 MySQL/MariaDB**

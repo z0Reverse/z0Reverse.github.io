@@ -1,3 +1,18 @@
+---
+title: FastJson1.2.24复现
+date: 2026-10-06 16:28:52
+categories:
+  - WebSecurity
+  - CVE
+  - 三方组件
+  - FastJson
+tags:
+  - FastJson
+  - 反序列化
+  - RCE
+  - 漏洞复现
+---
+
 | CNVD-2017-02833 | 无黑名单，`@type` 直接加载类 | 默认开启 | `JdbcRowSetImpl` 触发 JNDI |
 | --------------- | ------------------ | ---- | ------------------------ |
 |                 |                    |      |                          |

@@ -191,8 +191,7 @@ Payload 核心：
 - 分页：`limit 1 offset 0`，和 MySQL 类似
 - 支持堆叠查询；超级用户可`COPY FROM PROGRAM`执行系统命令
 
----
-
+***
 ### Oracle
 Oracle 没有 MySQL 那种原生 XPath / 几何报错函数；经典报错注入使用 `CTXSYS.DRITHSX.SN`（Oracle Text 组件），需要组件存在
 **报错注入 Payload**
@@ -221,8 +220,7 @@ Oracle 没有 MySQL 那种原生 XPath / 几何报错函数；经典报错注入
 - 延时：`DBMS_PIPE.RECEIVE_MESSAGE('a',5)`
 - OOB 外带：`UTL_HTTP.REQUEST` 发起 http 请求带出数据
 
----
-
+***
 ### SQLite
 
 > ⚠️ SQLite**没有专门的报错注入函数**，主流利用方式：`cast(查询结果 as integer)`，字符串转整数触发报错。 SQLite 是文件型数据库，单库 = 单个文件；无多数据库概念，没有 information_schema。

@@ -4,12 +4,13 @@ date: 2026-09-24 00:36:38
 categories:
   - WebSecurity
   - CVE
+  - 三方组件
   - FastJson
 tags:
   - FastJson
   - 反序列化
   - RCE
-  - 中间件
+  - 三方组件
   - 漏洞复现
 ---
 
