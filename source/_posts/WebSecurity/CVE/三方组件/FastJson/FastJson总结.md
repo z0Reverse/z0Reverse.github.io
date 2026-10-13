@@ -46,16 +46,16 @@ tags:
 
 ## 三、GitHub 开源利用工具清单
 
-| 工具 | 地址 / 定位 | 主要用途 |
-| --- | --- | --- |
-| **JNDIExploit** | `feihua/JNDIExploit` | 一键启动 LDAP (1389)+HTTP (8080)，支持内存马 / 命令执行 / 高 JDK LDAP 绕过，1.2.24/1.2.47 首选 |
-| **JNDIMap** | `X1r0z/JNDIMap` | 轻量 JNDI 服务，LDAP 返回序列化 payload，适配高 JDK，可生成反弹 shell |
-| **JNDIEXP(JNDIInject)** | `Bl0omZ/JNDIEXP`（原仓库已删，流传 `JNDIInject-1.2-SNAPSHOT.jar`） | 精简版 JNDI 注入工具，含 **gadget fuzz 探测模块** |
-| **ysoserial** | `frohoff/ysoserial` | 生成 CC/CB/Groovy/C3P0 等原生反序列化字节流，**不出网场景核心** |
-| **JYsoSerial** | `jangod3/JYsoSerial` | ysoserial 增强版，新增内存马 / 回显链，不出网优先 |
-| **fastjsonScan** | `zilong3033/fastjsonScan`（Burp 插件） | 被动 / 主动扫描，DNSlog 探测、版本识别、生成 SpringEcho/TomcatEcho **回显 payload** |
-| **FastjsonVulnExp** | `yijingsec/FastJsonVulnExp` | 全套版本 POC，批量探测版本 |
-| **jndi_tool** | `wyzxxz/jndi_tool` | 高 JDK 绕过，可生成内存马 |
+| 工具                      | 地址 / 定位                                                  | 主要用途                                                                       |
+| ----------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------- |
+| **JNDIExploit**         | `feihua/JNDIExploit`                                     | 一键启动 LDAP (1389)+HTTP (8080)，支持内存马 / 命令执行 / 高 JDK LDAP 绕过，1.2.24/1.2.47 首选 |
+| **JNDIMap**             | `X1r0z/JNDIMap`                                          | 轻量 JNDI 服务，LDAP 返回序列化 payload，适配高 JDK，可生成反弹 shell                          |
+| **JNDIEXP(JNDIInject)** | `Bl0omZ/JNDIEXP`（原仓库已删，流传 `JNDIInject-1.2-SNAPSHOT.jar`） | 精简版 JNDI 注入工具，含 **gadget fuzz 探测模块**                                       |
+| **ysoserial**           | `frohoff/ysoserial`                                      | 生成 CC/CB/Groovy/C3P0 等原生反序列化字节流，**不出网场景核心**                                |
+| **JYsoSerial**          | `jangod3/JYsoSerial`                                     | ysoserial 增强版，新增内存马 / 回显链，不出网优先                                            |
+| **fastjsonScan**        | `zilong3033/fastjsonScan`（Burp 插件）                       | 被动 / 主动扫描，DNSlog 探测、版本识别、生成 SpringEcho/TomcatEcho **回显 payload**           |
+| **FastjsonVulnExp**     | `yijingsec/FastJsonVulnExp`                              | 全套版本 POC，批量探测版本                                                            |
+| **jndi_tool**           | `wyzxxz/jndi_tool`                                       | 高 JDK 绕过，可生成内存马                                                            |
 
 ## 四、JNDIInject（Bl0omZ/JNDIEXP）使用详解
 

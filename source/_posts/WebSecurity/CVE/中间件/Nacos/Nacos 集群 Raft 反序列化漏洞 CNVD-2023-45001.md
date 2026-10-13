@@ -29,6 +29,8 @@ tags:
 
 exp：[https://github.com/c0olw/NacosRce/](https://github.com/c0olw/NacosRce/)
 
+
+
 ## 漏洞修复
 
 1. 默认配置下该漏洞仅影响 Nacos 集群间 Raft 协议通信的 7848 端口，此端口不承载客户端请求，可以通过限制集群外部 IP 访问 7848 端口来进行缓解。
