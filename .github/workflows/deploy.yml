@@ -31,9 +31,19 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npx hexo generate
+        run: |
+          echo "::notice::node=$(node -v) NODE_OPTIONS=$NODE_OPTIONS"
+          free -m | head -n 2
+          set +e
+          npx hexo generate > build.log 2>&1
+          code=$?
+          if [ $code -ne 0 ]; then
+            echo "::error::hexo generate failed (exit $code)"
+            grep -inE "fatal|out of memory|heap|allocation|error|at " build.log | tail -n 25 | sed 's/^/::error::/'
+          fi
+          exit $code
         env:
-          NODE_OPTIONS: --max-old-space-size=4096
+          NODE_OPTIONS: --max-old-space-size=6144
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
