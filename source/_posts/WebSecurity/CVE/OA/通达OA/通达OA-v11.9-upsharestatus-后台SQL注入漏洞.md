@@ -25,8 +25,10 @@ tags:
 
 ```plain
 https://cdndown.tongda2000.com/oa/2019/TDOA11.9.exe
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 双击安装
 
 ![image-20220209112211968](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/202202091122432.png)
@@ -38,27 +40,28 @@ https://cdndown.tongda2000.com/oa/2019/TDOA11.9.exe
 ```php
 public function actionUpsharestatus()
 	{
-		Yii::$app->response->format = yii\web\Response::FORMAT_JSON;
-		$data = modules\appdesign\models\AppUtils::toGBK($_POST);
+		Yii::$app-&gt;response-&gt;format = yii\web\Response::FORMAT_JSON;
+		$data = modules\appdesign\models\AppUtils::toGBK(&#36;_POST);
 
 		if (modules\portal\controllers\intval($data["uid"]) == $_SESSION["LOGIN_UID"]) {
-			modules\portal\models\PortalWorkbench::updateAll(array("state" => "{$data["status"]}"), "id={$data["id"]}");
+			modules\portal\models\PortalWorkbench::updateAll(array("state" =&gt; "{$data["status"]}"), "id={$data["id"]}");
 		}
 		else if ($data["status"] == 1) {
-			modules\portal\models\PortalWorkbenchState::deleteAll(array("wids" => "{$data["id"]}", "uid" => "{$_SESSION["LOGIN_UID"]}"));
+			modules\portal\models\PortalWorkbenchState::deleteAll(array("wids" =&gt; "{$data["id"]}", "uid" =&gt; "{$_SESSION["LOGIN_UID"]}"));
 		}
 		else {
 			$Work = new modules\portal\models\PortalWorkbenchState();
-			$Work->wids = $data["id"];
-			$Work->uid = $_SESSION["LOGIN_UID"];
-			$Work->save();
+			$Work-&gt;wids = $data["id"];
+			$Work-&gt;uid = $_SESSION["LOGIN_UID"];
+			$Work-&gt;save();
 		}
 
-		$dataBack = array("status" => 1, "msg" => modules\portal\controllers\_("操作成功"));
+		$dataBack = array("status" =&gt; 1, "msg" =&gt; modules\portal\controllers\_("操作成功"));
 		$dataBack = modules\appdesign\models\AppUtils::toUTF8($dataBack);
 		return $dataBack;
-	}
-```
+	}</code></pre>
+
+</details>
 
 ![image-20220209112228111](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/202202091122220.png)
 

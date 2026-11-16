@@ -1,4 +1,5 @@
 ---
+disableNunjucks: true
 title: "致远OA M1Server userTokenService 远程命令执行漏洞"
 date: 2026-10-17 09:13:18
 categories:

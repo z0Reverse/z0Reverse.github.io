@@ -26,8 +26,10 @@ tags:
 
 ```
 app="Ruijie-EG易网关"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 首先登录到后台中(可以组合 锐捷EG易网关 管理员账号密码泄露漏洞)
@@ -35,7 +37,7 @@ app="Ruijie-EG易网关"
 漏洞文件 branch_passw.php
 
 ```php
-<?php
+&lt;?php
 
 /**
  * 分支密码的统一管理
@@ -52,7 +54,7 @@ class defaultController extends coreController {
 
     function __construct() {
         parent::__construct();
-        $this->filename = DS . "data" . DS . "evpn" . DS . "cfg_pwd.text";
+        $this-&gt;filename = DS . "data" . DS . "evpn" . DS . "cfg_pwd.text";
     }
 
     /**
@@ -82,9 +84,9 @@ class defaultController extends coreController {
     function getAction() {
         $command = "/usr/local/evpn/server/echo_pass.sh";
         $content = [];
-        exec(EscapeShellCmd($command), $content);
-        $data = array("status" => true,
-            "data" => isset($content[0]) && $content[0] === "" ? "" : $content);
+        &#101;xec(EscapeShellCmd($command), $content);
+        $data = array("status" =&gt; true,
+            "data" =&gt; isset($content[0]) &amp;&amp; $content[0] === "" ? "" : $content);
         json_echo($data);
     }
     
@@ -96,13 +98,13 @@ class defaultController extends coreController {
         $city = p("city");
         $district = p("district");
         $shell = "/usr/local/evpn/server/sh_clients_pass.sh";
-        if($province !== FALSE && $province != ""){
+        if($province !== FALSE &amp;&amp; $province != ""){
             $shell .= " province ".iconv("UTF-8", "GB2312//IGNORE", $province);
         }
-        if($city !== FALSE && $city != ""){
+        if($city !== FALSE &amp;&amp; $city != ""){
             $shell .= " city ".iconv("UTF-8", "GB2312//IGNORE", $city);
         }
-        if($district !== FALSE && $district != ""){
+        if($district !== FALSE &amp;&amp; $district != ""){
             $shell .= " district ".iconv("UTF-8", "GB2312//IGNORE", $district);
         }
         header("Content-type: text/html;charset=gbk");
@@ -113,8 +115,9 @@ class defaultController extends coreController {
 
 }
 
-include_once dirname(dirname(__FILE__)) . '/init.php';     //mvc架构初始化
-```
+include_once dirname(dirname(__FILE__)) . '/init.php';     //mvc架构初始化</code></pre>
+
+</details>
 
 其中漏洞部分
 

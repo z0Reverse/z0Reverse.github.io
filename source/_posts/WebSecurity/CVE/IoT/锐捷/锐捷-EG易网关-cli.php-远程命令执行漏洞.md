@@ -26,8 +26,10 @@ tags:
 
 ```
 app="Ruijie-EG易网关"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 首先登录到后台中(可以组合 锐捷EG易网关 管理员账号密码泄露漏洞)
@@ -35,7 +37,7 @@ app="Ruijie-EG易网关"
 漏洞文件 cli.php
 
 ```php
-<?php
+&lt;?php
 
 /**
  * cli命令查询
@@ -74,7 +76,7 @@ class defaultController extends coreController {
         $res = preg_replace(array("/%01/", "/%22/", "/%09/", "/%0D/", "/%3A/","/%07/"), array("", '"', "\t", "", ":",""), urlencode($data["data"])); //先进行url编码防止gbk中文无法json,再过滤首尾空方块
         $resArr = explode("%0A", $res);
         //$resArr = preg_split("/\r\n|\n/", $data["data"]);
-        if ($mode == "config" && strstr($resArr[0], "Enter+configuration+commands%2C+one+per+line.++End+with+CNTL%2FZ."))
+        if ($mode == "config" &amp;&amp; strstr($resArr[0], "Enter+configuration+commands%2C+one+per+line.++End+with+CNTL%2FZ."))
             array_shift($resArr);
         $data["data"] = $resArr;
         if (!headers_sent()) {
@@ -99,9 +101,9 @@ class defaultController extends coreController {
             exit();
         }
         $content = [];
-        exec(EscapeShellCmd($command), $content);
-        $data = array("status" => true,
-            "data" => $content);
+        &#101;xec(EscapeShellCmd($command), $content);
+        $data = array("status" =&gt; true,
+            "data" =&gt; $content);
         json_echo($data);
     }
 
@@ -129,18 +131,21 @@ class defaultController extends coreController {
      * 检测静态页面时候未登录直接进入
      */
     public function checkloginAction() {
-        json_echo(array("status" => true));
+        json_echo(array("status" =&gt; true));
     }
 
 }
 
-include_once(AROOT . "init.php");     //mvc初始化入口，放在底部
-```
+include_once(AROOT . "init.php");     //mvc初始化入口，放在底部</code></pre>
+
+</details>
 
 关键部分代码为
 
-```php
-/**
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-php">/**
      * 执行shell脚本
      */
     public function shellAction() {
@@ -152,12 +157,13 @@ include_once(AROOT . "init.php");     //mvc初始化入口，放在底部
             exit();
         }
         $content = [];
-        exec(EscapeShellCmd($command), $content);
-        $data = array("status" => true,
-            "data" => $content);
+        &#101;xec(EscapeShellCmd($command), $content);
+        $data = array("status" =&gt; true,
+            "data" =&gt; $content);
         json_echo($data);
-    }
-```
+    }</code></pre>
+
+</details>
 
 command参数直接传入执行了命令
 

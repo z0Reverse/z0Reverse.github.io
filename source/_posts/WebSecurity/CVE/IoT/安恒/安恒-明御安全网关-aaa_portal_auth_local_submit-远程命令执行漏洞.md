@@ -1,4 +1,5 @@
 ---
+disableNunjucks: true
 title: "安恒 明御安全网关 aaa_portal_auth_local_submit 远程命令执行漏洞"
 date: 2026-10-18 09:16:06
 categories:

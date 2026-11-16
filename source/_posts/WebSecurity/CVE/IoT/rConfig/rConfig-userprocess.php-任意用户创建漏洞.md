@@ -24,14 +24,16 @@ rConfig
 
 ```
 app="rConfig"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 出现漏洞的文件为 userproce.php
 
 ```php
-<?php
+&lt;?php
 
 /**
  * Process.php
@@ -52,27 +54,27 @@ class Process {
     function Process() {
         global $session;
         /* User submitted login form */
-        if (isset($_POST['sublogin'])) {
-            $this->procLogin();
+        if (isset(&#36;_POST['sublogin'])) {
+            $this-&gt;procLogin();
         }
-        /* Admin submitted user add form */ else if (isset($_POST['add']) && isset($_POST['editid']) && empty($_POST['editid'])) {
-            $this->procRegister();
+        /* Admin submitted user add form */ else if (isset(&#36;_POST['add']) &amp;&amp; isset(&#36;_POST['editid']) &amp;&amp; empty(&#36;_POST['editid'])) {
+            $this-&gt;procRegister();
         }
-        /* Admin submitted user edit form */ else if (isset($_POST['add']) && isset($_POST['editid']) && !empty($_POST['editid'])) {
-            $this->procUpdateAccount();
+        /* Admin submitted user edit form */ else if (isset(&#36;_POST['add']) &amp;&amp; isset(&#36;_POST['editid']) &amp;&amp; !empty(&#36;_POST['editid'])) {
+            $this-&gt;procUpdateAccount();
         }
-        /* User submitted forgot password form */ else if (isset($_POST['subforgot'])) {
-            $this->procForgotPass();
+        /* User submitted forgot password form */ else if (isset(&#36;_POST['subforgot'])) {
+            $this-&gt;procForgotPass();
         }
-        /* User submitted edit account form */ else if (isset($_POST['subedit'])) {
-            $this->procEditAccount();
+        /* User submitted edit account form */ else if (isset(&#36;_POST['subedit'])) {
+            $this-&gt;procEditAccount();
         }
         /**
          * The only other reason user should be directed here
          * is if he wants to logout, which means user is
          * logged in currently.
-         */ else if ($session->logged_in) {
-            $this->procLogout();
+         */ else if ($session-&gt;logged_in) {
+            $this-&gt;procLogout();
         }
         /**
          * Should not get here, which means user is viewing this page
@@ -90,15 +92,15 @@ class Process {
     function procLogin() {
         global $session, $form;
         /* Login attempt */
-        $retval = $session->login($_POST['user'], $_POST['pass'], isset($_POST['remember']));
+        $retval = $session-&gt;login(&#36;_POST['user'], &#36;_POST['pass'], isset(&#36;_POST['remember']));
         /* Login successful */
         if ($retval) {
-            header("Location: " . $session->referrer);
+            header("Location: " . $session-&gt;referrer);
         }
         /* Login failed */ else {
-            $_SESSION['value_array'] = $_POST;
-            $_SESSION['error_array'] = $form->getErrorArray();
-            header("Location: " . $session->referrer);
+            $_SESSION['value_array'] = &#36;_POST;
+            $_SESSION['error_array'] = $form-&gt;getErrorArray();
+            header("Location: " . $session-&gt;referrer);
         }
     }
 
@@ -108,7 +110,7 @@ class Process {
      */
     function procLogout() {
         global $session;
-        $retval = $session->logout();
+        $retval = $session-&gt;logout();
         header("Location: /login.php");
     }
 
@@ -123,30 +125,30 @@ class Process {
         global $session, $form;
         /* Convert username to all lowercase (by option) */
         if (ALL_LOWERCASE) {
-            $_POST['username'] = strtolower($_POST['username']);
+            &#36;_POST['username'] = strtolower(&#36;_POST['username']);
         }
         /* Registration attempt */
-        $retval = $session->register($_POST['username'], $_POST['password'], $_POST['passconf'], $_POST['email'], $_POST['ulevelid']);
+        $retval = $session-&gt;register(&#36;_POST['username'], &#36;_POST['password'], &#36;_POST['passconf'], &#36;_POST['email'], &#36;_POST['ulevelid']);
 
         /* Registration Successful */
         if ($retval == 0) {
-            $_SESSION['reguname'] = $_POST['username'];
+            $_SESSION['reguname'] = &#36;_POST['username'];
             $_SESSION['regsuccess'] = true;
-            $errors['Success'] = "User " . $_POST['username'] . " successfully added to Database";
+            $errors['Success'] = "User " . &#36;_POST['username'] . " successfully added to Database";
             $_SESSION['errors'] = $errors;
-            header("Location: " . $session->referrer);
+            header("Location: " . $session-&gt;referrer);
         }
         /* Error found with form */ else if ($retval == 1) {
-            $_SESSION['value_array'] = $_POST;
-            $_SESSION['errors'] = $form->getErrorArray();
-            header("Location: " . $session->referrer . "?error");
+            $_SESSION['value_array'] = &#36;_POST;
+            $_SESSION['errors'] = $form-&gt;getErrorArray();
+            header("Location: " . $session-&gt;referrer . "?error");
         }
         /* Registration attempt failed */ else if ($retval == 2) {
-            $_SESSION['reguname'] = $_POST['username'];
+            $_SESSION['reguname'] = &#36;_POST['username'];
             $_SESSION['regsuccess'] = false;
-            $errors['Fail'] = "ERROR: User " . $_POST['username'] . " could not be added to Database";
+            $errors['Fail'] = "ERROR: User " . &#36;_POST['username'] . " could not be added to Database";
             $_SESSION['errors'] = $errors;
-            header("Location: " . $session->referrer);
+            header("Location: " . $session-&gt;referrer);
         }
     }
 
@@ -158,43 +160,43 @@ class Process {
     function procForgotPass() {
         global $database, $session, $mailer, $form;
         /* Username error checking */
-        $subuser = $_POST['user'];
+        $subuser = &#36;_POST['user'];
         $field = "user";  //Use field name for username
         if (!$subuser || strlen($subuser = trim($subuser)) == 0) {
-            $form->setError($field, "Username not entered<br>");
-            $_SESSION['value_array'] = $_POST;
-            $_SESSION['errors'] = $form->getErrorArray();
-            header("Location: " . $session->referrer . "?error");
+            $form-&gt;setError($field, "Username not entered&lt;br&gt;");
+            $_SESSION['value_array'] = &#36;_POST;
+            $_SESSION['errors'] = $form-&gt;getErrorArray();
+            header("Location: " . $session-&gt;referrer . "?error");
         } else {
             /* Make sure username is in database */
             $subuser = stripslashes($subuser);
-            if (strlen($subuser) < 5 || strlen($subuser) > 30 ||
+            if (strlen($subuser) &lt; 5 || strlen($subuser) &gt; 30 ||
                     !preg_match("/^([0-9a-z])+$/", $subuser) ||
-                    (!$database->usernameTaken($subuser))) {
-                $form->setError($field, "Unknown Username");
-                $_SESSION['value_array'] = $_POST;
-                $_SESSION['errors'] = $form->getErrorArray();
-                header("Location: " . $session->referrer . "?error");
+                    (!$database-&gt;usernameTaken($subuser))) {
+                $form-&gt;setError($field, "Unknown Username");
+                $_SESSION['value_array'] = &#36;_POST;
+                $_SESSION['errors'] = $form-&gt;getErrorArray();
+                header("Location: " . $session-&gt;referrer . "?error");
             }
         }
         /* Errors exist, have user correct them */
-        if ($form->num_errors > 0) {
-            $_SESSION['value_array'] = $_POST;
-            $_SESSION['error_array'] = $form->getErrorArray();
+        if ($form-&gt;num_errors &gt; 0) {
+            $_SESSION['value_array'] = &#36;_POST;
+            $_SESSION['error_array'] = $form-&gt;getErrorArray();
         } else {
             /* Generate new password */
-            $newpass = $session->generateRandStr(8);
+            $newpass = $session-&gt;generateRandStr(8);
             /* Get email of user */
-            $usrinf = $database->getUserInfo($subuser);
+            $usrinf = $database-&gt;getUserInfo($subuser);
             $email = $usrinf['email'];
             /* Attempt to send the email with new password */
-            if ($mailer->sendNewPass($subuser, $email, $newpass)) {
+            if ($mailer-&gt;sendNewPass($subuser, $email, $newpass)) {
                 /* Email sent, update database */
-                $database->updateUserField($subuser, "password", md5($newpass));
-                echo "<script>"
+                $database-&gt;updateUserField($subuser, "password", md5($newpass));
+                echo "&lt;script&gt;"
                 . "alert('Your new password has been generated. The password was emailed to $email');"
                 . "window.close();"
-                . "</script>";
+                . "&lt;/script&gt;";
             }/* Email failure, do not change password */ 
             else {
                 $_SESSION['forgotpass'] = false;
@@ -210,27 +212,27 @@ class Process {
     function procEditAccount() {
         global $session, $form;
         /* Account edit attempt */
-        $retval = $session->editAccount($_POST['editid'], $_POST['username'], $_POST['curpass'], $_POST['newpass'], $_POST['passconf'], $_POST['email'], $_POST['ulevelid']);
+        $retval = $session-&gt;editAccount(&#36;_POST['editid'], &#36;_POST['username'], &#36;_POST['curpass'], &#36;_POST['newpass'], &#36;_POST['passconf'], &#36;_POST['email'], &#36;_POST['ulevelid']);
 
         /* Account edit successful */
         if ($retval == 0) {
-            $_SESSION['useredit'] = $_POST['username'];
+            $_SESSION['useredit'] = &#36;_POST['username'];
             $_SESSION['useredit'] = true;
-            $errors['Success'] = "User " . $_POST['username'] . " successfully edited";
+            $errors['Success'] = "User " . &#36;_POST['username'] . " successfully edited";
             $_SESSION['errors'] = $errors;
-            header("Location: " . $session->referrer);
+            header("Location: " . $session-&gt;referrer);
         }
         /* Error found with form */ else if ($retval == 1) {
-            $_SESSION['value_array'] = $_POST;
-            $_SESSION['errors'] = $form->getErrorArray();
-            header("Location: " . $session->referrer . "?error");
+            $_SESSION['value_array'] = &#36;_POST;
+            $_SESSION['errors'] = $form-&gt;getErrorArray();
+            header("Location: " . $session-&gt;referrer . "?error");
         }
         /* Registration attempt failed */ else if ($retval == 2) {
-            $_SESSION['useredit'] = $_POST['username'];
+            $_SESSION['useredit'] = &#36;_POST['username'];
             $_SESSION['regsuccess'] = false;
-            $errors['Fail'] = "ERROR: User " . $_POST['username'] . " could not be edited";
+            $errors['Fail'] = "ERROR: User " . &#36;_POST['username'] . " could not be edited";
             $_SESSION['errors'] = $errors;
-            header("Location: " . $session->referrer);
+            header("Location: " . $session-&gt;referrer);
         }
     }
 
@@ -250,25 +252,25 @@ class Process {
 
         global $session, $form;
         /* Account edit attempt */
-        $retval = $session->updateAccount($_POST['editid'], $_POST['username'], $_POST['password'], $_POST['passconf'], $_POST['email'], $_POST['ulevelid']);
+        $retval = $session-&gt;updateAccount(&#36;_POST['editid'], &#36;_POST['username'], &#36;_POST['password'], &#36;_POST['passconf'], &#36;_POST['email'], &#36;_POST['ulevelid']);
 
         /* Account edit successful */
         if ($retval == 0) {
-            $_SESSION['useredit'] = $_POST['username'];
+            $_SESSION['useredit'] = &#36;_POST['username'];
             $_SESSION['useredit'] = true;
-            $errors['Success'] = "User " . $_POST['username'] . " successfully edited";
+            $errors['Success'] = "User " . &#36;_POST['username'] . " successfully edited";
             $_SESSION['errors'] = $errors;
             header("Location: " . $protocol . "://" . $_SERVER['HTTP_HOST'] . "/" . "useradmin.php");
         }
         /* Error found with form */ else if ($retval == 1) {
-            $_SESSION['value_array'] = $_POST;
-            $_SESSION['errors'] = $form->getErrorArray();
+            $_SESSION['value_array'] = &#36;_POST;
+            $_SESSION['errors'] = $form-&gt;getErrorArray();
             header("Location: " . $protocol . "://" . $_SERVER['HTTP_HOST'] . "/" . "useradmin.php?error");
         }
         /* Registration attempt failed */ else if ($retval == 2) {
-            $_SESSION['useredit'] = $_POST['username'];
+            $_SESSION['useredit'] = &#36;_POST['username'];
             $_SESSION['regsuccess'] = false;
-            $errors['Fail'] = "ERROR: User " . $_POST['username'] . " could not be edited";
+            $errors['Fail'] = "ERROR: User " . &#36;_POST['username'] . " could not be edited";
             $_SESSION['errors'] = $errors;
             header("Location: " . $protocol . "://" . $_SERVER['HTTP_HOST'] . "/" . "useradmin.php");
         }
@@ -277,8 +279,9 @@ class Process {
 }
 
 /* Initialize process */
-$process = new Process;
-```
+$process = new Process;</code></pre>
+
+</details>
 
 出现漏洞的原因是对权限设定错误，任何人都可以通过访问这个文件创建管理员用户
 

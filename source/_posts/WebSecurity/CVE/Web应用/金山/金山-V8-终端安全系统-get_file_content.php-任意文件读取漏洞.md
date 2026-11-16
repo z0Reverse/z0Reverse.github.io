@@ -35,14 +35,16 @@ title="在线安装-V8+终端安全系统Web控制台"
 
 存在漏洞的文件`/Console/receive_file/get_file_content.php`
 
-```
-<?php  
-  if(stripos($_POST['filepath'],"..") !== false) {
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">&lt;?php  
+  if(stripos(&#36;_POST['filepath'],"..") !== false) {
     echo 'no file founggd';
     exit();
   }
   ini_set("open_basedir", "../");
-  $file_path = '../'.iconv("utf-8","gb2312",$_POST['filepath']);
+  $file_path = '../'.iconv("utf-8","gb2312",&#36;_POST['filepath']);
   if(!file_exists($file_path)){
     echo 'no file founggd';
     exit();
@@ -54,14 +56,15 @@ title="在线安装-V8+终端安全系统Web控制台"
   $buffer=5024;  
   $file_count=0;  
 
-  while(!feof($fp) && $file_count<$file_size){  
+  while(!feof($fp) &amp;&amp; $file_count&lt;$file_size){  
     $file_con=fread($fp,$buffer);  
     $file_count+=$buffer;  
     echo $file_con;  
   }  
   fclose($fp);  
-?>
-```
+?&gt;</code></pre>
+
+</details>
 
 
 

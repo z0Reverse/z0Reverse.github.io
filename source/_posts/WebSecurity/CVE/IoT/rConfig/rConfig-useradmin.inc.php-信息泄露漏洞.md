@@ -25,14 +25,16 @@ rConfig
 
 ```
 app="rConfig"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 出现漏洞的文件
 
 ```php
-<?php
+&lt;?php
 /* Includes */
 require_once("../classes/db2.class.php");
 include_once('../classes/paginator.class.php');
@@ -41,26 +43,26 @@ include_once('../classes/paginator.class.php');
 $db2 = new db2();
 
 // get timezone for later
-$db2->query("SELECT timeZone FROM settings");
-$result = $db2->resultsetCols();
+$db2-&gt;query("SELECT timeZone FROM settings");
+$result = $db2-&gt;resultsetCols();
 $timeZone = $result[0];
 date_default_timezone_set($timeZone);
 
 /* Get Row count from users where NOT deleted */
-$db2->query('SELECT COUNT(*) AS total FROM users WHERE status = 1');
-$row = $db2->resultsetCols();
+$db2-&gt;query('SELECT COUNT(*) AS total FROM users WHERE status = 1');
+$row = $db2-&gt;resultsetCols();
 $result["total"] = $row[0];
 /* Instantiate Paginator Class */
 $pages = new Paginator;
-$pages->items_total = $result['total'];
-$pages->mid_range = 7; // Number of pages to display. Must be odd and > 3
-$pages->paginate();
-echo $pages->display_pages();
-echo "<span class=\"\">" . $pages->display_jump_menu() . $pages->display_items_per_page() . "</span>";
+$pages-&gt;items_total = $result['total'];
+$pages-&gt;mid_range = 7; // Number of pages to display. Must be odd and &gt; 3
+$pages-&gt;paginate();
+echo $pages-&gt;display_pages();
+echo "&lt;span class=\"\"&gt;" . $pages-&gt;display_jump_menu() . $pages-&gt;display_items_per_page() . "&lt;/span&gt;";
 
 /* GET all nodes records from DB */
-$db2->query("SELECT id, username, userlevel, email, timestamp FROM users WHERE status = 1 $pages->limit");
-$resultSelect = $db2->resultset();
+$db2-&gt;query("SELECT id, username, userlevel, email, timestamp FROM users WHERE status = 1 $pages-&gt;limit");
+$resultSelect = $db2-&gt;resultset();
 // push rows to $itesm array
 $items = array();
 foreach ($resultSelect as $row) {
@@ -69,28 +71,28 @@ foreach ($resultSelect as $row) {
 /* Create Multidimensional array for use later */
 $result["rows"] = $items;
 $i = 0; # row counter  to enable alternate row coloring
-?>
+?&gt;
 
-<table id="userAddTbl" class="tableSimple">
-    <thead>
-    <th rowspan="2"><input type="checkbox" disabled="disabled"/></th>
-    <th rowspan="2">Username</th>
-    <th rowspan="2">E-mail</th>
-    <th rowspan="2">User Level</th>
-    <th rowspan="2">Last Login</th>
-</thead>
-<tbody>
-    <?php
+&lt;table id="userAddTbl" class="tableSimple"&gt;
+    &lt;thead&gt;
+    &lt;th rowspan="2"&gt;&lt;input type="checkbox" disabled="disabled"/&gt;&lt;/th&gt;
+    &lt;th rowspan="2"&gt;Username&lt;/th&gt;
+    &lt;th rowspan="2"&gt;E-mail&lt;/th&gt;
+    &lt;th rowspan="2"&gt;User Level&lt;/th&gt;
+    &lt;th rowspan="2"&gt;Last Login&lt;/th&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+    &lt;?php
     foreach ($result['rows'] as $rows):
         $id = $rows['id'];
         /* This bit just updates the class='row' bit with an alternating 1 OR 0 for alternative row coloring */
-        echo '<tr class="row' . ($i++ % 2) . '">';
-        ?>
-    <td align="center"><input type="checkbox" name="tablecheckbox" id="<?php echo $id; ?>"/></td>
-    <td align="center"><strong><?php echo $rows['username'] ?></strong></td>
-    <td align="center"><?php echo $rows['email'] ?></td>
-    <td align="center">
-        <?php
+        echo '&lt;tr class="row' . ($i++ % 2) . '"&gt;';
+        ?&gt;
+    &lt;td align="center"&gt;&lt;input type="checkbox" name="tablecheckbox" id="&lt;?php echo $id; ?&gt;"/&gt;&lt;/td&gt;
+    &lt;td align="center"&gt;&lt;strong&gt;&lt;?php echo $rows['username'] ?&gt;&lt;/strong&gt;&lt;/td&gt;
+    &lt;td align="center"&gt;&lt;?php echo $rows['email'] ?&gt;&lt;/td&gt;
+    &lt;td align="center"&gt;
+        &lt;?php
         // quick check if userlevel =9 user is admin else, user is a User
         if ($rows['userlevel'] == 9) {
             $userlevel = "Admin";
@@ -98,24 +100,25 @@ $i = 0; # row counter  to enable alternate row coloring
             $userlevel = "User";
         }
         echo $userlevel;
-        ?></td>
-    <td align="center">
-        <?php
+        ?&gt;&lt;/td&gt;
+    &lt;td align="center"&gt;
+        &lt;?php
         // quick convert unix TimeStamp to normal times
         $lastLogin = date('H:i d-m-Y', $rows['timestamp']);
         echo $lastLogin;
-        ?>
-    </td>
-    </tr>
-<?php endforeach; ?>
-</tbody>
-</table>
+        ?&gt;
+    &lt;/td&gt;
+    &lt;/tr&gt;
+&lt;?php endforeach; ?&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 
-<?php
-echo $pages->display_pages();
-echo "<div class=\"spacer\"></div>";
-echo "<p class=\"paginate\">Page: $pages->current_page of $pages->num_pages</p>\n";
-```
+&lt;?php
+echo $pages-&gt;display_pages();
+echo "&lt;div class=\"spacer\"&gt;&lt;/div&gt;";
+echo "&lt;p class=\"paginate\"&gt;Page: $pages-&gt;current_page of $pages-&gt;num_pages&lt;/p&gt;\n";</code></pre>
+
+</details>
 
 文件没有设定权限，任何人可以访问泄露信息
 

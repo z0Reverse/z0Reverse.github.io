@@ -37,12 +37,14 @@ app="猎鹰安全-金山V8+终端安全系统"
 
 ```plain
 Kingsoft\Security Manager\SystemCenter\Console\inter\pdf_maker.php
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 
 
 ```php
-<?php
+&lt;?php
 require_once (dirname(__FILE__)."\\common\\HTTPrequest_SCpost.php");
 /*
 {
@@ -50,7 +52,7 @@ require_once (dirname(__FILE__)."\\common\\HTTPrequest_SCpost.php");
 {
 "set_exportpdf_cmd" :
     {
-    "url" : "http://172.18.254.146/report/system/main.php?userSession=5784727B-7AEA-4EFE-B0CB-DDD6DA1CABD3&guid=1AC380D9-                580C-49A8-B6EC-787CF50FA928&VHierarchyID=ADMIN",
+    "url" : "http://172.18.254.146/report/system/main.php?userSession=5784727B-7AEA-4EFE-B0CB-DDD6DA1CABD3&amp;guid=1AC380D9-                580C-49A8-B6EC-787CF50FA928&amp;VHierarchyID=ADMIN",
     "fileName":"test.pdf"
     }
 }
@@ -60,10 +62,10 @@ require_once (dirname(__FILE__)."\\common\\HTTPrequest_SCpost.php");
 	//$post = file_get_contents("php://input");
 	
 	/*
-	$post = array("kptl"=>
-			array("set_exportpdf_cmd"=>array(
-				"url"=>"http://172.18.254.146/report/system/main.php?userSession=5784727B-7AEA-4EFE-B0CB-DDD6DA1CABD3&guid=1AC380D9-580C-49A8-B6EC-787CF50FA928&VHierarchyID=ADMIN",
-				"fileName"=>"test1234.pdf"
+	$post = array("kptl"=&gt;
+			array("set_exportpdf_cmd"=&gt;array(
+				"url"=&gt;"http://172.18.254.146/report/system/main.php?userSession=5784727B-7AEA-4EFE-B0CB-DDD6DA1CABD3&amp;guid=1AC380D9-580C-49A8-B6EC-787CF50FA928&amp;VHierarchyID=ADMIN",
+				"fileName"=&gt;"test1234.pdf"
 				)
 			));
 			*/
@@ -73,8 +75,8 @@ require_once (dirname(__FILE__)."\\common\\HTTPrequest_SCpost.php");
 	
 	
 
-	$url = $_POST["url"];
-	$fileName =  $_POST["fileName"];
+	$url = &#36;_POST["url"];
+	$fileName =  &#36;_POST["fileName"];
 	$batName=$fileName;
 	if ($url == null || $fileName == null)
 	{
@@ -87,14 +89,14 @@ require_once (dirname(__FILE__)."\\common\\HTTPrequest_SCpost.php");
 	$nameStr = base64_decode($fileName).date("Y-m-d").".pdf";
 	$fileName="..\\htmltopdf\\".$nameStr;
 
-	system('mkdir ..\\htmltopdf');
+	&#115;ystem('mkdir ..\\htmltopdf');
 
 	
 	$cmd = '..\\..\\wkhtmltopdf.exe "'.$url.'" '.$fileName;
-	if (getApacheVersion()>=24) { //apache 2.4 php 7 版本 只能在  bat中运行
+	if (getApacheVersion()&gt;=24) { //apache 2.4 php 7 版本 只能在  bat中运行
 		$cmd =" del ".$fileName;
 
-		exec($cmd);
+		&#101;xec($cmd);
 		$url_= str_replace('%','%%', $url);
 		$cmd = '..\\..\\wkhtmltopdf.exe "'.$url_.'" '.$fileName;
 		$batName ="exec_wkhtmltopdf.bat";
@@ -103,19 +105,20 @@ require_once (dirname(__FILE__)."\\common\\HTTPrequest_SCpost.php");
 		fwrite($myfile, $cmd);
 		fclose($myfile);
 		$cmd =$batName ;
-		exec($cmd);
+		&#101;xec($cmd);
 		$cmd =" del ".$batName;
-		exec($cmd);
+		&#101;xec($cmd);
     }else
     {
-	system($cmd);
+	&#115;ystem($cmd);
     }
 	// echo $url;
-	$return = array("nResult" => "0","fileName" =>$nameStr,"url"=>$url);
+	$return = array("nResult" =&gt; "0","fileName" =&gt;$nameStr,"url"=&gt;$url);
 	echo json_encode($return,JSON_UNESCAPED_UNICODE);
 	
-?>
-```
+?&gt;</code></pre>
+
+</details>
 
 
 

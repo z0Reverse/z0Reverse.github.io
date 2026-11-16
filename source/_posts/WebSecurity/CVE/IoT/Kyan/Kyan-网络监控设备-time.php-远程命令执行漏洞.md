@@ -35,8 +35,10 @@ app="Kyan设计"
 
 存在漏洞的文件: `/time.php`
 
-```
-<?php
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">&lt;?php
 require_once 'functions.php';
 require_once 'international.php';
 
@@ -51,36 +53,36 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 		showErrMessage("permission denied");
 		exit;
 	}
-	$timesynctype = $_POST["timesynctype"];
+	$timesynctype = &#36;_POST["timesynctype"];
 	if($timesynctype!="client")
 	{
-		$output = shell_exec("/bin/bashsuid -p -c \"/usr/sbin/ntpdate " .$timesynctype. "\"");
+		$output = &#115;hell_&#101;xec("/bin/bashsuid -p -c \"/usr/sbin/ntpdate " .$timesynctype. "\"");
 		showMessage($output);		
-		shell_exec("/bin/bashsuid -p -c \"hwclock --systohc\"");
+		&#115;hell_&#101;xec("/bin/bashsuid -p -c \"hwclock --systohc\"");
 	}else
 	{
-		$ctime = $_POST["ctime"];
-		shell_exec("/bin/bashsuid -p -c \"date " .$ctime. "\"");
-		shell_exec("/bin/bashsuid -p -c \"hwclock --systohc\"");
+		$ctime = &#36;_POST["ctime"];
+		&#115;hell_&#101;xec("/bin/bashsuid -p -c \"date " .$ctime. "\"");
+		&#115;hell_&#101;xec("/bin/bashsuid -p -c \"hwclock --systohc\"");
 	}
 }
-        echo "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n";
-        echo "  <head>\n";
-        echo "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n";
-        echo "    <meta http-equiv=\"Content-Style-Type\" content=\"text/css\" />\n";
-        echo "    <meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\" />\n";
-        echo "    <link type=\"text/css\" rel=\"stylesheet\" href=\"./templates/clean.css\" title=\"PSI_Template\"/>\n";
-        echo "    <title>time</title>\n";
-	echo "<style type=\"text/css\">";
+        echo "&lt;html xmlns=\"http://www.w3.org/1999/xhtml\"&gt;\n";
+        echo "  &lt;head&gt;\n";
+        echo "    &lt;meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" /&gt;\n";
+        echo "    &lt;meta http-equiv=\"Content-Style-Type\" content=\"text/css\" /&gt;\n";
+        echo "    &lt;meta http-equiv=\"Content-Script-Type\" content=\"text/javascript\" /&gt;\n";
+        echo "    &lt;link type=\"text/css\" rel=\"stylesheet\" href=\"./templates/clean.css\" title=\"PSI_Template\"/&gt;\n";
+        echo "    &lt;title&gt;time&lt;/title&gt;\n";
+	echo "&lt;style type=\"text/css\"&gt;";
 	echo "th, td, h3 {";
 	echo "font-size: 12px;";
 	echo "}";
-	echo "</style>";
-        echo "  </head>\n";	
+	echo "&lt;/style&gt;";
+        echo "  &lt;/head&gt;\n";	
 
 //print_html_begin("time");
-?>
-<script language="javascript" type="text/javascript">
+?&gt;
+&lt;script language="javascript" type="text/javascript"&gt;
 //因程序执行耗费时间,所以时间并不十分准确,误差大约在2000毫秒以下
 var xmlHttp = false;
 //获取服务器时间
@@ -94,7 +96,7 @@ try {
   }
 }
 
-if (!xmlHttp && typeof XMLHttpRequest != 'undefined') {
+if (!xmlHttp &amp;&amp; typeof XMLHttpRequest != 'undefined') {
   xmlHttp = new XMLHttpRequest();
 }
 
@@ -171,7 +173,7 @@ if(month==1||month==3||month==5||month==7
    month+=1;
    }
  }else if(month==2){
-   if(year%4==0&&year%100!=0){//闰年处理
+   if(year%4==0&amp;&amp;year%100!=0){//闰年处理
     if(date==29){
      date=1;
      month+=1;
@@ -201,33 +203,33 @@ if(month==1||month==3||month==5||month==7
 
 function addZero(num) {
 num=Math.floor(num);
-return ((num <= 9) ? ("0" + num) : num);
+return ((num &lt;= 9) ? ("0" + num) : num);
 }
 function updatetime()
 {
 	return true;
 }
-</script>
+&lt;/script&gt;
 
-<body onLoad="getSeverTime();">
-<table style='width:500px' border='0' align='center' cellpadding='3' cellspacing='1'>
-<th colspan="2"><?php echo lang_get('Timer'); ?></th>
-<tr ><td align='right' width=50%><?php echo lang_get('System time')?></td><td align='left'><div id="servertime"></div></td></tr>
-<tr ><td align='right'><?php echo lang_get('Client time')?></td><td align='left'><div id="clienttime"></div></td></tr>
-<tr ><td colspan="2" align="center">
-<form name="Form1" method="post" action=<?php echo $_SERVER['PHP_SELF']?>>
-<input type="hidden" name="cdate" id="cdate" value=""/>
-<input type="hidden" name="ctime" id="ctime" value=""/>
-<?php echo lang_get('Sync Source');?>:
-<select name="timesynctype" id="timesynctype" >
-<option value="time.windows.com" selected="selected">time.windows.com</option>
-<option value="time.nist.gov">time.nist.gov</option>
-<?php 
+&lt;body onLoad="getSeverTime();"&gt;
+&lt;table style='width:500px' border='0' align='center' cellpadding='3' cellspacing='1'&gt;
+&lt;th colspan="2"&gt;&lt;?php echo lang_get('Timer'); ?&gt;&lt;/th&gt;
+&lt;tr &gt;&lt;td align='right' width=50%&gt;&lt;?php echo lang_get('System time')?&gt;&lt;/td&gt;&lt;td align='left'&gt;&lt;div id="servertime"&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr &gt;&lt;td align='right'&gt;&lt;?php echo lang_get('Client time')?&gt;&lt;/td&gt;&lt;td align='left'&gt;&lt;div id="clienttime"&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr &gt;&lt;td colspan="2" align="center"&gt;
+&lt;form name="Form1" method="post" action=&lt;?php echo $_SERVER['PHP_SELF']?&gt;&gt;
+&lt;input type="hidden" name="cdate" id="cdate" value=""/&gt;
+&lt;input type="hidden" name="ctime" id="ctime" value=""/&gt;
+&lt;?php echo lang_get('Sync Source');?&gt;:
+&lt;select name="timesynctype" id="timesynctype" &gt;
+&lt;option value="time.windows.com" selected="selected"&gt;time.windows.com&lt;/option&gt;
+&lt;option value="time.nist.gov"&gt;time.nist.gov&lt;/option&gt;
+&lt;?php 
 /*$system_lic_file = '/mnt/licenses/system/system.dat';
 $bsynctoclient=false;
 if(file_exists($system_lic_file))
 {
-	$output = shell_exec("/bin/bashsuid -p -c \"openssl bf-cbc -K 000102030405060708090A0B0C0D0E0F -iv 0102030405060708 -d -in /mnt/licenses/system/system.dat |grep -v \"^;\"|grep Expire\"");
+	$output = &#115;hell_&#101;xec("/bin/bashsuid -p -c \"openssl bf-cbc -K 000102030405060708090A0B0C0D0E0F -iv 0102030405060708 -d -in /mnt/licenses/system/system.dat |grep -v \"^;\"|grep Expire\"");
 	if($output == "")
 	{
 		$bsynctoclient = true;
@@ -239,47 +241,51 @@ if(file_exists($system_lic_file))
 }
 if($bsynctoclient)
 {*/
-	echo "<option value=\"client\" >".lang_get('PC Client')."</option>";
+	echo "&lt;option value=\"client\" &gt;".lang_get('PC Client')."&lt;/option&gt;";
 /* } */
 
-?>
+?&gt;
 
-</select>
-<input  type="submit" name="update" id="update" value="<?php echo lang_get('Update Now');?>" />
-</form>
-</td></tr>
-</table>
-</body>
-</html>
-<?php
+&lt;/select&gt;
+&lt;input  type="submit" name="update" id="update" value="&lt;?php echo lang_get('Update Now');?&gt;" /&gt;
+&lt;/form&gt;
+&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+&lt;?php
 //print_html_end();
-?>
-```
+?&gt;</code></pre>
+
+</details>
 
 其中需要注意的地方
 
-```
-if($_SERVER['REQUEST_METHOD'] == 'POST')
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">if($_SERVER['REQUEST_METHOD'] == 'POST')
 {
 	if(!user_is_admin())
 	{
 		showErrMessage("permission denied");
 		exit;
 	}
-	$timesynctype = $_POST["timesynctype"];
+	$timesynctype = &#36;_POST["timesynctype"];
 	if($timesynctype!="client")
 	{
-		$output = shell_exec("/bin/bashsuid -p -c \"/usr/sbin/ntpdate " .$timesynctype. "\"");
+		$output = &#115;hell_&#101;xec("/bin/bashsuid -p -c \"/usr/sbin/ntpdate " .$timesynctype. "\"");
 		showMessage($output);		
-		shell_exec("/bin/bashsuid -p -c \"hwclock --systohc\"");
+		&#115;hell_&#101;xec("/bin/bashsuid -p -c \"hwclock --systohc\"");
 	}else
 	{
-		$ctime = $_POST["ctime"];
-		shell_exec("/bin/bashsuid -p -c \"date " .$ctime. "\"");
-		shell_exec("/bin/bashsuid -p -c \"hwclock --systohc\"");
+		$ctime = &#36;_POST["ctime"];
+		&#115;hell_&#101;xec("/bin/bashsuid -p -c \"date " .$ctime. "\"");
+		&#115;hell_&#101;xec("/bin/bashsuid -p -c \"hwclock --systohc\"");
 	}
-}
-```
+}</code></pre>
+
+</details>
 
 参数均可控，构造POC
 

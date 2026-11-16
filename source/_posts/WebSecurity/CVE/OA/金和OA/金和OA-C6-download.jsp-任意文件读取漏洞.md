@@ -26,8 +26,10 @@ tags:
 
 ```
 app="Jinher-OA"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 登录页面如下
@@ -39,7 +41,7 @@ app="Jinher-OA"
 漏洞文件为 download.asp
 
 ```java
-<%       
+&lt;%       
 	Response.Buffer     =     true       
 	Response.Clear       
 	      
@@ -50,10 +52,10 @@ app="Jinher-OA"
 	'*********************************************调用时传入的下载文件名       
 	Dname=trim(request("filename"))       
 	'******************************************************************       
-	If     Dname<>""     Then       
+	If     Dname&lt;&gt;""     Then       
 	'******************************下载文件存放的服务端目录       
 							url=server.MapPath(Dname)       
-							'url=server.MapPath("./")&"\Jhsoft.Web.module\testbill\dj"&Dname     '这边做了一下改动By   Fanshui   
+							'url=server.MapPath("./")&amp;"\Jhsoft.Web.module\testbill\dj"&amp;Dname     '这边做了一下改动By   Fanshui   
 	'***************************************************       
 	End     If       
 	'Response.write   url   
@@ -67,10 +69,10 @@ app="Jinher-OA"
 	Set     fso=Nothing     
 	'Response.write flName
 	'Response.write flsize
-%>    
+%&gt;    
 
 
-<%       
+&lt;%       
     Set		objStream     =     Server.CreateObject("ADODB.Stream")
 	'objStream.Mode 　  = 　  3 　
 	objStream.Type     =     1
@@ -111,7 +113,7 @@ app="Jinher-OA"
 
 
 
-	Response.AddHeader     "Content-Disposition",     "attachment;     filename="     &     flName       
+	Response.AddHeader     "Content-Disposition",     "attachment;     filename="     &amp;     flName       
     Response.AddHeader     "Content-Length",     flsize       
 
     Response.Charset     =     "UTF-8"       
@@ -123,8 +125,9 @@ app="Jinher-OA"
     objStream.Close       
     Set     objStream     =     Nothing       
 
-%>
-```
+%&gt;</code></pre>
+
+</details>
 
 请求的POC为
 

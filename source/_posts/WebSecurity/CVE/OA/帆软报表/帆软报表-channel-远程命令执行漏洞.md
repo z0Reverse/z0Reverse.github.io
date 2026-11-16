@@ -1,4 +1,5 @@
 ---
+disableNunjucks: true
 title: "帆软报表 channel 远程命令执行漏洞"
 date: 2026-10-17 09:12:18
 categories:

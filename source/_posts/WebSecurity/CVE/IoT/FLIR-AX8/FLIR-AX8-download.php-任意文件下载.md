@@ -26,8 +26,10 @@ FLIR-AX8
 
 ```
 app="FLIR-FLIR-AX8"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 登录页面
@@ -37,7 +39,7 @@ app="FLIR-FLIR-AX8"
 出现漏洞的文件为 **download.php**
 
 ```php
-<?php
+&lt;?php
 /**
  * Copyright 2012 Armand Niculescu - MediaDivision.com
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -48,13 +50,13 @@ app="FLIR-FLIR-AX8"
 // get the file request, throw error if nothing supplied
 
 // hide notices
-@ini_set('error_reporting', E_ALL & ~ E_NOTICE);
+@ini_set('error_reporting', E_ALL &amp; ~ E_NOTICE);
 
 //- turn off compression on the server
 //@apache_setenv('no-gzip', 1);
 //@ini_set('zlib.output_compression', 'Off');
 
-if(!isset($_REQUEST['file']) || empty($_REQUEST['file']))
+if(!isset(&#36;_REQUEST['file']) || empty(&#36;_REQUEST['file']))
 {
 	header("HTTP/1.0 400 Bad Request");
 	exit;
@@ -62,14 +64,14 @@ if(!isset($_REQUEST['file']) || empty($_REQUEST['file']))
 
 // sanitize the file request, keep just the name and extension
 // also, replaces the file location with a preset one ('./myfiles/' in this example)
-$file_path  = $_REQUEST['file'];
-$file_type = $_REQUEST['type'];
+$file_path  = &#36;_REQUEST['file'];
+$file_type = &#36;_REQUEST['type'];
 $path_parts = pathinfo($file_path);
 $file_name  = $path_parts['basename'];
 $file_ext   = $path_parts['extension'];
 
 // allow a file to be streamed instead of sent as an attachment
-$is_attachment = isset($_REQUEST['stream']) ? false : true;
+$is_attachment = isset(&#36;_REQUEST['stream']) ? false : true;
 
 // make sure the file exists
 if (is_file($file_path))
@@ -96,11 +98,11 @@ if (is_file($file_path))
         // set the mime type based on extension, add yours if needed.
         $ctype_default = "application/octet-stream";
         $content_types = array(
-                "exe" => "application/octet-stream",
-                "zip" => "application/zip",
-                "mp3" => "audio/mpeg",
-                "mpg" => "video/mpeg",
-                "avi" => "video/x-msvideo",
+                "exe" =&gt; "application/octet-stream",
+                "zip" =&gt; "application/zip",
+                "mp3" =&gt; "audio/mpeg",
+                "mpg" =&gt; "video/mpeg",
+                "avi" =&gt; "video/x-msvideo",
         );
         $ctype = isset($content_types[$file_ext]) ? $content_types[$file_ext] : $ctype_default;
         header("Content-Type: " . $ctype);
@@ -135,10 +137,10 @@ if (is_file($file_path))
 		//set start and end based on range (if set), else set defaults
 		//also check for invalid ranges.
 		$seek_end   = (empty($seek_end)) ? ($file_size - 1) : min(abs(intval($seek_end)),($file_size - 1));
-		$seek_start = (empty($seek_start) || $seek_end < abs(intval($seek_start))) ? 0 : max(abs(intval($seek_start)),0);
+		$seek_start = (empty($seek_start) || $seek_end &lt; abs(intval($seek_start))) ? 0 : max(abs(intval($seek_start)),0);
 	 
 		//Only send partial content header if downloading a piece of the file (IE workaround)
-		if ($seek_start > 0 || $seek_end < ($file_size - 1))
+		if ($seek_start &gt; 0 || $seek_end &lt; ($file_size - 1))
 		{
 			header('HTTP/1.1 206 Partial Content');
 			header('Content-Range: bytes '.$seek_start.'-'.$seek_end.'/'.$file_size);
@@ -181,8 +183,9 @@ else
 	header("HTTP/1.0 404 Not Found");
 	exit;
 }
-?>
-```
+?&gt;</code></pre>
+
+</details>
 
 简单审计可以发现 file参数 为可控参数且没有过滤参数，导致可以下载任意文件
 

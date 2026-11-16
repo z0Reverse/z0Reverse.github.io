@@ -28,11 +28,13 @@ app="致远互联-OA"
 
 出现漏洞的源码
 
-```
-<%@ page contentType="text/html;charset=GBK"%>
-<%@ page session= "false" %>
-<%@ page import="net.btdz.oa.ext.https.*"%>
-<%
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">&lt;%@ page contentType="text/html;charset=GBK"%&gt;
+&lt;%@ page session= "false" %&gt;
+&lt;%@ page import="net.btdz.oa.ext.https.*"%&gt;
+&lt;%
     String reqType = request.getParameter("cmd");
     String outXML = "";
     boolean allowHttps = true;
@@ -51,15 +53,16 @@ app="致远互联-OA"
         }
     }
     else{
-        outXML += "<?xml version=\"1.0\" encoding=\"GB2312\"?>\r\n";
-        outXML += "<SessionList>\r\n";
-//        outXML += "<Session>\r\n";
-//        outXML += "</Session>\r\n";
-        outXML += "</SessionList>\r\n";
+        outXML += "&lt;?xml version=\"1.0\" encoding=\"GB2312\"?&gt;\r\n";
+        outXML += "&lt;SessionList&gt;\r\n";
+//        outXML += "&lt;Session&gt;\r\n";
+//        outXML += "&lt;/Session&gt;\r\n";
+        outXML += "&lt;/SessionList&gt;\r\n";
     }
     out.println(outXML);
-%>
-```
+%&gt;</code></pre>
+
+</details>
 
 从上面的代码可知，当cmd参数为getAll时，便可获取到所有用户的SessionID ,请求
 

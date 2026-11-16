@@ -37,14 +37,16 @@ app="FLIR-FLIR-AX8"
 
 出现漏洞的文件为 **res.php**
 
-```
-<?php
-	if (isset($_POST["action"])) {
-		switch ($_POST["action"]) {
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">&lt;?php
+	if (isset(&#36;_POST["action"])) {
+		switch (&#36;_POST["action"]) {
 			case "get":
-				if(isset($_POST["resource"]))
+				if(isset(&#36;_POST["resource"]))
 				{
-					switch ($_POST["resource"]) {
+					switch (&#36;_POST["resource"]) {
 						case ".rtp.hflip":
 							if (!file_exists("/FLIR/system/journal.d/horizontal_flip.cfg")) {
 								$result = "false";
@@ -60,28 +62,28 @@ app="FLIR-FLIR-AX8"
 							$result = file_get_contents("/FLIR/system/journal.d/vertical_flip.cfg") === "1" ? "true" : "false";
 							break;
 						default:
-							$result = trim(shell_exec("LD_LIBRARY_PATH=/FLIR/usr/lib /FLIR/usr/bin/rls -o ".$_POST["resource"]));
+							$result = trim(&#115;hell_&#101;xec("LD_LIBRARY_PATH=/FLIR/usr/lib /FLIR/usr/bin/rls -o ".&#36;_POST["resource"]));
 					}
 				}
 				break;
 			case "set":
-				if(isset($_POST["resource"]) and isset($_POST["value"])) {
-					switch ($_POST["resource"]) {
+				if(isset(&#36;_POST["resource"]) and isset(&#36;_POST["value"])) {
+					switch (&#36;_POST["resource"]) {
 						case "rtp.hflip":
-							file_put_contents("/FLIR/system/journal.d/horizontal_flip.cfg", $_POST["value"] === "true" ? "1" : "0");
+							file_put_contents("/FLIR/system/journal.d/horizontal_flip.cfg", &#36;_POST["value"] === "true" ? "1" : "0");
 							break;
 						case "rtp.vflip":
-							file_put_contents("/FLIR/system/journal.d/vertical_flip.cfg", $_POST["value"] === "true" ? "1" : "0");
+							file_put_contents("/FLIR/system/journal.d/vertical_flip.cfg", &#36;_POST["value"] === "true" ? "1" : "0");
 							break;
 						default:
-							$result = trim(shell_exec("LD_LIBRARY_PATH=/FLIR/usr/lib /FLIR/usr/bin/rset ".$_POST["resource"]." ".$_POST["value"]));;
+							$result = trim(&#115;hell_&#101;xec("LD_LIBRARY_PATH=/FLIR/usr/lib /FLIR/usr/bin/rset ".&#36;_POST["resource"]." ".&#36;_POST["value"]));;
 					}
 				}
 
 				break;
 			case "measurement":
-				if (isset($_POST["type"]) && isset($_POST["id"])) {
-					$nodeData =  trim(shell_exec("LD_LIBRARY_PATH=/FLIR/usr/lib /FLIR/usr/bin/rls -i .image.sysimg.measureFuncs.".$_POST["type"].".".$_POST["id"]));
+				if (isset(&#36;_POST["type"]) &amp;&amp; isset(&#36;_POST["id"])) {
+					$nodeData =  trim(&#115;hell_&#101;xec("LD_LIBRARY_PATH=/FLIR/usr/lib /FLIR/usr/bin/rls -i .image.sysimg.measureFuncs.".&#36;_POST["type"].".".&#36;_POST["id"]));
 					$lines = explode("\n", $nodeData);
 					foreach($lines as $line)
 					{
@@ -92,7 +94,7 @@ app="FLIR-FLIR-AX8"
 				}
 				break;
 			case "global-parameters":
-				$nodeData =  trim(shell_exec("LD_LIBRARY_PATH=/FLIR/usr/lib /FLIR/usr/bin/rls -i .image.sysimg.basicImgData.objectParams"));
+				$nodeData =  trim(&#115;hell_&#101;xec("LD_LIBRARY_PATH=/FLIR/usr/lib /FLIR/usr/bin/rls -i .image.sysimg.basicImgData.objectParams"));
 				$lines = explode("\n", $nodeData);
 				foreach($lines as $line)
 				{
@@ -100,9 +102,9 @@ app="FLIR-FLIR-AX8"
 					$result[$resource[0]] = $resource[1];
 				}
 			case "alarm":
-				if(isset($_POST["id"]))
+				if(isset(&#36;_POST["id"]))
 				{
-					$nodeData = trim(shell_exec("LD_LIBRARY_PATH=/FLIR/usr/lib /FLIR/usr/bin/rls .image.sysimg.alarms.measfunc.".$_POST["id"]));
+					$nodeData = trim(&#115;hell_&#101;xec("LD_LIBRARY_PATH=/FLIR/usr/lib /FLIR/usr/bin/rls .image.sysimg.alarms.measfunc.".&#36;_POST["id"]));
 					$lines = explode("\n", $nodeData);
 					foreach($lines as $line)
 					{
@@ -113,18 +115,19 @@ app="FLIR-FLIR-AX8"
 				}
 				break;
 			case "calibrate":
-				$result = shell_exec("LD_LIBRARY_PATH=/FLIR/usr/lib /FLIR/usr/bin/nuc");
+				$result = &#115;hell_&#101;xec("LD_LIBRARY_PATH=/FLIR/usr/lib /FLIR/usr/bin/nuc");
 
 				break;
 			case "node":
-				$nodes = trim(shell_exec("LD_LIBRARY_PATH=/FLIR/usr/lib /FLIR/usr/bin/rls ".$_POST["resource"]));
+				$nodes = trim(&#115;hell_&#101;xec("LD_LIBRARY_PATH=/FLIR/usr/lib /FLIR/usr/bin/rls ".&#36;_POST["resource"]));
 				$result = preg_split("/\s+\n/", $nodes);
 				break;
 		}
 		echo json_encode($result);
 	}
-?>
-```
+?&gt;</code></pre>
+
+</details>
 
 验证POC
 

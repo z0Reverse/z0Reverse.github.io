@@ -35,16 +35,18 @@ app="一米OA"
 
 出现漏洞的文件
 
-```
-<%@ page contentType="text/html;charset=utf-8" %>
-<%@page import="cn.js.fan.util.*" %>
-<%@page import="cn.js.fan.web.Global" %>
-<%@page import="com.redmoon.oa.*" %>
-<%@page import="java.io.*" %>
-<jsp:useBean id="fchar" scope="page" class="cn.js.fan.util.StrUtil"/>
-<jsp:useBean id="fsecurity" scope="page" class="cn.js.fan.security.SecurityUtil"/>
-<jsp:useBean id="privilege" scope="page" class="com.redmoon.oa.pvg.Privilege"/>
-<%
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">&lt;%@ page contentType="text/html;charset=utf-8" %&gt;
+&lt;%@page import="cn.js.fan.util.*" %&gt;
+&lt;%@page import="cn.js.fan.web.Global" %&gt;
+&lt;%@page import="com.redmoon.oa.*" %&gt;
+&lt;%@page import="java.io.*" %&gt;
+&lt;jsp:useBean id="fchar" scope="page" class="cn.js.fan.util.StrUtil"/&gt;
+&lt;jsp:useBean id="fsecurity" scope="page" class="cn.js.fan.security.SecurityUtil"/&gt;
+&lt;jsp:useBean id="privilege" scope="page" class="com.redmoon.oa.pvg.Privilege"/&gt;
+&lt;%
     String user = ParamUtil.get(request, "user");
     if ("".equals(user)) {
         if (!privilege.isUserPrivValid(request, "read")) {
@@ -104,8 +106,9 @@ app="一米OA"
 
     out.clear();
     out = pageContext.pushBody();
-%>
-```
+%&gt;</code></pre>
+
+</details>
 
 首先验证 user 传参是否为空, 需要对 user 参数任意赋值
 

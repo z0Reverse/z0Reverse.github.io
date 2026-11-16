@@ -32,6 +32,8 @@ jobs:
 
       - name: Build
         run: npx hexo generate
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3

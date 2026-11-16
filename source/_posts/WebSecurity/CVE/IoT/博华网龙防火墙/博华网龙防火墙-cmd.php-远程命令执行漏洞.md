@@ -25,8 +25,10 @@ tags:
 
 ```
 "博华网龙防火墙"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 登录页面
@@ -36,53 +38,54 @@ tags:
 存在漏洞的文件为 **/diagnostics/cmd.php**
 
 ```php
-<?php
+&lt;?php
     include_once("pub/pub.inc");
     include_once("pub/session.inc");
     
     $username = $_SESSION["USER_NAME"];
     checkApproachUrl(); 
     
-  if($_GET['action'] == "ping")
+  if(&#36;_GET['action'] == "ping")
   {
-        $host = $_GET['host'];
-        $count = $_GET['count'];
-        system("/bin/ping -c $count " . escapeshellarg($host)." >temp.htm");
+        $host = &#36;_GET['host'];
+        $count = &#36;_GET['count'];
+        &#115;ystem("/bin/ping -c $count " . escapeshellarg($host)." &gt;temp.htm");
         
          if($username)
             pSyslog("ping $host $count次", 0);           
   }
-  else if($_GET['action'] == "traceroute")
+  else if(&#36;_GET['action'] == "traceroute")
   {
-        $host = $_GET['host'];
-        $ttl =  $_GET['ttl'];
-        $useicmp = $_GET['useicmp'];
+        $host = &#36;_GET['host'];
+        $ttl =  &#36;_GET['ttl'];
+        $useicmp = &#36;_GET['useicmp'];
         
         if($useicmp)
             $useicmp = "-I";
         else
             $useicmp = "";        
-        system("/usr/bin/traceroute -d $useicmp -w 2 -m " . escapeshellarg($ttl) . " " . escapeshellarg($host)." >temp.htm");    
+        &#115;ystem("/usr/bin/traceroute -d $useicmp -w 2 -m " . escapeshellarg($ttl) . " " . escapeshellarg($host)." &gt;temp.htm");    
         if($username)
             pSyslog("traceroute $host 跳数为$ttl", 0);     
   }
-  else if($_GET['action'] == "arping")
+  else if(&#36;_GET['action'] == "arping")
   {
-    $host = $_GET['host'];
-    $count = $_GET['count'];
-    $if = $_GET['ifName'];
-    $src = $_GET['src'];
-    system("/usr/bin/arping -I $if -c $count -s $src $host >temp.htm");
+    $host = &#36;_GET['host'];
+    $count = &#36;_GET['count'];
+    $if = &#36;_GET['ifName'];
+    $src = &#36;_GET['src'];
+    &#115;ystem("/usr/bin/arping -I $if -c $count -s $src $host &gt;temp.htm");
     
      if($username)
         pSyslog("arping $host $count次", 0);
   }
   else
   {
-    system("echo \"\" >temp.htm");
+    &#115;ystem("echo \"\" &gt;temp.htm");
   } 
-?>
-```
+?&gt;</code></pre>
+
+</details>
 
 可以发现其中存在多个命令执行点，均可进行命令拼接执行恶意命令
 

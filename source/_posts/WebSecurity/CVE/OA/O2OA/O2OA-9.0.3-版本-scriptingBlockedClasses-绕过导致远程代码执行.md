@@ -83,8 +83,10 @@ function mainOutput() {
 
 漏洞产生的原因是 9.0.3 版本 `o2server/configSample/general.json` 文件中对类做了黑名单限制，但是攻击者可以通过 Java 反射绕过黑名单中的类：
 
-```
-"scriptingBlockedClasses": [
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">"scriptingBlockedClasses": [
 	"java.util.zip.ZipOutputStream",
 	"java.io.RandomAccessFile",
 	"java.net.Socket",
@@ -101,11 +103,12 @@ function mainOutput() {
 	"java.nio.file.Paths",
 	"javax.script.ScriptEngine",
 	"java.util.zip.ZipFile",
-	"java.lang.ProcessBuilder",
+	"java.lang.&#80;rocessBuilder",
 	"java.net.URI",
 	"java.nio.file.Path"
-],
-```
+],</code></pre>
+
+</details>
 
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/O2OA%209.0.3%20%E7%89%88%E6%9C%AC%20scriptingBlockedClasses%20%E7%BB%95%E8%BF%87%E5%AF%BC%E8%87%B4%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/image-20250227114843307.png)
 

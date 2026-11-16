@@ -27,27 +27,30 @@ tags:
 
 ```
 app="Landray-OA系统"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 出现漏洞的文件为 custom.jsp
 
 ```jsp
-<%@page import="com.landray.kmss.util.ResourceUtil"%>
-<%@page import="net.sf.json.JSONArray"%>
-<%@page import="net.sf.json.JSONObject"%>
-<%@ page language="java" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
+&lt;%@page import="com.landray.kmss.util.ResourceUtil"%&gt;
+&lt;%@page import="net.sf.json.JSONArray"%&gt;
+&lt;%@page import="net.sf.json.JSONObject"%&gt;
+&lt;%@ page language="java" pageEncoding="UTF-8"%&gt;
+&lt;%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%&gt;
+&lt;%
  JSONObject vara =
 JSONObject.fromObject(request.getParameter("var"));
  JSONObject body = JSONObject.fromObject(vara.get("body"));
-%>
-<c:import url='<%=body.getString("file") %>'>
- <c:param name="var" value="${ param['var'] }"></c:param>
-</c:import>
-```
+%&gt;
+&lt;c:import url='&lt;%=body.getString("file") %&gt;'&gt;
+ &lt;c:param name="var" value="${ param['var'] }"&gt;&lt;/c:param&gt;
+&lt;/c:import&gt;</code></pre>
+
+</details>
 
 请求包为
 

@@ -26,8 +26,10 @@ rConfig
 
 ```
 app="rConfig"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 存在漏洞的文件
@@ -35,21 +37,21 @@ app="rConfig"
 **/home/rconfig/www/lib/ajaxHandlers/ajaxArchiveFiles.php**
 
 ```php
-<?php
+&lt;?php
 require_once("/home/rconfig/classes/usersession.class.php");
 require_once("/home/rconfig/classes/ADLog.class.php");
 require_once("/home/rconfig/config/functions.inc.php");
 $log = ADLog::getInstance();
-if (!$session->logged_in) {
-    echo 'Don\'t bother trying to hack me!!!!!<br /> This hack attempt has been logged';
-    $log->Warn("Security Issue: Some tried to access this file directly from IP: " . $_SERVER['REMOTE_ADDR'] . " & Username: " . $session->username . " (File: " . $_SERVER['PHP_SELF'] . ")");
+if (!$session-&gt;logged_in) {
+    echo 'Don\'t bother trying to hack me!!!!!&lt;br /&gt; This hack attempt has been logged';
+    $log-&gt;Warn("Security Issue: Some tried to access this file directly from IP: " . $_SERVER['REMOTE_ADDR'] . " &amp; Username: " . $session-&gt;username . " (File: " . $_SERVER['PHP_SELF'] . ")");
     // need to add authentication to this script
     header("Location: " . $config_basedir . "login.php");
 } else {
 //archive logs files
-    $mainPath = $_GET['path'];
+    $mainPath = &#36;_GET['path'];
     $archiveMainPath = $mainPath . "archive/";
-    $ext = "*." . $_GET['ext'];
+    $ext = "*." . &#36;_GET['ext'];
     $fullpath = $mainPath . $ext;
 // create and archive dir if not already created
     if (!is_dir($archiveMainPath)) {
@@ -57,32 +59,35 @@ if (!$session->logged_in) {
     }
     $today = date("Ymd");
     $commandString = "sudo -u apache zip -r -j " . $archiveMainPath . "filename" . $today . ".zip " . $mainPath . $ext;
-    exec($commandString);
+    &#101;xec($commandString);
     foreach (glob($fullpath) as $v) {
         unlink($v);
     }
 
     $fileCount = count(glob($mainPath . $ext));
 
-    if ($fileCount > 0) {
+    if ($fileCount &gt; 0) {
         $response = json_encode(array(
-            'failure' => true
+            'failure' =&gt; true
         ));
     } else {
         $response = json_encode(array(
-            'success' => true
+            'success' =&gt; true
         ));
     }
     echo $response;
-}  // end session check
-```
+}  // end session check</code></pre>
+
+</details>
 
 关键代码如下
 
-```php
-$mainPath = $_GET['path'];
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-php">$mainPath = &#36;_GET['path'];
     $archiveMainPath = $mainPath . "archive/";
-    $ext = "*." . $_GET['ext'];
+    $ext = "*." . &#36;_GET['ext'];
     $fullpath = $mainPath . $ext;
 // create and archive dir if not already created
     if (!is_dir($archiveMainPath)) {
@@ -90,8 +95,9 @@ $mainPath = $_GET['path'];
     }
     $today = date("Ymd");
     $commandString = "sudo -u apache zip -r -j " . $archiveMainPath . "filename" . $today . ".zip " . $mainPath . $ext;
-    exec($commandString);
-```
+    &#101;xec($commandString);</code></pre>
+
+</details>
 
 ![img](https://g.yuque.com/gr/latex?mainPath参数和)**ext参数** 用户可控
 

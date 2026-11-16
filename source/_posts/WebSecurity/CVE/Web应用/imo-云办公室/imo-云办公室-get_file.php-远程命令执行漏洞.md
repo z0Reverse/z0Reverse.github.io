@@ -35,20 +35,23 @@ app="iMO-云办公室"
 
 漏洞文件 get_file.php
 
-```
-<?php
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">&lt;?php
 // 放置在 mfs 服务器上用于获取文件列表，配合 nd_verify_large_file.php 使用
-if(empty($_GET['cid']) || empty($_GET['nid']))
+if(empty(&#36;_GET['cid']) || empty(&#36;_GET['nid']))
 	exit;
-$cid = $_GET['cid'];
-$nid = $_GET['nid'];
+$cid = &#36;_GET['cid'];
+$nid = &#36;_GET['nid'];
 $mainDir = dirname(__FILE__) . '/../upload/NDiskData/normal/' . $cid . '/';
-exec("ls {$mainDir}*_{$nid}_*", $r);
+&#101;xec("ls {$mainDir}*_{$nid}_*", $r);
 $ret = array();
 foreach($r as $v)
 	$ret[md5_file($v)] = str_replace(dirname(__FILE__) . "/../upload/NDiskData/normal/{$cid}/", '', $v);
-echo json_encode($ret);
-```
+echo json_encode($ret);</code></pre>
+
+</details>
 
 验证POC
 

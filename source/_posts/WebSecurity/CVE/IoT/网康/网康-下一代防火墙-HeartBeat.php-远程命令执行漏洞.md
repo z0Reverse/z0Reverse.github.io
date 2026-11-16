@@ -37,16 +37,19 @@ app="网康科技-下一代防火墙"
 
 ![image-20230314085853048](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/iot/images/image-20230314085853048.png)
 
-```
-public function delTestFile($fileName){
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">public function delTestFile($fileName){
 	    if(dirname($fileName) == '/var/www/tmp'){
 		$cmd = "/bin/rm -f {$fileName}";
 		putenv("CMD=$cmd");
-		$msg = shell_exec('/var/www/html/scripts/exec_cmd');
+		$msg = &#115;hell_&#101;xec('/var/www/html/scripts/exec_cmd');
 	    }
 	    return time();
-	}
-```
+	}</code></pre>
+
+</details>
 
 调用方法 delTestFile，fileName参数可控，调用的 exec_cmd 文件为Root权限文件，构造请求包进行命令执行
 

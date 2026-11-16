@@ -35,18 +35,21 @@ title="视频编码设备接入网关"
 
 漏洞文件为 `showFile.php`, 其中 `参数 fileName` 没有过滤危险字符，导致可文件遍历下载
 
-```
-<?php
-					$file_name = $_GET['fileName'];
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">&lt;?php
+					$file_name = &#36;_GET['fileName'];
 					$file_path = '../../../log/'.$file_name;
 					$fp = fopen($file_path, "r");
 					while($line = fgets($fp)){
 						$line = nl2br(htmlentities($line, ENT_COMPAT, "utf-8"));
-						echo '<span style="font-size:16px">'.$line.'</span>';
+						echo '&lt;span style="font-size:16px"&gt;'.$line.'&lt;/span&gt;';
 					}
 					fclose($fp);
-?>
-```
+?&gt;</code></pre>
+
+</details>
 
 POC
 

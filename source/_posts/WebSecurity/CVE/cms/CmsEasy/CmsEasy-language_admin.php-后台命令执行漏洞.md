@@ -36,16 +36,18 @@ body="cmseasyedit"
 
 ![image-20220518143419336](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/cms/images/202205181434423.png)
 
-```
-function add_action() {
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">function add_action() {
         $lang_choice='system.php';
-        if (isset($_GET['lang_choice'])){
-            $lang_choice=$_GET['lang_choice'];
+        if (isset(&#36;_GET['lang_choice'])){
+            $lang_choice=&#36;_GET['lang_choice'];
         }
         if (front::post('submit')) {
             $langid=front::get('id');
             $lang=new lang();
-            $langdata = $lang->getrows('id='.$langid, 1);
+            $langdata = $lang-&gt;getrows('id='.$langid, 1);
             if (is_array($langdata)){
                 $langurlname=$langdata[0]['langurlname'];
             }else{
@@ -55,40 +57,41 @@ function add_action() {
             $tipspath=ROOT.'/lang/'.$langurlname.'/'.$lang_choice;
             $content=file_get_contents($path);
             $tipscontent=file_get_contents($tipspath);
-            $replace="'".front::$post['key']."'=>'".front::$post['val']."',";
-            $tipsreplace="'".front::$post['key']."'=>'".front::$post['cnnote']."',";
+            $replace="'".front::$post['key']."'=&gt;'".front::$post['val']."',";
+            $tipsreplace="'".front::$post['key']."'=&gt;'".front::$post['cnnote']."',";
             $content=str_replace(');',"\n".$replace.');',$content);
             file_put_contents($path,$content);
             $pos=strpos($tipscontent,$tipsreplace);
-            if ($langurlname != 'cn'&&$pos === false) {
+            if ($langurlname != 'cn'&amp;&amp;$pos === false) {
                 $tipscontent=str_replace(');',"\n".$tipsreplace.');',$tipscontent);
                 file_put_contents($tipspath,$tipscontent);
             }
-            if ($_GET['site'] != 'default') {
+            if (&#36;_GET['site'] != 'default') {
                 $ftp=new nobftp();
                 $ftpconfig=config::get('website');
-                $ftp->connect($ftpconfig['ftpip'],$ftpconfig['ftpuser'],$ftpconfig['ftppwd'],$ftpconfig['ftpport']);
-                $ftperror=$ftp->returnerror();
+                $ftp-&gt;connect($ftpconfig['ftpip'],$ftpconfig['ftpuser'],$ftpconfig['ftppwd'],$ftpconfig['ftpport']);
+                $ftperror=$ftp-&gt;returnerror();
                 if ($ftperror) {
                     exit($ftperror);
                 }
                 else {
-                    $ftp->nobchdir($ftpconfig['ftppath']);
-                    $ftp->nobput($ftpconfig['ftppath'].'/lang/'.$langurlname.'/'.$lang_choice,$path);
+                    $ftp-&gt;nobchdir($ftpconfig['ftppath']);
+                    $ftp-&gt;nobput($ftpconfig['ftppath'].'/lang/'.$langurlname.'/'.$lang_choice,$path);
                 }
             }
             event::log(lang_admin('add_to').lang_admin('language_pack'),lang_admin('success'));
             //
-            $shepi='<script type="text/javascript">alert("'.lang_admin('dosomething').lang_admin('complete').'");gotoinurl("'.url('language/edit/id/'.$langdata[0]['id'],true);
-            $shepi=$shepi.'&lang_choice='.$lang_choice;
-            $shepi=$shepi.'");</script>';
+            $shepi='&lt;script type="text/javascript"&gt;alert("'.lang_admin('dosomething').lang_admin('complete').'");gotoinurl("'.url('language/edit/id/'.$langdata[0]['id'],true);
+            $shepi=$shepi.'&amp;lang_choice='.$lang_choice;
+            $shepi=$shepi.'");&lt;/script&gt;';
             echo $shepi;
             //exit;
             //front::refresh(url('language/edit',true));
         }
-        $this->view->lang_choice=$lang_choice;
-    }
-```
+        $this-&gt;view-&gt;lang_choice=$lang_choice;
+    }</code></pre>
+
+</details>
 
 访问这个页面
 
@@ -100,8 +103,10 @@ function add_action() {
 
 传入参数后,查看 `lang/cn/system_custom.php` 文件中
 
-```
-<?php
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">&lt;?php
 /*
  *中文语言包
  */
@@ -111,9 +116,10 @@ return
 array(
 
 
-'2'=>'3',);
-?>
-```
+'2'=&gt;'3',);
+?&gt;</code></pre>
+
+</details>
 
 由于没有对传入的参数进行过滤，通过写入特殊的参数就可以逃逸出数组造成命令执行
 
@@ -125,8 +131,10 @@ test1  test2  test3);
 
 写入后文件内容
 
-```
-<?php
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">&lt;?php
 /*
  *中文语言包
  */
@@ -135,9 +143,10 @@ return
 
 array(
 
-'test2'=>'test3);',);
-?>
-```
+'test2'=&gt;'test3);',);
+?&gt;</code></pre>
+
+</details>
 
 再传入一次参数
 

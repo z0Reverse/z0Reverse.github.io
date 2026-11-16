@@ -38,15 +38,18 @@ app="EMLOG"
 
 ![image-20220518160725472](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/cms/images/202205181607539.png)
 
-```
-if ($action == 'compages') {
-    $wgNum = isset($_POST['wgnum']) ? intval($_POST['wgnum']) : 1;//侧边栏编号 1、2、3 ……
-    $widgets = isset($_POST['widgets']) ? serialize($_POST['widgets']) : '';
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">if ($action == 'compages') {
+    $wgNum = isset(&#36;_POST['wgnum']) ? intval(&#36;_POST['wgnum']) : 1;//侧边栏编号 1、2、3 ……
+    $widgets = isset(&#36;_POST['widgets']) ? serialize(&#36;_POST['widgets']) : '';
     Option::updateOption("widgets{$wgNum}", $widgets);
-    $CACHE->updateCache('options');
-    emDirect("./widgets.php?activated=true&wg=$wgNum");
-}
-```
+    $CACHE-&gt;updateCache('options');
+    emDirect("./widgets.php?activated=true&amp;wg=$wgNum");
+}</code></pre>
+
+</details>
 
 传参为 wgnum 和 widgets ，跟踪方法 `updateOption`
 

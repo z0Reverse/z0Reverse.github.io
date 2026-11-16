@@ -35,55 +35,58 @@ app="iMO-云办公室"
 
 漏洞文件 corpfile.php
 
-```
-<?php
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">&lt;?php
 define('DELETE_FAILED', '数据不存在，删除失败!');
 define('DELETE_SUCCESS', '数据存在，删除成功!');
-switch($_POST['type'])
+switch(&#36;_POST['type'])
 {
   case 'corpLogo':
-    $checkFile = exec('ls ' . $_POST['file']);
-    $result = exec($_POST['command']);
-    echo json_encode(array('cid' => $_POST['cid'], 'account' => $_POST['account'], 'command' => $_POST['command'], 'file' => (($checkFile && !$result) ? DELETE_SUCCESS : DELETE_FAILED)));
+    $checkFile = &#101;xec('ls ' . &#36;_POST['file']);
+    $result = &#101;xec(&#36;_POST['command']);
+    echo json_encode(array('cid' =&gt; &#36;_POST['cid'], 'account' =&gt; &#36;_POST['account'], 'command' =&gt; &#36;_POST['command'], 'file' =&gt; (($checkFile &amp;&amp; !$result) ? DELETE_SUCCESS : DELETE_FAILED)));
   break;
 
   case 'userLogo':
-    $checkFile = exec('ls ' . $_POST['file']);
-    $result = exec($_POST['command']);
-    echo json_encode(array('uid' => $_POST['uid'], 'user_account' => $_POST['user_account'], 'command' => $_POST['command'], 'file' => (($checkFile && !$result) ? DELETE_SUCCESS : DELETE_FAILED)));
+    $checkFile = &#101;xec('ls ' . &#36;_POST['file']);
+    $result = &#101;xec(&#36;_POST['command']);
+    echo json_encode(array('uid' =&gt; &#36;_POST['uid'], 'user_account' =&gt; &#36;_POST['user_account'], 'command' =&gt; &#36;_POST['command'], 'file' =&gt; (($checkFile &amp;&amp; !$result) ? DELETE_SUCCESS : DELETE_FAILED)));
   break;
 
   case 'corpTemp':
-    $checkFile = exec('ls ' . $_POST['file']);
-    $result = exec($_POST['command']);
-    echo json_encode(array('cid' => $_POST['cid'], 'account' => $_POST['account'], 'command' => $_POST['command'], 'file' => (($checkFile && !$result) ? DELETE_SUCCESS : DELETE_FAILED)));
+    $checkFile = &#101;xec('ls ' . &#36;_POST['file']);
+    $result = &#101;xec(&#36;_POST['command']);
+    echo json_encode(array('cid' =&gt; &#36;_POST['cid'], 'account' =&gt; &#36;_POST['account'], 'command' =&gt; &#36;_POST['command'], 'file' =&gt; (($checkFile &amp;&amp; !$result) ? DELETE_SUCCESS : DELETE_FAILED)));
   break;
 
   case 'chatLog':
-    $checkFile = exec('ls ' . $_POST['file']);
-    $result = exec($_POST['command']);
-    echo json_encode(array('cid' => $_POST['cid'], 'account' => $_POST['account'], 'command' => $_POST['command'], 'file' => (($checkFile && !$result) ? DELETE_SUCCESS : DELETE_FAILED)));
+    $checkFile = &#101;xec('ls ' . &#36;_POST['file']);
+    $result = &#101;xec(&#36;_POST['command']);
+    echo json_encode(array('cid' =&gt; &#36;_POST['cid'], 'account' =&gt; &#36;_POST['account'], 'command' =&gt; &#36;_POST['command'], 'file' =&gt; (($checkFile &amp;&amp; !$result) ? DELETE_SUCCESS : DELETE_FAILED)));
   break;
 
   case 'multiChatLog':
-    $checkFile = exec('ls ' . $_POST['file']);
-    $result = exec($_POST['command']);
-    echo json_encode(array('cid' => $_POST['cid'], 'account' => $_POST['account'], 'command' => $_POST['command'], 'file' => (($checkFile && !$result) ? DELETE_SUCCESS : DELETE_FAILED)));
+    $checkFile = &#101;xec('ls ' . &#36;_POST['file']);
+    $result = &#101;xec(&#36;_POST['command']);
+    echo json_encode(array('cid' =&gt; &#36;_POST['cid'], 'account' =&gt; &#36;_POST['account'], 'command' =&gt; &#36;_POST['command'], 'file' =&gt; (($checkFile &amp;&amp; !$result) ? DELETE_SUCCESS : DELETE_FAILED)));
   break;
 
   case 'groupChatLog':
-    $checkFile = exec('ls ' . $_POST['file']);
-    $result = exec($_POST['command']);
-    echo json_encode(array('cid' => $_POST['cid'], 'account' => $_POST['account'], 'command' => $_POST['command'], 'file' => (($checkFile && !$result) ? DELETE_SUCCESS : DELETE_FAILED)));
+    $checkFile = &#101;xec('ls ' . &#36;_POST['file']);
+    $result = &#101;xec(&#36;_POST['command']);
+    echo json_encode(array('cid' =&gt; &#36;_POST['cid'], 'account' =&gt; &#36;_POST['account'], 'command' =&gt; &#36;_POST['command'], 'file' =&gt; (($checkFile &amp;&amp; !$result) ? DELETE_SUCCESS : DELETE_FAILED)));
   break;
 
   case 'backChatLog':
-    $checkFile = exec('ls ' . $_POST['file']);
-    $result = exec($_POST['command']);
-    echo json_encode(array('cid' => $_POST['cid'], 'account' => $_POST['account'], 'command' => $_POST['command'], 'file' => (($checkFile && !$result) ? DELETE_SUCCESS : DELETE_FAILED)));
+    $checkFile = &#101;xec('ls ' . &#36;_POST['file']);
+    $result = &#101;xec(&#36;_POST['command']);
+    echo json_encode(array('cid' =&gt; &#36;_POST['cid'], 'account' =&gt; &#36;_POST['account'], 'command' =&gt; &#36;_POST['command'], 'file' =&gt; (($checkFile &amp;&amp; !$result) ? DELETE_SUCCESS : DELETE_FAILED)));
   break;
-}
-```
+}</code></pre>
+
+</details>
 
 验证POC
 

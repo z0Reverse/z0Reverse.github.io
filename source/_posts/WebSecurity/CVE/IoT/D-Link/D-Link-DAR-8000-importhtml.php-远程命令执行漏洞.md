@@ -26,8 +26,10 @@ D-Link DAR-8000
 
 ```
 body="mask.style.visibility"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 登录页面
@@ -41,7 +43,7 @@ body="mask.style.visibility"
 出现漏洞的文件 **importhtml.php**
 
 ```php
-<?php 
+&lt;?php 
 include_once("global.func.php");
 if($_SESSION['language']!="english")
 {
@@ -52,9 +54,9 @@ else
 	require_once ("include/language_en.php");
 }
 
-if(isset($_GET['type'])) $get_type = $_GET['type'];
-if(isset($_GET['tab'])) $get_tab = $_GET['tab'];
-if(isset($_GET['sql'])) $get_sql = $_GET['sql'];
+if(isset(&#36;_GET['type'])) $get_type = &#36;_GET['type'];
+if(isset(&#36;_GET['tab'])) $get_tab = &#36;_GET['tab'];
+if(isset(&#36;_GET['sql'])) $get_sql = &#36;_GET['sql'];
 
 if($get_type == "exporthtmlpost")	
 {
@@ -81,13 +83,16 @@ elseif($get_type == "exporthtmlwebrecv")
 	$get_tab = $arr_export_cn[$get_tab];
 	exportHtmlWebRecv("$get_tab",stripslashes(base64_decode($get_sql)));
 }
-?>
-```
+?&gt;</code></pre>
+
+</details>
 
 跟踪exportHtmlMail函数
 
-```php
-function exportHtmlMail($filename,$sql){
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-php">function exportHtmlMail($filename,$sql){
 	Header( "Expires: 0" );
 	Header( "Pragma: public" );
 	Header( "Cache-Control: must-revalidate, post-check=0, pre-check=0" );
@@ -95,15 +100,15 @@ function exportHtmlMail($filename,$sql){
 	Header( "Content-Type: application/octet-stream" );
 	header("Accept-Ranges: bytes");
 	header("Content-Disposition: attachment; filename=$filename.html");
-	echo "<html>\n";
-	echo "<head><title>报表</title></head>\n";
-	echo "<body>\n";
+	echo "&lt;html&gt;\n";
+	echo "&lt;head&gt;&lt;title&gt;报表&lt;/title&gt;&lt;/head&gt;\n";
+	echo "&lt;body&gt;\n";
 	$conn = connOther();
 	$result = mysql_query($sql,$conn);
 	while ($data= mysql_fetch_array($result)){
 		$post_content = "";
 		if($data['mail_file_path'] == "(null)"){
-			$post_content = "<font color=red>内容审计未启用</font>";
+			$post_content = "&lt;font color=red&gt;内容审计未启用&lt;/font&gt;";
 		}
 		else{
 			$post_filename=$data['mail_file_path'];
@@ -113,16 +118,17 @@ function exportHtmlMail($filename,$sql){
 				$post_filename = $ifother;
 			}
 			$str = "/usr/bin/cap2con $post_filename pop";
-			system($str,$returnvalue);
+			&#115;ystem($str,$returnvalue);
 			$post_filename=str_replace(".cap",".eml",$post_filename);
 			$post_content = file_get_contents($post_filename);
 			$rec=new mime_decode;
-			$post_content=$rec->decode_mime_string($post_content);
+			$post_content=$rec-&gt;decode_mime_string($post_content);
 			//...
 		}
 	}
-}
-```
+}</code></pre>
+
+</details>
 
 这里可以发现通过base64解码后执行的Sql语句结果传入函数exportHtmlMail中调用system执行, 而 $post_filename 可控
 

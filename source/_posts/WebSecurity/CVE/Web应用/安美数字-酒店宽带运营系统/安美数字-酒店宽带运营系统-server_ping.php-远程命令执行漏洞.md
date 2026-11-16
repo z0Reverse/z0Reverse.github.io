@@ -25,8 +25,10 @@ tags:
 
 ```
 "酒店宽带运营"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 登录页面如下
@@ -42,11 +44,11 @@ tags:
 
 
 ```php
-<?
+&lt;?
 if (!isset($ip) || $ip == "" || !isset($id) || $id == "") exit;
 
 $cmd = "ping -c 2 -s 65 $ip";
-$fp = popen($cmd, "r");
+$fp = &#112;open($cmd, "r");
 $getString = "";
 if ($fp) {
 	while (($line = fgets($fp, 512))) {
@@ -57,16 +59,17 @@ if ($fp) {
 }
 
 if (strstr($getString, "2 received, 0%")) {
-	echo "<html><body><script language=\"javascript\">\n";
+	echo "&lt;html&gt;&lt;body&gt;&lt;script language=\"javascript\"&gt;\n";
 	echo "parent.doTestResult('$id', 'ok');\n";
-	echo "</script></body></html>\n";
+	echo "&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;\n";
 } else {
-	echo "<html><body><script language=\"javascript\">\n";
+	echo "&lt;html&gt;&lt;body&gt;&lt;script language=\"javascript\"&gt;\n";
 	echo "parent.doTestResult('$id', 'no');\n";
-	echo "</script></body></html>\n";
+	echo "&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;\n";
 }
-?>
-```
+?&gt;</code></pre>
+
+</details>
 
 
 
@@ -74,10 +77,13 @@ if (strstr($getString, "2 received, 0%")) {
 
 
 
-```plain
-$cmd = "ping -c 2 -s 65 $ip";
-$fp = popen($cmd, "r");
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-plain">$cmd = "ping -c 2 -s 65 $ip";
+$fp = &#112;open($cmd, "r");</code></pre>
+
+</details>
 
 
 

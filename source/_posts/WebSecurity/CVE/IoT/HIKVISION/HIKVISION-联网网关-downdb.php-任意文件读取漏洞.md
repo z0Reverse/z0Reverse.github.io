@@ -37,12 +37,14 @@ Hikvision 联网网关，流媒体管理服务器
 
 出现漏洞的代码文件为downdb.php，可以未授权下载任意文件：
 
-```
-<?php
-$file_name=$_GET['fileName'];
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">&lt;?php
+$file_name=&#36;_GET['fileName'];
 $file_dir = "../../../";
 if   (!file_exists($file_dir.$file_name))   {   //检查文件是否存在  
-  echo'<script> alert("文件不存在!");window.history.back(-1);</script>'; 
+  echo'&lt;script&gt; alert("文件不存在!");window.history.back(-1);&lt;/script&gt;'; 
   exit();
 
 }else{	
@@ -57,8 +59,9 @@ if   (!file_exists($file_dir.$file_name))   {   //检查文件是否存在
 	fclose($file);
 	exit();
 }
-?> 
-```
+?&gt; </code></pre>
+
+</details>
 
 POC：
 

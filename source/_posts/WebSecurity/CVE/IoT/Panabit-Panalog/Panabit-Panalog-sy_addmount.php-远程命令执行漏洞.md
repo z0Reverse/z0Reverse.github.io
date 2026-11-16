@@ -35,12 +35,14 @@ body="Maintain/cloud_index.php"
 
 存在漏洞的代码为 account/sy_addmount.php
 
-```
-<?php
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">&lt;?php
 
 include(dirname(__FILE__)."/../common.php");
 
-$username = isset($_REQUEST["username"]) ? $_REQUEST["username"] : "";
+$username = isset(&#36;_REQUEST["username"]) ? &#36;_REQUEST["username"] : "";
 if (empty($username)) {
 	echo '{"success":"no", "out":"NO_USER"}';
 	exit;
@@ -51,10 +53,11 @@ $username = addslashes($username);
 $rows = array();
 
 $cmd = PANALOGEYE." behavior add account=$username";
-exec($cmd, $out, $ret);
+&#101;xec($cmd, $out, $ret);
 echo $out[0];
-exit;
-```
+exit;</code></pre>
+
+</details>
 
 其中没有对身份进行鉴权，且 username 可控，构造POC
 

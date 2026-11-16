@@ -25,8 +25,10 @@ Kyan
 
 ```
 title="platform - Login"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 登录页面如下
@@ -40,48 +42,49 @@ title="platform - Login"
 其中 run.php 文件内容为
 
 ```php
-<?php 
+&lt;?php 
 require_once 'functions.php';
 require_once 'international.php';
 session_start();
 auth_check();
 print_html_begin('run');
-?>
-<body link="#000000" vlink="#000000" alink="#000000" bgcolor="#FFFFFF">
+?&gt;
+&lt;body link="#000000" vlink="#000000" alink="#000000" bgcolor="#FFFFFF"&gt;
 
-<form method="post">
-<table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="100%" id="AutoNumber1" height="25" bordercolor="#000000">
-    <tr>
-      <td width="100%" height="25" bgcolor="#FCFEBA">
-      <p align="center"><font face="Verdana" size="2"> Shell Execute </font></td>
-    </tr>
-    <tr>
-      <td width="100%" height="25" bgcolor="#FCFEBA">
-            <div align="center">
-              <textarea name="command" rows="2" cols="100" ><?php echo $_POST['command']; ?>
-              </textarea> 
-        </div></td>
-    </tr>
-    <tr>
-      <td width="100%" height="25" bgcolor="#FCFEBA">
-        <div align="center">
-          <input type="submit" value="Execute">
-          </div></td>
-    </tr>
-    <tr>
-      <td width="100%" height="25" bgcolor="#FCFEBA">
-        <div align="center">
-          <textarea name="textarea" cols="100" rows="50" readonly><?php @$output = system(trim($_POST['command'])); ?>
-          </textarea>
-        </div></td>
-    </tr>
-</table>
-</form>
-</body> 
-<?php
+&lt;form method="post"&gt;
+&lt;table border="1" cellpadding="0" cellspacing="0" style="border-collapse: collapse" width="100%" id="AutoNumber1" height="25" bordercolor="#000000"&gt;
+    &lt;tr&gt;
+      &lt;td width="100%" height="25" bgcolor="#FCFEBA"&gt;
+      &lt;p align="center"&gt;&lt;font face="Verdana" size="2"&gt; Shell Execute &lt;/font&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td width="100%" height="25" bgcolor="#FCFEBA"&gt;
+            &lt;div align="center"&gt;
+              &lt;textarea name="command" rows="2" cols="100" &gt;&lt;?php echo &#36;_POST['command']; ?&gt;
+              &lt;/textarea&gt; 
+        &lt;/div&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td width="100%" height="25" bgcolor="#FCFEBA"&gt;
+        &lt;div align="center"&gt;
+          &lt;input type="submit" value="Execute"&gt;
+          &lt;/div&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td width="100%" height="25" bgcolor="#FCFEBA"&gt;
+        &lt;div align="center"&gt;
+          &lt;textarea name="textarea" cols="100" rows="50" readonly&gt;&lt;?php @$output = &#115;ystem(trim(&#36;_POST['command'])); ?&gt;
+          &lt;/textarea&gt;
+        &lt;/div&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+&lt;/form&gt;
+&lt;/body&gt; 
+&lt;?php
 print_html_end(); 
-?>
-```
+?&gt;</code></pre>
+
+</details>
 
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/iot/images/202202140928998.png)
 

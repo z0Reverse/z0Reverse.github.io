@@ -1,4 +1,5 @@
 ---
+disableNunjucks: true
 title: "明源云 ERP系统 接口管家 ApiUpdate.ashx 任意文件上传漏洞"
 date: 2026-10-16 09:10:47
 categories:

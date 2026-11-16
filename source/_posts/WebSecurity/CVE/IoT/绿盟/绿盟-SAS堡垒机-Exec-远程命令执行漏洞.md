@@ -35,33 +35,36 @@ body="'/needUsbkey.php?username='"
 
 ![image-20230828162917436](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/iot/images/image-20230828162917436.png)
 
-```
-<?php
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">&lt;?php
   require_once 'Nsc/Websvc/Response.php';
 class ExecController extends Cavy_Controller_Action {
 
   var $models = 'no';
 
   public function index() {
-    $command = $this->_params['cmd'];
+    $command = $this-&gt;_params['cmd'];
     $ret = 0;
     $output = array();
-    exec($command,$output,$ret);
+    &#101;xec($command,$output,$ret);
     $result = new StdClass;
     if ($ret != 0) {
-      $result->code = Nsc_Websvc_Response::EXEC_ERROR;
-      $result->text = "exec error";
+      $result-&gt;code = Nsc_Websvc_Response::EXEC_ERROR;
+      $result-&gt;text = "exec error";
     }
     else {
-      $result->code = Nsc_Websvc_Response::SUCCESS;
-      //			$result->text = implode("\n",$output);
-      $result->text = "WEBSVC OK";
+      $result-&gt;code = Nsc_Websvc_Response::SUCCESS;
+      //			$result-&gt;text = implode("\n",$output);
+      $result-&gt;text = "WEBSVC OK";
     }
-    $this->_render(array('result'=>$result),'/websvc/result');
+    $this-&gt;_render(array('result'=&gt;$result),'/websvc/result');
   }
 }
-?>
-```
+?&gt;</code></pre>
+
+</details>
 
 验证POC
 

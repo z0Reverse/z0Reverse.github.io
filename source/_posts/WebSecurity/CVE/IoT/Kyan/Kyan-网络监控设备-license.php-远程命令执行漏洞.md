@@ -35,8 +35,10 @@ app="Kyan设计"
 
 存在漏洞的文件: `/license.php`
 
-```
-<?php
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">&lt;?php
 require_once 'config.php';
 require_once 'functions.php';
 require_once 'international.php';
@@ -70,22 +72,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if (is_windows()) {
 		$bn = basename($tmpname);
 		$command = "move /Y \"". $tmpname . "\" c:\\cygwin\\dev\\shm\\" . $bn;
-		shell_exec($command);
+		&#115;hell_&#101;xec($command);
 		$tmpname = "/dev/shm/" . $bn;
 	}
-	shell_exec($BASH."\"mkdir -p /dev/shm/upload && chmod -R 777 /dev/shm/ \"");
-	exec($BASH."\"cd /dev/shm/upload && ( bzcat " . $tmpname . " | openssl bf-cbc -d -k " . $encrypt_key . " | cpio -idu )\"", $output, $ret);
-	if($ret <> 0)
+	&#115;hell_&#101;xec($BASH."\"mkdir -p /dev/shm/upload &amp;&amp; chmod -R 777 /dev/shm/ \"");
+	&#101;xec($BASH."\"cd /dev/shm/upload &amp;&amp; ( bzcat " . $tmpname . " | openssl bf-cbc -d -k " . $encrypt_key . " | cpio -idu )\"", $output, $ret);
+	if($ret &lt;&gt; 0)
 	{
 		show_error(lang_get('Extract file failed'));
-		exec($BASH."\"rm -rf /dev/shm/upload\"");
+		&#101;xec($BASH."\"rm -rf /dev/shm/upload\"");
 		exit;
 	}
-	exec($BASH."\"cd /dev/shm/upload && md5sum -c md5sum\"", $output, $ret);
-	if($ret <> 0)
+	&#101;xec($BASH."\"cd /dev/shm/upload &amp;&amp; md5sum -c md5sum\"", $output, $ret);
+	if($ret &lt;&gt; 0)
 	{
 		show_error(lang_get('MD5 check failed'));
-		exec($BASH."\"rm -rf /dev/shm/upload\"");
+		&#101;xec($BASH."\"rm -rf /dev/shm/upload\"");
 		exit;
 	}
 	if (is_windows())
@@ -95,10 +97,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if(!$dh)
 	{
 		show_error(lang_get('can not open dest dir to copy'));
-		exec($BASH."\"rm -rf /dev/shm/upload\"");
+		&#101;xec($BASH."\"rm -rf /dev/shm/upload\"");
 		exit;
 	}
-	exec($BASH."\"touch /tmp/mmap_watch_pause\"");
+	&#101;xec($BASH."\"touch /tmp/mmap_watch_pause\"");
 	while($file = readdir($dh))
 	{
 		if(is_dir($file)) continue;
@@ -107,29 +109,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		{
 			$filetitle = basename($file, '.lic');
 			$extract_dir = $pkg_extract_dir  . '/' . $filetitle;
-			exec($BASH."\"" . $extract_dir . "/.init stop\"");
-			exec($BASH."\"mkdir -p " . $destdir . " && mv -f /dev/shm/upload/" . $file . " " . $destdir . "\"");
-			exec($BASH."\"rm -rf " . $extract_dir . " && mkdir -p " . $extract_dir . " && cd " . $extract_dir . " && bzcat " . $destdir . '/' . $file . " | cpio -idu \"");
+			&#101;xec($BASH."\"" . $extract_dir . "/.init stop\"");
+			&#101;xec($BASH."\"mkdir -p " . $destdir . " &amp;&amp; mv -f /dev/shm/upload/" . $file . " " . $destdir . "\"");
+			&#101;xec($BASH."\"rm -rf " . $extract_dir . " &amp;&amp; mkdir -p " . $extract_dir . " &amp;&amp; cd " . $extract_dir . " &amp;&amp; bzcat " . $destdir . '/' . $file . " | cpio -idu \"");
 		}
 	}
 	if (!is_windows())
-		exec($BASH."\"/sbin/ldconfig\"");
+		&#101;xec($BASH."\"/sbin/ldconfig\"");
 	else
-		exec($BASH."\"rm -rf ". $tmpname ."\"");
-	exec($BASH."\"rm -f /tmp/mmap_watch_pause\"");
-	exec($BASH."\"rm -rf /dev/shm/upload\"");
+		&#101;xec($BASH."\"rm -rf ". $tmpname ."\"");
+	&#101;xec($BASH."\"rm -f /tmp/mmap_watch_pause\"");
+	&#101;xec($BASH."\"rm -rf /dev/shm/upload\"");
 }
-if (isset($_GET['cmd']) && isset($_GET['name'])) {
-	$cmd = $_GET['cmd'];
+if (isset(&#36;_GET['cmd']) &amp;&amp; isset(&#36;_GET['name'])) {
+	$cmd = &#36;_GET['cmd'];
 	if ($cmd == 'delete') {
-		$name = $_GET['name'];
-		exec($BASH."\"rm -f ". $PREFIX ."licenses/".$name."\"");
+		$name = &#36;_GET['name'];
+		&#101;xec($BASH."\"rm -f ". $PREFIX ."licenses/".$name."\"");
 	}
 }
 print_html_begin('license');
-echo "<table style=\"width:500px\"  border='0' align='center' cellpadding='3' cellspacing='1'>\n";
-echo "<th colspan=2>".lang_get('licenses')."</th>\n";
-echo "<tr><td>".lang_get('name')."</td><td>".lang_get('operation')."</td></tr>\n";
+echo "&lt;table style=\"width:500px\"  border='0' align='center' cellpadding='3' cellspacing='1'&gt;\n";
+echo "&lt;th colspan=2&gt;".lang_get('licenses')."&lt;/th&gt;\n";
+echo "&lt;tr&gt;&lt;td&gt;".lang_get('name')."&lt;/td&gt;&lt;td&gt;".lang_get('operation')."&lt;/td&gt;&lt;/tr&gt;\n";
 if (is_windows())
 	$dh = opendir('z:\\writable\\licenses');
 else
@@ -142,35 +144,39 @@ if ($dh) {
 		if (!ereg('\.lic$', $file))
 			continue;
 		$filetitle = basename($file, '.lic');
-		echo "<tr><td align=center>".$filetitle."</td><td>";
-		echo "</td></tr>\n";
+		echo "&lt;tr&gt;&lt;td align=center&gt;".$filetitle."&lt;/td&gt;&lt;td&gt;";
+		echo "&lt;/td&gt;&lt;/tr&gt;\n";
 	}
 }
-echo "</table>\n<br>\n";
-echo "<body>\n";
-echo "<table style=\"width:500px\"  border='0' align='center' cellpadding='3' cellspacing='1'>\n";
-echo "<form action=\"".$_server['php_self']."\" method=\"post\" enctype=\"multipart/form-data\">\n";
-echo "<input type=\"hidden\" name=\"max_file_size\" value=\"200000000\">\n";
-echo "<th align=\"center\" colspan=\"2\">".lang_get('licenses to upload')."</th>";
-echo "<tr class=\"tablebody1\"> <td align=\"right\" width=\"50%\">" .lang_get('select file')."</td><td align=\"left\"> <input type=\"file\" name=\"fileupload\"> </td></tr>";
-echo "<tr class=\"tablebody2\"> <td align=\"center\" colspan=\"2\">  <input type=\"submit\" name=\"submit\" value=".lang_get('upload')."> </td></tr>";
-echo "</form>\n</table>\n";
-echo "</body>\n";
+echo "&lt;/table&gt;\n&lt;br&gt;\n";
+echo "&lt;body&gt;\n";
+echo "&lt;table style=\"width:500px\"  border='0' align='center' cellpadding='3' cellspacing='1'&gt;\n";
+echo "&lt;form action=\"".$_server['php_self']."\" method=\"post\" enctype=\"multipart/form-data\"&gt;\n";
+echo "&lt;input type=\"hidden\" name=\"max_file_size\" value=\"200000000\"&gt;\n";
+echo "&lt;th align=\"center\" colspan=\"2\"&gt;".lang_get('licenses to upload')."&lt;/th&gt;";
+echo "&lt;tr class=\"tablebody1\"&gt; &lt;td align=\"right\" width=\"50%\"&gt;" .lang_get('select file')."&lt;/td&gt;&lt;td align=\"left\"&gt; &lt;input type=\"file\" name=\"fileupload\"&gt; &lt;/td&gt;&lt;/tr&gt;";
+echo "&lt;tr class=\"tablebody2\"&gt; &lt;td align=\"center\" colspan=\"2\"&gt;  &lt;input type=\"submit\" name=\"submit\" value=".lang_get('upload')."&gt; &lt;/td&gt;&lt;/tr&gt;";
+echo "&lt;/form&gt;\n&lt;/table&gt;\n";
+echo "&lt;/body&gt;\n";
 print_html_end();
-?>
-```
+?&gt;</code></pre>
+
+</details>
 
 其中需要注意的位置
 
-```
-if (isset($_GET['cmd']) && isset($_GET['name'])) {
-	$cmd = $_GET['cmd'];
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">if (isset(&#36;_GET['cmd']) &amp;&amp; isset(&#36;_GET['name'])) {
+	$cmd = &#36;_GET['cmd'];
 	if ($cmd == 'delete') {
-		$name = $_GET['name'];
-		exec($BASH."\"rm -f ". $PREFIX ."licenses/".$name."\"");
+		$name = &#36;_GET['name'];
+		&#101;xec($BASH."\"rm -f ". $PREFIX ."licenses/".$name."\"");
 	}
-}
-```
+}</code></pre>
+
+</details>
 
 由于变量可控，构造POC执行任意命令
 

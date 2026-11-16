@@ -25,8 +25,10 @@ tags:
 
 ```
 app="Ruijie-EG易网关"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 登录页面如下
@@ -36,7 +38,7 @@ app="Ruijie-EG易网关"
 漏洞文件 login.php
 
 ```php
-<?php
+&lt;?php
 
 /**
  * 用户登录处理
@@ -57,7 +59,7 @@ class defaultController {
     public function indexAction() {
 $username = p("username");$password = p("password");$data = [];
 $reg='/(\r|\n)+/';
-if (count(preg_split($reg, $username)) > 1 || count(preg_split($reg, $password)) > 1) {
+if (count(preg_split($reg, $username)) &gt; 1 || count(preg_split($reg, $password)) &gt; 1) {
 $data["status"] = 6;
 $data["msg"] = "username or password can't exist '\r\n'";
 json_echo($data);
@@ -103,8 +105,9 @@ exit();
 
 }
 
-include_once(AROOT . "init.php");    //mvc初始化入口，放在底部
-```
+include_once(AROOT . "init.php");    //mvc初始化入口，放在底部</code></pre>
+
+</details>
 
 关键代码部分
 

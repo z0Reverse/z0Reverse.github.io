@@ -25,14 +25,16 @@ tags:
 
 ```
 网康 NS-ASG安全网关
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 出现漏洞的文件为 **/admin/cert_download.php**
 
 ```php
-![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/iot/C:/Users/47236/Desktop/2.png)<?php
+![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/iot/C:/Users/47236/Desktop/2.png)&lt;?php
 $filename = substr($file,strpos('certs/',$certfile)+6);
 //文件的类型
 header('Content-type: application/pdf');
@@ -40,8 +42,9 @@ header('Content-type: application/pdf');
 header('Content-Disposition: attachment; filename="'.$filename.'"');
 readfile("$certfile");
 exit();
-?>
-```
+?&gt;</code></pre>
+
+</details>
 
 此文件没有对身份进行校验即可下载任意文件
 

